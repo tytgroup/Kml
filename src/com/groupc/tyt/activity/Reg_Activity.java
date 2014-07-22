@@ -2,6 +2,7 @@ package com.groupc.tyt.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.TypefaceSpan;
+import android.view.MenuItem;
 
 
 import com.groupc.tyt.R;
@@ -29,5 +31,15 @@ public class Reg_Activity extends Activity{
 		setContentView(R.layout.reg);
 	}
 
-	
+	public boolean onOptionsItemSelected(MenuItem item) {  
+	    switch (item.getItemId()) {  
+	        case android.R.id.home:  
+	            Intent intent = new Intent(this, MainActivity.class);  
+	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
+	            startActivity(intent);  
+	            return true;  
+	        default:  
+	            return super.onOptionsItemSelected(item);  
+	    }  
+	}
 }

@@ -68,7 +68,6 @@ public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
         SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
         SearchableInfo info=searchManager.getSearchableInfo(getActivity().getComponentName());
         searchView.setSearchableInfo(info);
-        
         searchView.setIconifiedByDefault(false); 
         return;
     }
