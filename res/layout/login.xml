@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical"
+    tools:context=".fragment.Me_Fragment" >
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_marginTop="20sp"
-        >
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -24,19 +25,20 @@
             <EditText
                 android:id="@+id/editText1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_edittext"
                 android:ems="10"
+                android:hint="用户名/手机号/学号"
                 android:inputType="textPersonName"
-                android:hint="用户名/手机号/学号" />
+                android:textSize="24sp" />
 
         </LinearLayout>
-
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-         android:layout_marginTop="20sp">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20sp" >
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -51,35 +53,35 @@
             <EditText
                 android:id="@+id/editText2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" >
+                android:layout_height="match_parent"
+                android:background="@drawable/bg_edittext"
+                android:inputType="textPassword"
+                android:textSize="24sp" >
 
                 <requestFocus />
             </EditText>
-
         </LinearLayout>
-
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_marginTop="2sp"
-        android:layout_marginBottom="2sp">
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2sp"
+        android:layout_marginTop="2sp" >
 
-        <TextView
+        <Button
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:background="#00000000"
             android:text="忘记密码？" />
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical" 
         android:gravity="center"
+        android:orientation="vertical"
         >
 
         <ImageButton
@@ -87,7 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="60sp"
+            android:layout_weight="1"
             android:background="@drawable/login"
             android:scaleType="fitCenter" />
 
