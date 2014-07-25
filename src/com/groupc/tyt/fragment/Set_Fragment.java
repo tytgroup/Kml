@@ -16,7 +16,7 @@ public class Set_Fragment extends Fragment {
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.main_favor,container,false);
+		View v = inflater.inflate(R.layout.me,container,false);
 		return v;
 	}
 }
