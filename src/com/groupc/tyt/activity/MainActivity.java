@@ -3,6 +3,7 @@ package com.groupc.tyt.activity;
 import com.groupc.tyt.R;
 import com.groupc.tyt.fragment.Favor_Fragment;
 import com.groupc.tyt.fragment.Home_Fragment;
+import com.groupc.tyt.fragment.Login_Fragment;
 import com.groupc.tyt.fragment.Me_Fragment;
 import com.groupc.tyt.fragment.Set_Fragment;
 import com.groupc.tyt.util.DummyTabContent;
@@ -39,8 +40,9 @@ public class MainActivity extends FragmentActivity {
 	Home_Fragment homeFragment;
 	Favor_Fragment favorFragment;
 	//Pub_Fragment pubFragment;
-	Me_Fragment meFragment;
+	Login_Fragment loginFragment;
 	Set_Fragment setFragment;
+	Me_Fragment meFragment;
     android.support.v4.app.FragmentTransaction ft;
 	LinearLayout tabIndicator1;
 	LinearLayout tabIndicator2;
@@ -69,8 +71,9 @@ public class MainActivity extends FragmentActivity {
 				homeFragment = (Home_Fragment) fm.findFragmentByTag("home");
 				favorFragment = (Favor_Fragment) fm.findFragmentByTag("favor");
 				//pubFragment = (Pub_Fragment) fm.findFragmentByTag("pub");
-				meFragment = (Me_Fragment) fm.findFragmentByTag("me");
+				loginFragment = (Login_Fragment) fm.findFragmentByTag("login");
 				setFragment = (Set_Fragment) fm.findFragmentByTag("set");
+				meFragment = (Me_Fragment) fm.findFragmentByTag("me");
 				ft = fm.beginTransaction();
 				
 				if(homeFragment!=null)
@@ -82,8 +85,8 @@ public class MainActivity extends FragmentActivity {
 				//if(pubFragment!=null)
 					//ft.detach(pubFragment);
 				
-				if(meFragment!=null)
-					ft.detach(meFragment);
+				if(loginFragment!=null)
+					ft.detach(loginFragment);
 				
 				if(setFragment!=null)
 					ft.detach(setFragment);
@@ -102,7 +105,7 @@ public class MainActivity extends FragmentActivity {
 					isTabPub();
 					CURRENT_TAB = 3;
 				
-				}*/else if(tabId.equalsIgnoreCase("me")){	
+				}*/else if(tabId.equalsIgnoreCase("login")){	
 					isTabMe();
 					CURRENT_TAB = 4;
 					
@@ -172,10 +175,10 @@ public class MainActivity extends FragmentActivity {
 
      public void isTabMe(){
      	
-     	if(meFragment==null){
- 			ft.add(R.id.realtabcontent,new Me_Fragment(), "me");						
+     	if(loginFragment==null){
+ 			ft.add(R.id.realtabcontent,new Login_Fragment(), "login");						
  		}else{
- 			ft.attach(meFragment);	
+ 			ft.attach(loginFragment);	
  		}
      }
      
@@ -238,7 +241,7 @@ public class MainActivity extends FragmentActivity {
  				Intent i=new Intent(getBaseContext(),Pub_Activity.class) ;  
  		         startActivity(i) ; 
  			}});
-        TabHost.TabSpec tSpecMe= tabHost.newTabSpec("me");
+        TabHost.TabSpec tSpecMe= tabHost.newTabSpec("login");
         tSpecMe.setIndicator(tabIndicator4);      
         tSpecMe.setContent(new DummyTabContent(getBaseContext()));
         tabHost.addTab(tSpecMe);
