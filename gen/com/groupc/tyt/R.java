@@ -68,15 +68,16 @@ public final class R {
     public static final class id {
         public static final int LinearLayout1=0x7f090000;
         public static final int LinearLayout2=0x7f090001;
-        public static final int button1=0x7f09001a;
-        public static final int button2=0x7f09001d;
-        public static final int checkBox1=0x7f09001c;
+        public static final int LoginButton=0x7f090011;
+        public static final int button1=0x7f09001b;
+        public static final int button2=0x7f09001e;
+        public static final int checkBox1=0x7f09001d;
         public static final int cn_word=0x7f09000b;
         public static final int editText1=0x7f09000e;
         public static final int editText2=0x7f09000f;
-        public static final int editText3=0x7f09001b;
-        public static final int editText4=0x7f09001e;
-        public static final int editText5=0x7f09001f;
+        public static final int editText3=0x7f09001c;
+        public static final int editText4=0x7f09001f;
+        public static final int editText5=0x7f090020;
         public static final int en_word=0x7f09000c;
         public static final int forget=0x7f090010;
         public static final int goodsimg=0x7f09000a;
@@ -86,19 +87,19 @@ public final class R {
         public static final int imageButton4=0x7f090005;
         public static final int imageButton5=0x7f090006;
         public static final int imageButton6=0x7f090007;
-        public static final int imageView1=0x7f090012;
-        public static final int imageView_guide=0x7f090011;
+        public static final int imageView1=0x7f090013;
+        public static final int imageView_guide=0x7f090012;
         public static final int listView1=0x7f090008;
         public static final int realtabcontent=0x7f090009;
         public static final int scrollView1=0x7f09000d;
-        public static final int search=0x7f090020;
-        public static final int textView1=0x7f090013;
-        public static final int textView2=0x7f090014;
-        public static final int textView3=0x7f090015;
-        public static final int textView4=0x7f090016;
-        public static final int textView5=0x7f090017;
-        public static final int textView6=0x7f090018;
-        public static final int textView7=0x7f090019;
+        public static final int search=0x7f090021;
+        public static final int textView1=0x7f090014;
+        public static final int textView2=0x7f090015;
+        public static final int textView3=0x7f090016;
+        public static final int textView4=0x7f090017;
+        public static final int textView5=0x7f090018;
+        public static final int textView6=0x7f090019;
+        public static final int textView7=0x7f09001a;
     }
     public static final class layout {
         public static final int activity_first=0x7f030000;

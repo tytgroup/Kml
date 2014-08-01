@@ -91,6 +91,8 @@ public class MainActivity extends FragmentActivity {
 				if(setFragment!=null)
 					ft.detach(setFragment);
 				
+				if(meFragment!=null)
+					ft.detach(meFragment);
 				
 				
 				if(tabId.equalsIgnoreCase("home")){
