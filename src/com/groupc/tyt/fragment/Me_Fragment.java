@@ -37,7 +37,7 @@ public class Me_Fragment extends Fragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.me,container,false);
-		listView = (ListView) v.findViewById(R.id.listView1);
+		listView = (ListView) v.findViewById(R.id.list);
 		init();
 		return v;
 	}

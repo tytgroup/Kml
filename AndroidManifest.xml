@@ -6,7 +6,9 @@
 
     <uses-sdk
         android:minSdkVersion="15"
-        android:targetSdkVersion="19" />
+        android:targetSdkVersion="19" 
+        />
+     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -24,12 +26,42 @@
         </activity>
          <activity
             android:name="com.groupc.tyt.activity.Reg_Activity"
-            android:windowSoftInputMode="stateVisible|adjustPan"
+            android:windowSoftInputMode="stateHidden|adjustPan"
             android:configChanges="orientation|keyboardHidden" >
          </activity>
          <activity
             android:name="com.groupc.tyt.activity.Pub_Activity"
-            android:windowSoftInputMode="stateVisible|adjustPan"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:configChanges="orientation|keyboardHidden" >
+         </activity>
+          <activity
+            android:name="com.groupc.tyt.activity.Applied_Activity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:configChanges="orientation|keyboardHidden" >
+         </activity>
+         <activity
+            android:name="com.groupc.tyt.activity.Published_Activity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:configChanges="orientation|keyboardHidden" >
+         </activity>
+         <activity
+            android:name="com.groupc.tyt.activity.SplashActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:configChanges="orientation|keyboardHidden" >
+         </activity>
+         <activity
+            android:name="com.groupc.tyt.activity.SplashActivity2"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:configChanges="orientation|keyboardHidden" >
+            </activity>
+            <activity
+            android:name="com.groupc.tyt.activity.Goods_Applied"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:configChanges="orientation|keyboardHidden" >
+         </activity>
+          <activity
+            android:name="com.groupc.tyt.activity.Goods_Published"
+            android:windowSoftInputMode="stateHidden|adjustPan"
             android:configChanges="orientation|keyboardHidden" >
          </activity>
     </application>

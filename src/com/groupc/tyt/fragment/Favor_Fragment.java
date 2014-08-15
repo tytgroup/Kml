@@ -12,7 +12,7 @@ public class Favor_Fragment extends Fragment {
 	private int images[] = null;
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.main_favor,container,false);
+		return inflater.inflate(R.layout.goods_list,container,false);
 		
 	
 
