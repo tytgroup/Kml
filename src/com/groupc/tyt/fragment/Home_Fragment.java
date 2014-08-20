@@ -2,6 +2,8 @@ package com.groupc.tyt.fragment;
 
 
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import com.groupc.tyt.R;
@@ -35,6 +37,8 @@ public class Home_Fragment extends Fragment {
 	private ImageButton sport;
 	private ImageButton more;
 	private ImageButton hotlist;
+	private ListView homelist;
+    private ShopListAdapter shopListAdapter;
 	
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -56,24 +60,15 @@ public class Home_Fragment extends Fragment {
 	    sport  = (ImageButton)v.findViewById(R.id.imageButton4);
 		more = (ImageButton)v.findViewById(R.id.imageButton5);
 		hotlist = (ImageButton)v.findViewById(R.id.imageButton6);
+		homelist = (ListView)v.findViewById(R.id.homelist);
 		
+		bicycle.setOnClickListener(new ImageButton.OnClickListener(){
+        public void onClick(View v) {
+        	
+        }});
+		ArrayList<HashMap<String, String>> testlist = new ArrayList<HashMap<String, String>>();
+		HashMap<String, String> map1 = new HashMap<String, String>();
 		
-        /*images=new int[]{R.drawable.img1, R.drawable.img2,R.drawable.img3,
-		        R.drawable.img4,R.drawable.img5,R.drawable.img6};
-		GridView gridview = (GridView)  getActivity().findViewById(R.id.gridView1);
-		ArrayList<HashMap<String, Object>> lstImageItem = new ArrayList<HashMap<String, Object>>();
-		for (int i = 0; i < 6; i++) {
-			HashMap<String, Object> map = new HashMap<String, Object>();
-			map.put("itemImage", images[i]);
-			lstImageItem.add(map);
-		}
-		SimpleAdapter saImageItems = new SimpleAdapter(getActivity(), 
-                lstImageItem,// 数据源
-                R.layout.items,// 显示布局
-                new String[]{"ItemImage","ItemText"}, 
-                new int[] { R.id.itemImage }); 
-        gridview.setAdapter(saImageItems);*/
-
        return v;
 		
 	}

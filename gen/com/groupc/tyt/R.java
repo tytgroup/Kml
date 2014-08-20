@@ -34,60 +34,74 @@ public final class R {
         public static final int gradient_bg_hover=0x7f020009;
         public static final int ic_launcher=0x7f02000a;
         public static final int ic_search=0x7f02000b;
-        public static final int image_bg=0x7f02000c;
-        public static final int img1=0x7f02000d;
-        public static final int img2=0x7f02000e;
-        public static final int img3=0x7f02000f;
-        public static final int img4=0x7f020010;
-        public static final int img5=0x7f020011;
-        public static final int img6=0x7f020012;
-        public static final int list_selector=0x7f020013;
-        public static final int login=0x7f020014;
-        public static final int main1=0x7f020015;
-        public static final int main1on=0x7f020016;
-        public static final int main2=0x7f020017;
-        public static final int main2on=0x7f020018;
-        public static final int main3=0x7f020019;
-        public static final int main3on=0x7f02001a;
-        public static final int main4=0x7f02001b;
-        public static final int main4on=0x7f02001c;
-        public static final int main5=0x7f02001d;
-        public static final int main5on=0x7f02001e;
-        public static final int ok_bg=0x7f02001f;
-        public static final int phone=0x7f020020;
-        public static final int psw=0x7f020021;
-        public static final int search=0x7f020022;
-        public static final int search_bt=0x7f020023;
-        public static final int tab1=0x7f020024;
-        public static final int tab2=0x7f020025;
-        public static final int tab3=0x7f020026;
-        public static final int tab4=0x7f020027;
-        public static final int tab5=0x7f020028;
-        public static final int top_back=0x7f020029;
-        public static final int up=0x7f02002a;
-        public static final int upsc=0x7f02002b;
-        public static final int usr=0x7f02002c;
-        public static final int usr2=0x7f02002d;
+        public static final int image1=0x7f02000c;
+        public static final int image2=0x7f02000d;
+        public static final int image3=0x7f02000e;
+        public static final int image4=0x7f02000f;
+        public static final int image5=0x7f020010;
+        public static final int image6=0x7f020011;
+        public static final int image_bg=0x7f020012;
+        public static final int img1=0x7f020013;
+        public static final int img1on=0x7f020014;
+        public static final int img2=0x7f020015;
+        public static final int img2on=0x7f020016;
+        public static final int img3=0x7f020017;
+        public static final int img3on=0x7f020018;
+        public static final int img4=0x7f020019;
+        public static final int img4on=0x7f02001a;
+        public static final int img5=0x7f02001b;
+        public static final int img5on=0x7f02001c;
+        public static final int img6=0x7f02001d;
+        public static final int img6on=0x7f02001e;
+        public static final int list_selector=0x7f02001f;
+        public static final int login=0x7f020020;
+        public static final int main1=0x7f020021;
+        public static final int main1on=0x7f020022;
+        public static final int main2=0x7f020023;
+        public static final int main2on=0x7f020024;
+        public static final int main3=0x7f020025;
+        public static final int main3on=0x7f020026;
+        public static final int main4=0x7f020027;
+        public static final int main4on=0x7f020028;
+        public static final int main5=0x7f020029;
+        public static final int main5on=0x7f02002a;
+        public static final int ok_bg=0x7f02002b;
+        public static final int phone=0x7f02002c;
+        public static final int psw=0x7f02002d;
+        public static final int search=0x7f02002e;
+        public static final int search_bt=0x7f02002f;
+        public static final int tab1=0x7f020030;
+        public static final int tab2=0x7f020031;
+        public static final int tab3=0x7f020032;
+        public static final int tab4=0x7f020033;
+        public static final int tab5=0x7f020034;
+        public static final int top_back=0x7f020035;
+        public static final int up=0x7f020036;
+        public static final int upsc=0x7f020037;
+        public static final int usr=0x7f020038;
+        public static final int usr2=0x7f020039;
     }
     public static final class id {
         public static final int LinearLayout1=0x7f090000;
         public static final int LinearLayout2=0x7f090001;
         public static final int LoginButton=0x7f090023;
+        public static final int addphoto=0x7f09002e;
         public static final int apid=0x7f090011;
         public static final int apply_state=0x7f090015;
         public static final int atime=0x7f090013;
-        public static final int button1=0x7f09002e;
-        public static final int button2=0x7f090031;
-        public static final int checkBox1=0x7f090030;
+        public static final int button1=0x7f090038;
+        public static final int cfpub=0x7f090034;
+        public static final int checkBox1=0x7f090033;
         public static final int cn_word=0x7f09001c;
         public static final int editText1=0x7f090020;
         public static final int editText2=0x7f090021;
-        public static final int editText3=0x7f09002f;
-        public static final int editText4=0x7f090032;
-        public static final int editText5=0x7f090033;
+        public static final int editText3=0x7f090035;
+        public static final int editText4=0x7f090036;
+        public static final int editText5=0x7f090037;
         public static final int en_word=0x7f09001d;
         public static final int finish=0x7f090019;
         public static final int forget=0x7f090022;
+        public static final int gddecribe=0x7f09002f;
         public static final int gdname=0x7f09000d;
         public static final int gdprice=0x7f09000e;
         public static final int goodsimg=0x7f09001b;
@@ -104,11 +118,14 @@ public final class R {
         public static final int list_image=0x7f09000c;
         public static final int listtop=0x7f09000a;
         public static final int listviewme=0x7f09002d;
-        public static final int progressBar1=0x7f090034;
+        public static final int num=0x7f090031;
+        public static final int price=0x7f090030;
+        public static final int progressBar1=0x7f090039;
         public static final int pubcancel=0x7f09001a;
         public static final int realtabcontent=0x7f090009;
         public static final int scrollView1=0x7f09001e;
-        public static final int search=0x7f090035;
+        public static final int search=0x7f09003a;
+        public static final int spinner=0x7f090032;
         public static final int t1=0x7f090010;
         public static final int t2=0x7f090012;
         public static final int t3=0x7f090014;
@@ -154,6 +171,7 @@ public final class R {
         public static final int title_activity_first=0x7f060002;
     }
     public static final class style {
+        public static final int AcBar_titleStyle=0x7f070002;
         /** 
         Base application theme for API 11+. This theme completely replaces
         AppBaseTheme from res/values/styles.xml on API 11+ devices.
@@ -166,15 +184,15 @@ public final class R {
     
  API 14 theme customizations can go here. 
          */
-        public static final int AppBaseTheme=0x7f070001;
+        public static final int AppBaseTheme=0x7f070003;
         /** 
         Base application theme, dependent on API level. This theme is replaced
         by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
     
  Application theme. 
- All customizations that are NOT specific to a particular API-level can go here. 
          */
         public static final int AppTheme=0x7f070000;
+        public static final int my_actionbar_style=0x7f070001;
     }
     public static final class xml {
         public static final int searchable=0x7f040000;

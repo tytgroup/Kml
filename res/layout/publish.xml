@@ -19,7 +19,7 @@
         </LinearLayout>
     
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/addphoto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -27,7 +27,7 @@
         android:text="添加图片" />
 
     <EditText
-        android:id="@+id/editText1"
+        android:id="@+id/gddecribe"
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_margin="20dp"
@@ -53,7 +53,7 @@
             android:textColor="#0A0A0A" />
 
         <EditText
-            android:id="@+id/editText2"
+            android:id="@+id/price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -79,7 +79,7 @@
              android:textColor="#0A0A0A" />
 
         <EditText
-            android:id="@+id/editText3"
+            android:id="@+id/num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/bg_edittext"
@@ -92,10 +92,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
-        android:layout_margin="5dp">
+        android:layout_margin="10dp">
 
         <TextView
             android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" 选择分类:"
+             android:textSize="20sp"
+             android:textColor="#0A0A0A" />
+
+        <Spinner android:id="@+id/spinner" 
+     android:layout_width="fill_parent" 
+     android:layout_height="wrap_content"  /> 
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_margin="5dp">
+
+        <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="短信提醒业务（需积分）" />
@@ -108,7 +126,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/cfpub"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
