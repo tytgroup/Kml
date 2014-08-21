@@ -1,24 +1,45 @@
 package com.groupc.tyt.activity;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+import org.json.JSONObject;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Message;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.TypefaceSpan;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 
+
+
+
+
+import android.widget.Toast;
+
 import com.groupc.tyt.R;
+import com.groupc.tyt.util.HttpClientUtil;
 
 public class Reg_Activity extends Activity{
+	private List<NameValuePair> params;
+	private String url="http://172.27.3.1:8080/json/RegisterService";
+	private String uno,name,psd,phone,img_xsz,img_head;
 	private EditText stunum;
 	private EditText usrname;
 	private EditText usrpsw;
@@ -63,12 +84,54 @@ public class Reg_Activity extends Activity{
         });   
 		cfreg.setOnClickListener(new Button.OnClickListener(){//创建监听    
             public void onClick(View v) {    
-                  
+            	uno=stunum.getText().toString();
+            	name = usrname.getText().toString();
+            	psd = usrpsw.getText().toString();
+            	phone = usrphone.getText().toString();
+            	img_xsz = null;
+            	img_head = null;
+            	new Thread(runnable).start();
             }    
   
         });   
 	}
-
+	Handler handler = new Handler(){
+	    @Override
+	    public void handleMessage(Message msg) {
+	        super.handleMessage(msg);
+	        String feedback = (String) msg.obj;
+		    if(feedback.equals("ok")){
+		    	Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT).show();
+		    }
+		    else{
+		    	Toast.makeText(getApplicationContext(), "注册失败！", Toast.LENGTH_SHORT).show();
+		    }
+	    	
+	    }
+	}; 
+	Runnable runnable = new Runnable(){
+	    @Override
+	    public void run() {
+	        Message msg = new Message();
+	       // Bundle data = new Bundle();
+			params=new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("uno", uno));
+			params.add(new BasicNameValuePair("nickname", name));
+			params.add(new BasicNameValuePair("psd", psd));
+			params.add(new BasicNameValuePair("phone", phone));
+			params.add(new BasicNameValuePair("img_xsz", img_xsz));
+			params.add(new BasicNameValuePair("img_head", img_head));
+			String feedback;
+			feedback = HttpClientUtil.httpPostClient(getApplicationContext(), url, params);
+			if (feedback == null) {
+				Toast.makeText(getApplicationContext(), "获取数据出错！", Toast.LENGTH_SHORT)
+						.show();
+			} else {
+				msg.obj = feedback;
+				handler.sendMessage(msg);
+			}
+	    }
+	};
 	public boolean onOptionsItemSelected(MenuItem item) {  
 	    switch (item.getItemId()) {  
 	        case android.R.id.home:  

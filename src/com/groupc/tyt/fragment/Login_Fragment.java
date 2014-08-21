@@ -6,8 +6,6 @@ import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONObject;
-
 import com.groupc.tyt.R;
 import com.groupc.tyt.activity.Reg_Activity;
 import com.groupc.tyt.util.HttpClientUtil;
@@ -29,84 +27,112 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
+@SuppressLint("HandlerLeak")
 public class Login_Fragment extends Fragment {
 
 	private ImageButton LoginButton;
-	private EditText editText1,editText2;
-	private String name,psd;
+	private EditText editText1, editText2;
+	private String name, psd;
 	private List<NameValuePair> params;
 	private TextView txt_show;
-	private String url="http://192.168.1.114:8080/json/login.jsp",title="test",keys[]={"goodId","goodName","goodPicture","goodNum"};
+	private String url = "http://172.27.3.1:8080/json/loginService",
+			title = "test", keys[] = { "goodId", "goodName", "goodPicture",
+					"goodNum" };
+
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-	     	View v = inflater.inflate(R.layout.login, container, false);
-	     	editText1=(EditText)v.findViewById(R.id.editText1);
-	     	editText2=(EditText)v.findViewById(R.id.editText2);
-	     	txt_show=(TextView)v.findViewById(R.id.textShow);
-	     	LoginButton=(ImageButton)v.findViewById(R.id.LoginButton);
+		View v = inflater.inflate(R.layout.login, container, false);
+		editText1 = (EditText) v.findViewById(R.id.editText1);
+		editText2 = (EditText) v.findViewById(R.id.editText2);
+		txt_show = (TextView) v.findViewById(R.id.textShow);
+		LoginButton = (ImageButton) v.findViewById(R.id.LoginButton);
 
 		return v;
 
 	}
 
-
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
-		Log.e("xsc", "xs");
-
 
 		LoginButton.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				name=editText1.getText().toString();
-				psd=editText2.getText().toString();
+				name = editText1.getText().toString();
+				psd = editText2.getText().toString();
 				new Thread(runnable).start();
 			}
 		});
-	
+
 	}
-	Handler handler = new Handler(){
-	    @SuppressWarnings("unchecked")
+
+	Handler handler = new Handler() {
 		@Override
-	    public void handleMessage(Message msg) {
-	        super.handleMessage(msg);
-	        List<Map<String,String>> mylist = (List<Map<String,String>>) msg.obj;
-		
-	    	for(int i=0;i<mylist.size();i++){
-				for(int j=0;j<keys.length;j++){
-				txt_show.append(mylist.get(i).get(keys[j]));
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			String feedback = (String) msg.obj;
+
+			if (HttpClientUtil.isjson(feedback)) {
+				List<Map<String, String>> mylist = new ArrayList<Map<String, String>>();
+				try {
+					mylist = HttpClientUtil.jsonToList(feedback, title, keys);
+					for (int i = 0; i < mylist.size(); i++) {
+						for (int j = 0; j < keys.length; j++) {
+							txt_show.append(mylist.get(i).get(keys[j]));
+						}
+					}
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					Log.e("json", "json解析出错");
+				}
+			} else {
+				if (feedback.equalsIgnoreCase("2")) {
+					Toast.makeText(getActivity(), "用户名不存在！", Toast.LENGTH_SHORT)
+							.show();
+				} else if (feedback.equals("3")) {
+					Toast.makeText(getActivity(), "密码不正确!", Toast.LENGTH_SHORT)
+							.show();
+
+				} else if (feedback.equals("0")) {
+					Toast.makeText(getActivity(), "其他问题!", Toast.LENGTH_SHORT)
+							.show();
+
+				}
+				else{
+					Toast.makeText(getActivity(), "真的是其他问题!"+feedback, Toast.LENGTH_SHORT)
+					.show();
 				}
 			}
-	    }
-	}; 
-	Runnable runnable = new Runnable(){
-	    @Override
-	    public void run() {
-	        Message msg = new Message();
-	       // Bundle data = new Bundle();
-			params=new ArrayList<NameValuePair>();
+		}
+	};
+	Runnable runnable = new Runnable() {
+		@Override
+		public void run() {
+			Message msg = new Message();
+			// Bundle data = new Bundle();
+			params = new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("nickname", name));
 			params.add(new BasicNameValuePair("psd", psd));
-			JSONObject jsonObject=new JSONObject();
-            jsonObject = HttpClientUtil.httpPostClient(getActivity(), url, params);
-            List<Map<String,String>> mylist=new ArrayList<Map<String,String>>();
-            try {
-				mylist=HttpClientUtil.jsonToList(jsonObject, title, keys);
-				// data.putString("value", mylist.get(0).get(keys[0]));
-		         msg.obj=mylist;
-			} catch (Exception e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-				Log.e("json", "json解析出错");
+			String feedback;
+			feedback = HttpClientUtil
+					.httpPostClient(getActivity(), url, params);
+			if (feedback == null) {
+				Toast.makeText(getActivity(), "获取数据出错！", Toast.LENGTH_SHORT)
+						.show();
+			} else {
+				msg.obj = feedback;
+				handler.sendMessage(msg);
 			}
-	        handler.sendMessage(msg);
-	    }
+		}
+
 	};
+
 	@SuppressLint("NewApi")
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);

@@ -40,9 +40,9 @@ public class HttpClientUtil {
 	private static final int REQUEST_TIMEOUT = 10*1000;//设置请求超时10秒钟  
 	private static final int SO_TIMEOUT = 10*1000;  //设置等待数据超时时间10秒钟 
 
-	public static JSONObject httpPostClient(Context context, String url,
+	public static String httpPostClient(Context context, String url,
 			List<NameValuePair> params) {
-		JSONObject json=null;
+		String msg=null;
 		BasicHttpParams httpParams = new BasicHttpParams();  
 	    HttpConnectionParams.setConnectionTimeout(httpParams, REQUEST_TIMEOUT);  
 	    HttpConnectionParams.setSoTimeout(httpParams, SO_TIMEOUT);  
@@ -57,8 +57,7 @@ public class HttpClientUtil {
 			if (response.getStatusLine().getStatusCode() == 200) {
 				HttpEntity entity = response.getEntity();
 				if (entity != null) {
-					String msg = EntityUtils.toString(response.getEntity());
-					json = new JSONObject(msg);
+					 msg = EntityUtils.toString(response.getEntity());
 				}
 				else{
 					Toast.makeText(context, "no data!", Toast.LENGTH_SHORT).show();
@@ -67,18 +66,28 @@ public class HttpClientUtil {
 			else{
 				Toast.makeText(context, "wrong with internet!", Toast.LENGTH_SHORT).show();
 			}
-			
-			
+					
 		} catch (Exception e) {
 			e.printStackTrace();
 			Log.e("http", "4");
 		}
 
-		return json;
+		return msg;
 	}
-	
-	public static  List<Map<String, String>> jsonToList(JSONObject jsonObject,String title,String[]keys)
+	public static boolean isjson(String msg)
+	{
+		if(msg.startsWith("{")){
+			//Log.e("isjson", "yes"+msg);
+			return true;
+		}
+		else{
+			//Log.e("isjson", "no"+msg);
+			return false;
+		}
+	}
+	public static  List<Map<String, String>> jsonToList(String msg,String title,String[]keys)
 			throws Exception{
+		JSONObject jsonObject=new JSONObject(msg);
 		List<Map<String, String>> list = new ArrayList<Map<String, String>>();
 		Map<String, String> map = null;
 		JSONArray jsonArray = jsonObject.getJSONArray(title);
