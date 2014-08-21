@@ -1,5 +1,6 @@
 package com.groupc.tyt.util;
 
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -58,6 +59,7 @@ public class HttpClientUtil {
 				HttpEntity entity = response.getEntity();
 				if (entity != null) {
 					 msg = EntityUtils.toString(response.getEntity());
+					//msg=URLDecoder.decode(msg,"utf-8");
 				}
 				else{
 					Toast.makeText(context, "no data!", Toast.LENGTH_SHORT).show();

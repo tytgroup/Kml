@@ -124,7 +124,7 @@ public class Reg_Activity extends Activity{
 			String feedback;
 			feedback = HttpClientUtil.httpPostClient(getApplicationContext(), url, params);
 			if (feedback == null) {
-				Toast.makeText(getApplicationContext(), "获取数据出错！", Toast.LENGTH_SHORT)
+				Toast.makeText(getApplicationContext(), "网络出错！", Toast.LENGTH_SHORT)
 						.show();
 			} else {
 				msg.obj = feedback;

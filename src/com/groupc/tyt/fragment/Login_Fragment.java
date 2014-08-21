@@ -6,8 +6,10 @@ import java.util.Map;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+
 import com.groupc.tyt.R;
 import com.groupc.tyt.activity.Reg_Activity;
+import com.groupc.tyt.constant.User;
 import com.groupc.tyt.util.HttpClientUtil;
 
 import android.annotation.SuppressLint;
@@ -38,8 +40,8 @@ public class Login_Fragment extends Fragment {
 	private List<NameValuePair> params;
 	private TextView txt_show;
 	private String url = "http://172.27.3.1:8080/json/loginService",
-			title = "test", keys[] = { "goodId", "goodName", "goodPicture",
-					"goodNum" };
+			title = "user", keys[] = { "iduser", "uno", "username","phone","tx","jf","xydj",
+					"hydj","rzjg" };
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
@@ -77,35 +79,45 @@ public class Login_Fragment extends Fragment {
 			super.handleMessage(msg);
 			String feedback = (String) msg.obj;
 
+			Log.e("feedback",""+feedback);
 			if (HttpClientUtil.isjson(feedback)) {
 				List<Map<String, String>> mylist = new ArrayList<Map<String, String>>();
 				try {
 					mylist = HttpClientUtil.jsonToList(feedback, title, keys);
-					for (int i = 0; i < mylist.size(); i++) {
-						for (int j = 0; j < keys.length; j++) {
-							txt_show.append(mylist.get(i).get(keys[j]));
-						}
-					}
+	
+					        int i=0;
+							 User.uid=Integer.parseInt(mylist.get(i).get("iduser"));
+							 User.name=mylist.get(i).get("username");
+							 User.uno=mylist.get(i).get("uno");
+							 User.phone=mylist.get(i).get("phone");
+							 User.tx=mylist.get(i).get("tx");
+							 User.rzjg=mylist.get(i).get("rzjg").equals("1")?true:false;
+							 User.jf=Double.parseDouble(mylist.get(i).get("jf"));
+							 User.hydj=Double.parseDouble(mylist.get(i).get("hydj"));
+							 User.xydj=Double.parseDouble(mylist.get(i).get("xydj"));
+							 Log.e("json", "uid="+User.uid+"|name="+User.name+"|uno="+User.uno
+									 +"|phone="+User.phone+"|tx="+User.tx+"|rzjg="+User.rzjg
+									 +"|jf="+User.jf+"|hydj="+User.hydj+"|xydj="+User.xydj);	
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-					Log.e("json", "json½âÎö³ö´í");
+					Log.e("json", "jsonè§£æžå‡ºé”™");
 				}
 			} else {
 				if (feedback.equalsIgnoreCase("2")) {
-					Toast.makeText(getActivity(), "ÓÃ»§Ãû²»´æÔÚ£¡", Toast.LENGTH_SHORT)
+					Toast.makeText(getActivity(), "ç”¨æˆ·åä¸å­˜åœ¨ï¼", Toast.LENGTH_SHORT)
 							.show();
 				} else if (feedback.equals("3")) {
-					Toast.makeText(getActivity(), "ÃÜÂë²»ÕýÈ·!", Toast.LENGTH_SHORT)
+					Toast.makeText(getActivity(), "å¯†ç ä¸æ­£ç¡®!", Toast.LENGTH_SHORT)
 							.show();
 
 				} else if (feedback.equals("0")) {
-					Toast.makeText(getActivity(), "ÆäËûÎÊÌâ!", Toast.LENGTH_SHORT)
+					Toast.makeText(getActivity(), "å…¶ä»–åŽŸå› é”™è¯¯!", Toast.LENGTH_SHORT)
 							.show();
 
 				}
 				else{
-					Toast.makeText(getActivity(), "ÕæµÄÊÇÆäËûÎÊÌâ!"+feedback, Toast.LENGTH_SHORT)
+					Toast.makeText(getActivity(), "æƒ³æ­»çš„å¿ƒéƒ½æœ‰äº†!"+feedback, Toast.LENGTH_SHORT)
 					.show();
 				}
 			}
@@ -123,7 +135,7 @@ public class Login_Fragment extends Fragment {
 			feedback = HttpClientUtil
 					.httpPostClient(getActivity(), url, params);
 			if (feedback == null) {
-				Toast.makeText(getActivity(), "»ñÈ¡Êý¾Ý³ö´í£¡", Toast.LENGTH_SHORT)
+				Toast.makeText(getActivity(), "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?", Toast.LENGTH_SHORT)
 						.show();
 			} else {
 				msg.obj = feedback;
@@ -136,7 +148,7 @@ public class Login_Fragment extends Fragment {
 	@SuppressLint("NewApi")
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		menu.add(0, 1, 0, "×¢²á")
+		menu.add(0, 1, 0, "×¢ï¿½ï¿½")
 				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
 		return;
