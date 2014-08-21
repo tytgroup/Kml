@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
@@ -34,6 +35,7 @@ public class Pub_Activity extends Activity{
 	private EditText describe;
 	private EditText price;
 	private EditText num;
+	private CheckBox checkbox1;
 	private List<String> list = new ArrayList<String>();
 	private Spinner mySpinner;
 	private ArrayAdapter<String> adapter;  
@@ -81,6 +83,7 @@ public class Pub_Activity extends Activity{
      	num=(EditText)findViewById(R.id.num);
      	addphoto=(Button)findViewById(R.id.addphoto);
      	confirm=(Button)findViewById(R.id.cfpub);
+     	checkbox1=(CheckBox)findViewById(R.id.checkBox1);
 	}
 	
 	public boolean onOptionsItemSelected(MenuItem item) {  
