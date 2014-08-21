@@ -20,7 +20,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/search"
           android:title="@string/search"
-          android:icon="@drawable/ic_search"
+          android:icon="@drawable/actionbar_search_icon"
           android:showAsAction="collapseActionView|ifRoom"
           android:actionViewClass="android.widget.SearchView" />
 </menu>

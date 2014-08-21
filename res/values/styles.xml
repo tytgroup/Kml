@@ -12,7 +12,7 @@
     </style>
 
   <style name="my_actionbar_style" parent="@android:style/Widget.Holo.Light.ActionBar">  
-        <item name="android:background">@drawable/top_back</item>  
+        <item name="android:background">@drawable/bottom_back</item>  
         <item name="android:titleTextStyle">@style/AcBar_titleStyle</item>  
         </style> 
          <style name="AcBar_titleStyle">
