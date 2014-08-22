@@ -19,8 +19,8 @@ import android.graphics.drawable.Drawable;
 
 public class SplashActivity2 extends Activity {
 	
-	MyHandler myHandler;//ÏûÏ¢´¦ÀíµÄHandler¶ÔÏó
-	String jsonstring;//ÓÃÀ´×°ÔØÍøÂçÏÂÔØµÄjson£¬²¢½«´«µİµ½ÏÂÒ»¸öactivity
+	MyHandler myHandler;//æ¶ˆæ¯å¤„ç†çš„Handlerå¯¹è±¡
+	String jsonstring;//ç”¨æ¥è£…è½½ç½‘ç»œä¸‹è½½çš„jsonï¼Œå¹¶å°†ä¼ é€’åˆ°ä¸‹ä¸€ä¸ªactivity
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,15 +28,15 @@ public class SplashActivity2 extends Activity {
 		Resources r = getResources();
 		Drawable myDrawable = r.getDrawable(R.drawable.top_back);
 		actionBar.setBackgroundDrawable(myDrawable);
-		SpannableString spannableString = new SpannableString("¼ÓÔØÖĞ");
+		SpannableString spannableString = new SpannableString("åŠ è½½ä¸­");
 		spannableString.setSpan(new TypefaceSpan("monospace"), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spannableString.setSpan(new AbsoluteSizeSpan(24, true), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		getActionBar().setTitle(spannableString);
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.splash);	
-		  myHandler = new MyHandler();//ÏûÏ¢´¦Àí¶ÔÏó
-		  MyThread m = new MyThread();//jsonÊı¾İÏÂÔØ¶ÔÏó
-	       new Thread(m).start();//¿ªÊ¼ÏÂÔØ£¬UI½çÃæ¼ÌĞø±£³Öprogress
+		  myHandler = new MyHandler();//æ¶ˆæ¯å¤„ç†å¯¹è±¡
+		  MyThread m = new MyThread();//jsonæ•°æ®ä¸‹è½½å¯¹è±¡
+	       new Thread(m).start();//å¼€å§‹ä¸‹è½½ï¼ŒUIç•Œé¢ç»§ç»­ä¿æŒprogress
 	}
 
 	
@@ -45,8 +45,8 @@ public class SplashActivity2 extends Activity {
     }
     
     /**
-     * ÄÚ²¿HandlerÀà
-     * ½ÓÊÜÏûÏ¢,´¦ÀíÏûÏ¢ ,´ËHandler»áÓëµ±Ç°Ö÷Ïß³ÌÒ»¿éÔËĞĞ
+     * å†…éƒ¨Handlerç±»
+     * æ¥å—æ¶ˆæ¯,å¤„ç†æ¶ˆæ¯ ,æ­¤Handlerä¼šä¸å½“å‰ä¸»çº¿ç¨‹ä¸€å—è¿è¡Œ
      * */
 
 @SuppressLint("HandlerLeak")
@@ -56,17 +56,17 @@ class MyHandler extends Handler {
              super.handleMessage(msg);
              Bundle b = msg.getData();
              String status = b.getString("status");
-             if(status=="ok"){//Èç¹ûÕıÈ·»ñÈ¡Êı¾İ
+             if(status=="ok"){//å¦‚æœæ­£ç¡®è·å–æ•°æ®
 			 Intent intent=new Intent(SplashActivity2.this,Published_Activity.class);
-			 intent.putExtra("jsonstring", jsonstring);//´«µİµ½MainActivityÒ³Ãæ
+			 intent.putExtra("jsonstring", jsonstring);//ä¼ é€’åˆ°MainActivityé¡µé¢
 			 startActivity(intent);
 			 SplashActivity2.this.finish();
              }
          }
      }
 /*
- * ´ËÄÚ²¿Ïß³ÌÀàÓÃÀ´ÏÂÔØjson
- * ´¦ÀíÍêºóÏëÖ÷Ïß³Ì·¢ËÍÏûÏ¢
+ * æ­¤å†…éƒ¨çº¿ç¨‹ç±»ç”¨æ¥ä¸‹è½½json
+ * å¤„ç†å®Œåæƒ³ä¸»çº¿ç¨‹å‘é€æ¶ˆæ¯
  * */
     class MyThread implements Runnable {
         public void run() {    
@@ -77,10 +77,10 @@ class MyHandler extends Handler {
 					e.printStackTrace();
 				}
                 Message msg = new Message();
-                Bundle b = new Bundle();// ´æ·ÅÊı¾İ
+                Bundle b = new Bundle();// å­˜æ”¾æ•°æ®
                 b.putString("status","ok");
                 msg.setData(b);
-                SplashActivity2.this.myHandler.sendMessage(msg); // ÏòHandler·¢ËÍÏûÏ¢,¸üĞÂUI
+                SplashActivity2.this.myHandler.sendMessage(msg); // å‘Handlerå‘é€æ¶ˆæ¯,æ›´æ–°UI
         }
     }
 }

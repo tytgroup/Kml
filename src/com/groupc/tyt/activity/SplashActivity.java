@@ -1,8 +1,17 @@
 package com.groupc.tyt.activity;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.message.BasicNameValuePair;
+
 import com.groupc.tyt.R;
-import com.groupc.tyt.util.HttpUtil;
+import com.groupc.tyt.constant.ConstantDef;
+import com.groupc.tyt.constant.User;
+import com.groupc.tyt.util.HttpClientUtil;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -10,6 +19,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.TypefaceSpan;
+import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -19,8 +29,8 @@ import android.graphics.drawable.Drawable;
 
 public class SplashActivity extends Activity {
 	
-	MyHandler myHandler;//ÏûÏ¢´¦ÀíµÄHandler¶ÔÏó
-	String jsonstring;//ÓÃÀ´×°ÔØÍøÂçÏÂÔØµÄjson£¬²¢½«´«µİµ½ÏÂÒ»¸öactivity
+	private List<NameValuePair> params;
+	private String url = ConstantDef.BaseUil+"HaveAppliedService";
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -28,59 +38,68 @@ public class SplashActivity extends Activity {
 		Resources r = getResources();
 		Drawable myDrawable = r.getDrawable(R.drawable.top_back);
 		actionBar.setBackgroundDrawable(myDrawable);
-		SpannableString spannableString = new SpannableString("¼ÓÔØÖĞ");
+		SpannableString spannableString = new SpannableString("åŠ è½½ä¸­");
 		spannableString.setSpan(new TypefaceSpan("monospace"), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spannableString.setSpan(new AbsoluteSizeSpan(24, true), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		getActionBar().setTitle(spannableString);
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.splash);	
-		  myHandler = new MyHandler();//ÏûÏ¢´¦Àí¶ÔÏó
-		  MyThread m = new MyThread();//jsonÊı¾İÏÂÔØ¶ÔÏó
-	       new Thread(m).start();//¿ªÊ¼ÏÂÔØ£¬UI½çÃæ¼ÌĞø±£³Öprogress
+
+		new Thread(runnable).start();//å¼€å§‹ä¸‹è½½ï¼ŒUIç•Œé¢ç»§ç»­ä¿æŒprogress
 	}
 
 	
-    private String GetSource() throws Exception{
-	return HttpUtil.getRequest(HttpUtil.BaseUrl);
-    }
-    
-    /**
-     * ÄÚ²¿HandlerÀà
-     * ½ÓÊÜÏûÏ¢,´¦ÀíÏûÏ¢ ,´ËHandler»áÓëµ±Ç°Ö÷Ïß³ÌÒ»¿éÔËĞĞ
-     * */
+	@SuppressLint("HandlerLeak")
+	Handler handler = new Handler() {
+		@Override
+		public void handleMessage(Message msg) {
+			super.handleMessage(msg);
+			String feedback = (String) msg.obj;
 
-@SuppressLint("HandlerLeak")
-class MyHandler extends Handler {
-         @Override
-         public void handleMessage(Message msg) {
-             super.handleMessage(msg);
-             Bundle b = msg.getData();
-             String status = b.getString("status");
-             if(status=="ok"){//Èç¹ûÕıÈ·»ñÈ¡Êı¾İ
-			 Intent intent=new Intent(SplashActivity.this,Applied_Activity.class);
-			 intent.putExtra("jsonstring", jsonstring);//´«µİµ½MainActivityÒ³Ãæ
-			 startActivity(intent);
-			 SplashActivity.this.finish();
-             }
-         }
-     }
-/*
- * ´ËÄÚ²¿Ïß³ÌÀàÓÃÀ´ÏÂÔØjson
- * ´¦ÀíÍêºóÏëÖ÷Ïß³Ì·¢ËÍÏûÏ¢
- * */
-    class MyThread implements Runnable {
-        public void run() {    
-                try {
-                	Thread.sleep(1000);
-                	jsonstring= GetSource();
-				} catch (Exception e) {
-					e.printStackTrace();
+			if (feedback.equals("null")) {
+				Toast.makeText(getApplicationContext(), "è¯·æ£€æŸ¥ç½‘ç»œè¿æ¥ï¼", Toast.LENGTH_SHORT)
+						.show();
+			} 
+			else if(feedback.equals("nd")){
+				Toast.makeText(getApplicationContext(), "æ²¡æœ‰æ•°æ®è¿”å›ï¼", Toast.LENGTH_SHORT)
+				.show();
+			}
+			else if(feedback.equals("wtc")){
+				Toast.makeText(getApplicationContext(), "ç½‘ç»œè¿æ¥å‡ºç°é—®é¢˜ï¼", Toast.LENGTH_SHORT)
+				.show();
+			}
+			else {
+			if (HttpClientUtil.isjson(feedback)) {			
+					 Intent intent=new Intent(SplashActivity.this,Applied_Activity.class);
+					 intent.putExtra("feedback", feedback);
+					 startActivity(intent);
+					 SplashActivity.this.finish();	
+			} 
+			else {
+				if (feedback.equalsIgnoreCase("2")) {
+					Toast.makeText(getApplicationContext(), "æ²¡æœ‰ç”³è¯·è¿‡ï¼", Toast.LENGTH_SHORT)
+							.show();
+				} else {
+					Toast.makeText(getApplicationContext(), "å…¶ä»–åŸå› é”™è¯¯!", Toast.LENGTH_SHORT)
+							.show();
 				}
-                Message msg = new Message();
-                Bundle b = new Bundle();// ´æ·ÅÊı¾İ
-                b.putString("status","ok");
-                msg.setData(b);
-                SplashActivity.this.myHandler.sendMessage(msg); // ÏòHandler·¢ËÍÏûÏ¢,¸üĞÂUI
-        }
-    }
+			}
+		}
+		}
+	};
+	Runnable runnable = new Runnable() {
+		@Override
+		public void run() {
+			Message msg = new Message();
+			// Bundle data = new Bundle();
+			params = new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("uid", User.uid));
+			String feedback;
+			feedback = HttpClientUtil
+					.httpPostClient(getApplicationContext(), url, params);	
+				msg.obj = feedback;
+				handler.sendMessage(msg);
+		}
+
+	};
 }

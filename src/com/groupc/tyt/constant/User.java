@@ -2,7 +2,7 @@ package com.groupc.tyt.constant;
 
 public class User {
 
-	public static  int uid;
+	public static  String uid;
 	public static  String name;
 	public static  String passWord;
 	public static  String uno;
@@ -17,7 +17,7 @@ public class User {
 	
 	User(){
 		
-		 uid=-1;
+		 uid="-1";
 		 name=null;
 		 passWord=null;
 		 uno=null;

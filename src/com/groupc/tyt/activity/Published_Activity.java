@@ -36,7 +36,7 @@ public class Published_Activity extends Activity {
 	Resources r = getResources();
 	Drawable myDrawable = r.getDrawable(R.drawable.top_back);
 	actionBar.setBackgroundDrawable(myDrawable);
-	SpannableString spannableString = new SpannableString("ÒÑÉêÇëµÄ½»Ò×");
+	SpannableString spannableString = new SpannableString("å·²ç”³è¯·çš„äº¤æ˜“");
 	spannableString.setSpan(new TypefaceSpan("monospace"), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 	spannableString.setSpan(new AbsoluteSizeSpan(24, true), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 	getActionBar().setTitle(spannableString);
@@ -45,13 +45,13 @@ public class Published_Activity extends Activity {
 	
 	listView1 = (ListView) this.findViewById(R.id.list);
 	
-	 //µã»÷Ã¿Ïîµ¯³ö¶Ô»°¿òÓÃµ½
-	Bundle extras = getIntent().getExtras();//»ñÈ¡´«µİ¹ıÀ´µÄjson
+	 //ç‚¹å‡»æ¯é¡¹å¼¹å‡ºå¯¹è¯æ¡†ç”¨åˆ°
+	Bundle extras = getIntent().getExtras();//è·å–ä¼ é€’è¿‡æ¥çš„json
 	jsonstring=extras.getString("jsonstring");
 	getdata();
-    //³õÊ¼»¯Êı¾İ
+    //åˆå§‹åŒ–æ•°æ®
 	
-    listView1.setOnItemClickListener(new OnItemClickListener() {//µã»÷listviewÖĞµÄÄ³Ïî
+    listView1.setOnItemClickListener(new OnItemClickListener() {//ç‚¹å‡»listviewä¸­çš„æŸé¡¹
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 			Intent intent=new Intent();
 			intent.setClass(Published_Activity.this, Goods_Published.class);
@@ -61,7 +61,7 @@ public class Published_Activity extends Activity {
 		});
 }
 /*
- * ³õÊ¼»¯»ñÈ¡Êı¾İ
+ * åˆå§‹åŒ–è·å–æ•°æ®
  */
 private void getdata(){
 	try {
@@ -74,7 +74,7 @@ private void getdata(){
 	listView1.setAdapter(shopListAdapter);
 }
 /*
- * »ñÈ¡µÈ¶àÊı¾İ
+ * è·å–ç­‰å¤šæ•°æ®
  */
 
 

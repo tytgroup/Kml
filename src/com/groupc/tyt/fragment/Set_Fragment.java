@@ -7,6 +7,7 @@ import com.groupc.tyt.R;
 import com.groupc.tyt.activity.Applied_Activity;
 import com.groupc.tyt.activity.SplashActivity;
 import com.groupc.tyt.activity.SplashActivity2;
+import com.groupc.tyt.constant.User;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -32,18 +33,23 @@ public class Set_Fragment extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.me,container,false);
 		listView = (ListView) v.findViewById(R.id.listviewme);
+		if(User.uid.equals("-1")){
+			Toast.makeText(getActivity(), "æ‚¨è¿˜æ²¡æœ‰ç™»é™†ï¼", Toast.LENGTH_SHORT).show();
+		}
+		else{
 		init();
+		}
 		return v;
 	}
 	
 	
 	private void init() {
 		List<String> items = new ArrayList<String>();
-		items.add("ÒÑÉêÇëµÄ½»Ò×");
-		items.add("ÒÑ·¢²¼µÄ½»Ò×");
-		items.add("Ê®Íò»ğ¼±ÇóÂò");
-		items.add("¹ºÂò»ı·Ö");
-		items.add("ÎÒÓĞ¸üºÃµÄ½¨Òé£¨²ÉÄÉËÍ»ı·Ö)");
+		items.add("å·²ç”³è¯·çš„äº¤æ˜“");
+		items.add("å·²å‘å¸ƒçš„äº¤æ˜“");
+		items.add("åä¸‡ç«æ€¥æ±‚ä¹°");
+		items.add("è´­ä¹°ç§¯åˆ†");
+		items.add("æˆ‘æœ‰æ›´å¥½çš„å»ºè®®ï¼ˆé‡‡çº³é€ç§¯åˆ†)");
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, items);
 		listView.setAdapter(adapter);
@@ -54,15 +60,20 @@ public class Set_Fragment extends Fragment {
                     case 0:
                             Intent localIntent=new Intent(getActivity(),SplashActivity.class);
                             startActivity(localIntent);
+                            break;
                     case 1:
                     	Intent localIntent2=new Intent(getActivity(),SplashActivity2.class);
                         startActivity(localIntent2);
+                        break;
                     case 2:
-                    	Toast.makeText(getActivity(), "¹¦ÄÜÉÏÏßÖĞ3", Toast.LENGTH_SHORT).show();
+                    	Toast.makeText(getActivity(), "åŠŸèƒ½å¼€å‘ä¸­", Toast.LENGTH_SHORT).show();
+                    	break;
                     case 3:
-                    	Toast.makeText(getActivity(), "¹¦ÄÜÉÏÏßÖĞ4", Toast.LENGTH_SHORT).show();
+                    	Toast.makeText(getActivity(), "åŠŸèƒ½å¼€å‘ä¸­", Toast.LENGTH_SHORT).show();
+                    	break;
                     case 4:
-                    	Toast.makeText(getActivity(), "¹¦ÄÜÉÏÏßÖĞ5", Toast.LENGTH_SHORT).show();
+                    	Toast.makeText(getActivity(), "åŠŸèƒ½å¼€å‘ä¸­", Toast.LENGTH_SHORT).show();
+                    	break;
                     }
                     
             }

@@ -26,7 +26,7 @@ public class Goods_Applied extends Activity{
 		Resources r = getResources();
 		Drawable myDrawable = r.getDrawable(R.drawable.top_back);
 		actionBar.setBackgroundDrawable(myDrawable);
-		SpannableString spannableString = new SpannableString("已申请的交易");
+		SpannableString spannableString = new SpannableString("宸茬敵璇风殑浜ゆ槗");
 		spannableString.setSpan(new TypefaceSpan("monospace"), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spannableString.setSpan(new AbsoluteSizeSpan(24, true), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		getActionBar().setTitle(spannableString);

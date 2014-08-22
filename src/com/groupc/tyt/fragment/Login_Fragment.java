@@ -9,6 +9,7 @@ import org.apache.http.message.BasicNameValuePair;
 
 import com.groupc.tyt.R;
 import com.groupc.tyt.activity.Reg_Activity;
+import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.constant.User;
 import com.groupc.tyt.util.HttpClientUtil;
 
@@ -39,7 +40,7 @@ public class Login_Fragment extends Fragment {
 	private String name, psd;
 	private List<NameValuePair> params;
 	private TextView txt_show;
-	private String url = "http://172.27.3.1:8080/json/loginService",
+	private String url = ConstantDef.BaseUil+"loginService",
 			title = "user", keys[] = { "iduser", "uno", "username","phone","tx","jf","xydj",
 					"hydj","rzjg" };
 
@@ -79,14 +80,26 @@ public class Login_Fragment extends Fragment {
 			super.handleMessage(msg);
 			String feedback = (String) msg.obj;
 
-			Log.e("feedback",""+feedback);
+			if (feedback.equals("null")) {
+				Toast.makeText(getActivity(), "请检查网络连接！", Toast.LENGTH_SHORT)
+						.show();
+			} 
+			else if(feedback.equals("nd")){
+				Toast.makeText(getActivity(), "没有数据返回！", Toast.LENGTH_SHORT)
+				.show();
+			}
+			else if(feedback.equals("wtc")){
+				Toast.makeText(getActivity(), "网络连接出现问题！", Toast.LENGTH_SHORT)
+				.show();
+			}
+			else {
 			if (HttpClientUtil.isjson(feedback)) {
 				List<Map<String, String>> mylist = new ArrayList<Map<String, String>>();
 				try {
 					mylist = HttpClientUtil.jsonToList(feedback, title, keys);
 	
 					        int i=0;
-							 User.uid=Integer.parseInt(mylist.get(i).get("iduser"));
+							 User.uid=mylist.get(i).get("iduser");
 							 User.name=mylist.get(i).get("username");
 							 User.uno=mylist.get(i).get("uno");
 							 User.phone=mylist.get(i).get("phone");
@@ -97,7 +110,9 @@ public class Login_Fragment extends Fragment {
 							 User.xydj=Double.parseDouble(mylist.get(i).get("xydj"));
 							 Log.e("json", "uid="+User.uid+"|name="+User.name+"|uno="+User.uno
 									 +"|phone="+User.phone+"|tx="+User.tx+"|rzjg="+User.rzjg
-									 +"|jf="+User.jf+"|hydj="+User.hydj+"|xydj="+User.xydj);	
+									 +"|jf="+User.jf+"|hydj="+User.hydj+"|xydj="+User.xydj);
+							 Toast.makeText(getActivity(), "登陆成功！", Toast.LENGTH_SHORT)
+								.show();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
@@ -117,10 +132,11 @@ public class Login_Fragment extends Fragment {
 
 				}
 				else{
-					Toast.makeText(getActivity(), "想死的心都有了!"+feedback, Toast.LENGTH_SHORT)
+					Toast.makeText(getActivity(), "想死的心都有了!", Toast.LENGTH_SHORT)
 					.show();
 				}
 			}
+		}
 		}
 	};
 	Runnable runnable = new Runnable() {
@@ -133,14 +149,9 @@ public class Login_Fragment extends Fragment {
 			params.add(new BasicNameValuePair("psd", psd));
 			String feedback;
 			feedback = HttpClientUtil
-					.httpPostClient(getActivity(), url, params);
-			if (feedback == null) {
-				Toast.makeText(getActivity(), "������?", Toast.LENGTH_SHORT)
-						.show();
-			} else {
+					.httpPostClient(getActivity(), url, params);	
 				msg.obj = feedback;
 				handler.sendMessage(msg);
-			}
 		}
 
 	};

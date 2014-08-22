@@ -2,11 +2,15 @@ package com.groupc.tyt.constant;
 
 public class Goods {
 
-	public String picture;
-	public String describe;
-	public String name;
-	public String type;
+	public String gid;
+	public String uid;
+	public String gpicture;
+	public String ptime;
+	public String gdescribe;
+	public String gname;
+	public String gtype;
+	public String gstate;
 	public double price;
-	public int quantity;
-	public boolean tx;   //提醒业务，待定
+	public int gquantity;
+	public boolean tx;   //寰呭畾
 }

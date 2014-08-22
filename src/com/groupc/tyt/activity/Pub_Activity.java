@@ -1,15 +1,16 @@
 package com.groupc.tyt.activity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-
 import com.groupc.tyt.R;
+import com.groupc.tyt.constant.ConstantDef;
+import com.groupc.tyt.constant.User;
 import com.groupc.tyt.util.HttpClientUtil;
-
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
 import android.content.Intent;
@@ -23,9 +24,11 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.TypefaceSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,16 +40,18 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class Pub_Activity extends Activity{
+@SuppressLint("SimpleDateFormat")
+public class Pub_Activity extends Activity {
 	private List<NameValuePair> params;
-	private String url="http://172.27.3.1:8080/json/RegisterService";
-	private String gname, gtype,guid,ptime,gprice,gpicture,gquantity,gdescribe,gstate;
+	private String url=ConstantDef.BaseUil+"PublishService";
+	private String gname, gtype,guid,ptime,gprice,gpicture,gquantity,gdescribe;
 	private Button addphoto;
 	private Button confirm;
 	private EditText describe;
 	private EditText price;
 	private EditText num;
 	private CheckBox checkbox1;
+	private SimpleDateFormat sdf =new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private List<String> list = new ArrayList<String>();
 	private Spinner mySpinner;
 	private ArrayAdapter<String> adapter;  
@@ -55,23 +60,21 @@ public class Pub_Activity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getActionBar();
-		SpannableString spannableString = new SpannableString("È¡Ïû·¢²¼");
+		SpannableString spannableString = new SpannableString("å–æ¶ˆå‘å¸ƒ");
 		getActionBar().setTitle(spannableString);
         actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.publish);
-		list.add("×ÔĞĞ³µ");    
-        list.add("Êé¼®");    
-        list.add("µç×Ó²úÆ·");    
-        list.add("ÔË¶¯Æ÷²Ä");    
-        list.add("ÆäËü");
-        //list.add("Ê®Íò»ğ¼±");   
+		list.add("è‡ªè¡Œè½¦");    
+        list.add("ä¹¦ç±");    
+        list.add("ç”µå­äº§å“");    
+        list.add("è¿åŠ¨å™¨æ");    
+        list.add("å…¶å®ƒ");  
          mySpinner = (Spinner)findViewById(R.id.spinner); 
         adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, list);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         mySpinner.setAdapter(adapter);
         mySpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){    
-            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {    
-             
+            public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {                
             	gtype=""+arg2;   
             }    
             public void onNothingSelected(AdapterView<?> arg0) {    
@@ -80,7 +83,7 @@ public class Pub_Activity extends Activity{
             }    
         });    
         
-        /*ÏÂÀ­²Ëµ¥µ¯³öµÄÄÚÈİÑ¡Ïî½¹µã¸Ä±äÊÂ¼ş´¦Àí*/    
+        /*ä¸‹æ‹‰èœå•å¼¹å‡ºçš„å†…å®¹é€‰é¡¹ç„¦ç‚¹æ”¹å˜äº‹ä»¶å¤„ç†*/  
         mySpinner.setOnFocusChangeListener(new Spinner.OnFocusChangeListener(){    
         public void onFocusChange(View v, boolean hasFocus) {    
          }    
@@ -91,26 +94,71 @@ public class Pub_Activity extends Activity{
      	addphoto=(Button)findViewById(R.id.addphoto);
      	confirm=(Button)findViewById(R.id.cfpub);
      	checkbox1=(CheckBox)findViewById(R.id.checkBox1);
+     	addphoto.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+     		
+     	});
+     	confirm.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub			
+		     	//gname ; 
+				if(User.uid.equals("-1")){
+		     		Toast.makeText(getApplicationContext(), "æ‚¨è¿˜æ²¡ç™»é™†ï¼Œè¯·å…ˆç™»é™†ï¼", Toast.LENGTH_SHORT)
+					.show();
+		     	}
+				else{
+		     	guid = User.uid;
+		     	Date date=new Date();
+		     	ptime=sdf.format(date);
+//		     	Log.e("data", ""+ptime);
+		     	gprice = price.getText().toString();
+		     	gquantity = num.getText().toString();
+		     	gdescribe = describe.getText().toString();
+				new Thread(runnable).start();
+			}
+			}
+     		
+     	});
+     	if(User.uid.equals("-1")){
+     		Toast.makeText(getApplicationContext(), "æ‚¨è¿˜æ²¡ç™»é™†ï¼Œè¯·å…ˆç™»é™†ï¼", Toast.LENGTH_SHORT)
+			.show();
+     	}
      	
-     	//gname ;   »¹Ã»È¡
-     	//guid = ;
-     	ptime=new Date().toLocaleString();
-     	gprice = price.getText().toString();
-     	gquantity = num.getText().toString();
-     	gdescribe = describe.getText().toString();
 	}
 	Handler handler = new Handler(){
 	    @Override
 	    public void handleMessage(Message msg) {
 	        super.handleMessage(msg);
 	        String feedback = (String) msg.obj;
+	        
+	        if (feedback.equals("null")) {
+				Toast.makeText(getApplicationContext(), "è¯·æ£€æŸ¥ç½‘ç»œè¿æ¥ï¼", Toast.LENGTH_SHORT)
+						.show();
+			} 
+			else if(feedback.equals("nd")){
+				Toast.makeText(getApplicationContext(), "æ²¡æœ‰æ•°æ®è¿”å›ï¼", Toast.LENGTH_SHORT)
+				.show();
+			}
+			else if(feedback.equals("wtc")){
+				Toast.makeText(getApplicationContext(), "ç½‘ç»œè¿æ¥å‡ºç°é—®é¢˜ï¼", Toast.LENGTH_SHORT)
+				.show();
+			}
+			else {
 		    if(feedback.equals("ok")){
-		    	Toast.makeText(getApplicationContext(), "·¢²¼³É¹¦£¡", Toast.LENGTH_SHORT).show();
+		    	Toast.makeText(getApplicationContext(), "å‘å¸ƒæˆåŠŸï¼", Toast.LENGTH_SHORT).show();
 		    }
 		    else{
-		    	Toast.makeText(getApplicationContext(), "·¢²¼Ê§°Ü£¡", Toast.LENGTH_SHORT).show();
+		    	Toast.makeText(getApplicationContext(), "å‘å¸ƒå¤±è´¥ï¼", Toast.LENGTH_SHORT).show();
 		    }
 	    	
+	    }
 	    }
 	}; 
 	Runnable runnable = new Runnable(){
@@ -122,20 +170,16 @@ public class Pub_Activity extends Activity{
 			params.add(new BasicNameValuePair("gname", gname));
 			params.add(new BasicNameValuePair("guid", guid));
 			params.add(new BasicNameValuePair("ptime", ptime));
+			params.add(new BasicNameValuePair("gprice", gprice));
 			params.add(new BasicNameValuePair("gpicture", gpicture));
 			params.add(new BasicNameValuePair("gdescribe", gdescribe));
 			params.add(new BasicNameValuePair("gtype", gtype));
 			params.add(new BasicNameValuePair("gquantity", gquantity));
 			String feedback;
 			feedback = HttpClientUtil.httpPostClient(getApplicationContext(), url, params);
-			if (feedback == null) {
-				Toast.makeText(getApplicationContext(), "ÍøÂç³ö´í£¡", Toast.LENGTH_SHORT)
-						.show();
-			} else {
 				msg.obj = feedback;
 				handler.sendMessage(msg);
 			}
-	    }
 	};
 	
 	public boolean onOptionsItemSelected(MenuItem item) {  
@@ -149,5 +193,7 @@ public class Pub_Activity extends Activity{
 	            return super.onOptionsItemSelected(item);  
 	    }  
 	}
+
+
 }
 

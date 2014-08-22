@@ -34,11 +34,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.groupc.tyt.R;
+import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.util.HttpClientUtil;
 
 public class Reg_Activity extends Activity{
 	private List<NameValuePair> params;
-	private String url="http://172.27.3.1:8080/json/RegisterService";
+	private String url=ConstantDef.BaseUil+"RegisterService";
 	private String uno,name,psd,phone,img_xsz,img_head;
 	private EditText stunum;
 	private EditText usrname;
@@ -55,7 +56,7 @@ public class Reg_Activity extends Activity{
 		Resources r = getResources();
 		Drawable myDrawable = r.getDrawable(R.drawable.top_back);
 		actionBar.setBackgroundDrawable(myDrawable);
-		SpannableString spannableString = new SpannableString("µÇÂ¼");
+		SpannableString spannableString = new SpannableString("ç™»å½•");
 		spannableString.setSpan(new TypefaceSpan("monospace"), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		spannableString.setSpan(new AbsoluteSizeSpan(24, true), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		getActionBar().setTitle(spannableString);
@@ -70,19 +71,19 @@ public class Reg_Activity extends Activity{
 		upusrphoto= (Button)findViewById(R.id.upusrphoto);
 		cfreg= (Button)findViewById(R.id.cfreg);
 		
-		upstuphoto.setOnClickListener(new Button.OnClickListener(){//´´½¨¼àÌı    
+		upstuphoto.setOnClickListener(new Button.OnClickListener(){//åˆ›å»ºç›‘å¬
             public void onClick(View v) {    
                   
             }    
   
         });    
-		upusrphoto.setOnClickListener(new Button.OnClickListener(){//´´½¨¼àÌı    
+		upusrphoto.setOnClickListener(new Button.OnClickListener(){//åˆ›å»ºç›‘å¬ 
             public void onClick(View v) {    
                   
             }    
   
         });   
-		cfreg.setOnClickListener(new Button.OnClickListener(){//´´½¨¼àÌı    
+		cfreg.setOnClickListener(new Button.OnClickListener(){//åˆ›å»ºç›‘å¬  
             public void onClick(View v) {    
             	uno=stunum.getText().toString();
             	name = usrname.getText().toString();
@@ -100,13 +101,28 @@ public class Reg_Activity extends Activity{
 	    public void handleMessage(Message msg) {
 	        super.handleMessage(msg);
 	        String feedback = (String) msg.obj;
+	        
+	        if (feedback.equals("null")) {
+				Toast.makeText(getApplicationContext(), "è¯·æ£€æŸ¥ç½‘ç»œè¿æ¥ï¼", Toast.LENGTH_SHORT)
+						.show();
+			} 
+			else if(feedback.equals("nd")){
+				Toast.makeText(getApplicationContext(), "æ²¡æœ‰æ•°æ®è¿”å›ï¼", Toast.LENGTH_SHORT)
+				.show();
+			}
+			else if(feedback.equals("wtc")){
+				Toast.makeText(getApplicationContext(), "ç½‘ç»œè¿æ¥å‡ºç°é—®é¢˜ï¼", Toast.LENGTH_SHORT)
+				.show();
+			}
+			else {
 		    if(feedback.equals("ok")){
-		    	Toast.makeText(getApplicationContext(), "×¢²á³É¹¦£¡", Toast.LENGTH_SHORT).show();
+		    	Toast.makeText(getApplicationContext(), "æ³¨å†ŒæˆåŠŸï¼", Toast.LENGTH_SHORT).show();
 		    }
 		    else{
-		    	Toast.makeText(getApplicationContext(), "×¢²áÊ§°Ü£¡", Toast.LENGTH_SHORT).show();
+		    	Toast.makeText(getApplicationContext(), "×¢æ³¨å†Œå¤±è´¥ï¼", Toast.LENGTH_SHORT).show();
 		    }
 	    	
+	    }
 	    }
 	}; 
 	Runnable runnable = new Runnable(){
@@ -123,13 +139,8 @@ public class Reg_Activity extends Activity{
 			params.add(new BasicNameValuePair("img_head", img_head));
 			String feedback;
 			feedback = HttpClientUtil.httpPostClient(getApplicationContext(), url, params);
-			if (feedback == null) {
-				Toast.makeText(getApplicationContext(), "ÍøÂç³ö´í£¡", Toast.LENGTH_SHORT)
-						.show();
-			} else {
 				msg.obj = feedback;
 				handler.sendMessage(msg);
-			}
 	    }
 	};
 	public boolean onOptionsItemSelected(MenuItem item) {  
