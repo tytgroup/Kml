@@ -8,7 +8,7 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.groupc.tyt.R;
-import com.groupc.tyt.activity.Reg_Activity;
+import com.groupc.tyt.activity.RegActivity;
 import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.constant.User;
 import com.groupc.tyt.util.HttpClientUtil;
@@ -33,7 +33,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("HandlerLeak")
-public class Login_Fragment extends Fragment {
+public class LoginFragment extends Fragment {
 
 	private ImageButton LoginButton;
 	private EditText editText1, editText2;
@@ -170,7 +170,7 @@ public class Login_Fragment extends Fragment {
 		switch (item.getItemId()) {
 		case 1:
 			Intent i = new Intent(getActivity().getBaseContext(),
-					Reg_Activity.class);
+					RegActivity.class);
 			startActivity(i);
 			break;
 		}

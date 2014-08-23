@@ -45,10 +45,9 @@ public class SplashActivity extends Activity {
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.splash);	
 
-		new Thread(runnable).start();//开始下载，UI界面继续保持progress
-	}
-
-	
+		Thread thread=new Thread(runnable);//开始下载，UI界面继续保持progress
+		thread.start();
+	}	
 	@SuppressLint("HandlerLeak")
 	Handler handler = new Handler() {
 		@Override
@@ -70,7 +69,7 @@ public class SplashActivity extends Activity {
 			}
 			else {
 			if (HttpClientUtil.isjson(feedback)) {			
-					 Intent intent=new Intent(SplashActivity.this,Applied_Activity.class);
+					 Intent intent=new Intent(SplashActivity.this,AppliedActivity.class);
 					 intent.putExtra("feedback", feedback);
 					 startActivity(intent);
 					 SplashActivity.this.finish();	

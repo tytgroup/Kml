@@ -33,8 +33,7 @@
             android:background="@drawable/bg_edittext"
             android:textSize="20sp"
             android:ems="10"
-            android:hint="此处填写商品名称"
-            android:inputType="numberDecimal" />
+            android:hint="此处填写商品名称" />
 
     </LinearLayout>
         <LinearLayout

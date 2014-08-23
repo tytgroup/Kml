@@ -8,9 +8,12 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.groupc.tyt.R;
-import com.groupc.tyt.activity.Applied_Activity;
+import com.groupc.tyt.activity.AppliedActivity;
+import com.groupc.tyt.activity.GoodsApplied;
+import com.groupc.tyt.activity.GoodsinActivity;
 import com.groupc.tyt.adapter.GoodsListViewAdapter;
 import com.groupc.tyt.constant.ConstantDef;
+import com.groupc.tyt.constant.SerializableMap;
 import com.groupc.tyt.constant.User;
 import com.groupc.tyt.util.HttpClientUtil;
 
@@ -30,12 +33,15 @@ import android.view.MenuInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-public class Home_Fragment extends Fragment implements OnClickListener{
+public class HomeFragment extends Fragment implements OnClickListener,OnItemClickListener{
 
 	private String  gtype;
 	private List<NameValuePair> params;
@@ -97,6 +103,7 @@ public void setListener(){
     sport.setOnClickListener(this);
 	more.setOnClickListener(this);
 	hotlist.setOnClickListener(this);
+	homelist.setOnItemClickListener(this);
 }
 @Override
 public void onClick(View v) {
@@ -125,6 +132,7 @@ public void onClick(View v) {
 	new Thread(runnable).start();
 
 }
+
 
 @SuppressLint("HandlerLeak")
 Handler handler = new Handler() {
@@ -194,5 +202,18 @@ Runnable runnable = new Runnable() {
 	}
 
 };
+
+@Override
+public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+	// TODO Auto-generated method stub
+	Intent intent=new Intent();
+	Bundle value=new Bundle();
+	SerializableMap smap=new SerializableMap();  
+    smap.setMap(mylist.get(arg2));  
+	value.putSerializable("map", smap);
+	intent.putExtras(value);
+	intent.setClass(getActivity(), GoodsinActivity.class);
+	startActivity(intent);	 
+}
 
 }

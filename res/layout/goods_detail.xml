@@ -1,99 +1,121 @@
 <?xml version="1.0" encoding="utf-8"?>
- <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-<LinearLayout 
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollView1"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical" >
-
-   
-
-   
-
-    <ImageView
-        android:id="@+id/gdimage"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/img1" />
+    android:layout_height="wrap_content" >
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:divider="@android:drawable/divider_horizontal_textfield"
-        android:orientation="vertical"
-        android:showDividers="middle" 
-        >
+        android:orientation="vertical" >
+
+        <ImageView
+            android:id="@+id/gdimage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/img1" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" >
+            android:layout_margin="20dp"
+            android:divider="@android:drawable/divider_horizontal_textfield"
+            android:orientation="vertical"
+            android:showDividers="middle" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="商品名称："
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/gdname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="#000000"
+                    android:textSize="20sp" />
+
+                <ImageButton
+                    android:id="@+id/favorbutton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/favorbutton" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal" >
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="价格："
+                    android:textColor="#FF0000"
+                    android:textSize="20sp" />
+
+                <TextView
+                    android:id="@+id/gdprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="TextView"
+                    android:textColor="#FF0000"
+                    android:textSize="20sp" />
+            </LinearLayout>
 
             <TextView
-                android:id="@+id/textView1"
-                android:layout_width="wrap_content"
+                android:id="@+id/gddescribe"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="商品名称："
-                android:textColor="#000000"
-                android:textSize="20sp" />
+                android:layout_marginTop="10dp"
+                android:text="Large Text"
+                android:textAppearance="?android:attr/textAppearanceLarge" />
 
-            <TextView
-                android:id="@+id/gdname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="#000000"
-                android:textSize="20sp" />
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="10dp"
+         android:layout_marginBottom="10dp"
+         android:layout_gravity="left|center_vertical">
 
-            <ImageButton
-                android:id="@+id/favorbutton"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:background="@drawable/favorbutton" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="数量:    "
+            android:layout_gravity="left|center_vertical"
+             android:textSize="20sp"
+             android:textColor="#0A0A0A" />
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/num"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal" 
-            android:layout_marginTop="10dp">
+            android:background="@drawable/bg_edittext"
+            android:ems="10"
+            android:textSize="20sp"
+            android:inputType="number" />
 
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
+    </LinearLayout>
+            <Button
+                android:id="@+id/cfap"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="价格："
-                android:textColor="#FF0000"
-                android:textSize="20sp" />
-
-            <TextView
-                android:id="@+id/gdprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="TextView"
-                android:textColor="#FF0000"
-                android:textSize="20sp" />
+                android:layout_marginTop="10dp"
+                android:background="@drawable/button_style"
+                android:text="申请交易" />
         </LinearLayout>
- 
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/gddescribe"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Large Text"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <Button
-        android:id="@+id/cfap"
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/button_style"
-        android:text="申请交易" />
-   </LinearLayout>
-</LinearLayout>
- </ScrollView>
+</ScrollView>

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.groupc.tyt.R;
-import com.groupc.tyt.activity.Reg_Activity;
+import com.groupc.tyt.activity.RegActivity;
 
 import android.app.ActionBar;
 import android.app.SearchManager;
@@ -26,7 +26,7 @@ import android.widget.ListView;
 import android.widget.SearchView;
 import android.widget.Toast;
 
-public class Me_Fragment extends Fragment {
+public class MeFragment extends Fragment {
 	private ListView listView;
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -45,11 +45,11 @@ public class Me_Fragment extends Fragment {
 	
 	private void init() {
 		List<String> items = new ArrayList<String>();
-		items.add("ÒÑÉêÇëµÄ½»Ò×");
-		items.add("ÒÑ·¢²¼µÄ½»Ò×");
-		items.add("Ê®Íò»ð¼±ÇóÂò");
-		items.add("¹ºÂò»ý·Ö");
-		items.add("ÎÒÓÐ¸üºÃµÄ½¨Òé£¨²ÉÄÉËÍ»ý·Ö)");
+		items.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½");
+		items.add("ï¿½Ñ·ï¿½ï¿½ï¿½ï¿½Ä½ï¿½ï¿½ï¿½");
+		items.add("Ê®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		items.add("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
+		items.add("ï¿½ï¿½ï¿½Ð¸ï¿½ÃµÄ½ï¿½ï¿½é£¨ï¿½ï¿½ï¿½ï¿½ï¿½Í»ï¿½ï¿½)");
 		
 		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, items);
 		listView.setAdapter(adapter);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.groupc.tyt.R;
-import com.groupc.tyt.activity.Applied_Activity;
+import com.groupc.tyt.activity.AppliedActivity;
 import com.groupc.tyt.activity.SplashActivity;
 import com.groupc.tyt.activity.SplashActivity2;
 import com.groupc.tyt.constant.User;
@@ -21,7 +21,7 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class Set_Fragment extends Fragment {
+public class SetFragment extends Fragment {
 	private ListView listView;
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -36,9 +36,7 @@ public class Set_Fragment extends Fragment {
 		if(User.uid.equals("-1")){
 			Toast.makeText(getActivity(), "您还没有登陆！", Toast.LENGTH_SHORT).show();
 		}
-		else{
-		init();
-		}
+		init();	
 		return v;
 	}
 	

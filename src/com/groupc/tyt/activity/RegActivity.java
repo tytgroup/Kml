@@ -37,7 +37,7 @@ import com.groupc.tyt.R;
 import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.util.HttpClientUtil;
 
-public class Reg_Activity extends Activity{
+public class RegActivity extends Activity{
 	private List<NameValuePair> params;
 	private String url=ConstantDef.BaseUil+"RegisterService";
 	private String uno,name,psd,phone,img_xsz,img_head;

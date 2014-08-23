@@ -1,11 +1,11 @@
 package com.groupc.tyt.activity;
 
 import com.groupc.tyt.R;
-import com.groupc.tyt.fragment.Favor_Fragment;
-import com.groupc.tyt.fragment.Home_Fragment;
-import com.groupc.tyt.fragment.Login_Fragment;
-import com.groupc.tyt.fragment.Me_Fragment;
-import com.groupc.tyt.fragment.Set_Fragment;
+import com.groupc.tyt.fragment.FavorFragment;
+import com.groupc.tyt.fragment.HomeFragment;
+import com.groupc.tyt.fragment.LoginFragment;
+import com.groupc.tyt.fragment.MeFragment;
+import com.groupc.tyt.fragment.SetFragment;
 import com.groupc.tyt.util.DummyTabContent;
 import android.app.ActionBar;
 import android.app.Dialog;
@@ -37,12 +37,12 @@ public class MainActivity extends FragmentActivity {
 	TabWidget tabWidget; 
 	LinearLayout bottom_layout;
 	int CURRENT_TAB = 0;	
-	Home_Fragment homeFragment;
-	Favor_Fragment favorFragment;
+	HomeFragment homeFragment;
+	FavorFragment favorFragment;
 	//Pub_Fragment pubFragment;
-	Login_Fragment loginFragment;
-	Set_Fragment setFragment;
-	Me_Fragment meFragment;
+	LoginFragment loginFragment;
+	SetFragment setFragment;
+	MeFragment meFragment;
     android.support.v4.app.FragmentTransaction ft;
 	LinearLayout tabIndicator1;
 	LinearLayout tabIndicator2;
@@ -63,12 +63,12 @@ public class MainActivity extends FragmentActivity {
 			public void onTabChanged(String tabId) {
 				
 				android.support.v4.app.FragmentManager fm =  getSupportFragmentManager();
-				homeFragment = (Home_Fragment) fm.findFragmentByTag("home");
-				favorFragment = (Favor_Fragment) fm.findFragmentByTag("favor");
+				homeFragment = (HomeFragment) fm.findFragmentByTag("home");
+				favorFragment = (FavorFragment) fm.findFragmentByTag("favor");
 				//pubFragment = (Pub_Fragment) fm.findFragmentByTag("pub");
-				loginFragment = (Login_Fragment) fm.findFragmentByTag("login");
-				setFragment = (Set_Fragment) fm.findFragmentByTag("set");
-				meFragment = (Me_Fragment) fm.findFragmentByTag("me");
+				loginFragment = (LoginFragment) fm.findFragmentByTag("login");
+				setFragment = (SetFragment) fm.findFragmentByTag("set");
+				meFragment = (MeFragment) fm.findFragmentByTag("me");
 				ft = fm.beginTransaction();
 				
 				if(homeFragment!=null)
@@ -146,7 +146,7 @@ public class MainActivity extends FragmentActivity {
      public void isTabHome(){
     	
     	if(homeFragment==null){		
-			ft.add(R.id.realtabcontent,new Home_Fragment(), "home");						
+			ft.add(R.id.realtabcontent,new HomeFragment(), "home");						
 		}else{
 			ft.attach(homeFragment);						
 		}
@@ -155,7 +155,7 @@ public class MainActivity extends FragmentActivity {
     public void isTabFavor(){
     	
     	if(favorFragment==null){
-			ft.add(R.id.realtabcontent,new Favor_Fragment(), "favor");						
+			ft.add(R.id.realtabcontent,new FavorFragment(), "favor");						
 		}else{
 			ft.attach(favorFragment);						
 		}
@@ -173,7 +173,7 @@ public class MainActivity extends FragmentActivity {
      public void isTabMe(){
      	
      	if(loginFragment==null){
- 			ft.add(R.id.realtabcontent,new Login_Fragment(), "login");						
+ 			ft.add(R.id.realtabcontent,new LoginFragment(), "login");						
  		}else{
  			ft.attach(loginFragment);	
  		}
@@ -182,7 +182,7 @@ public class MainActivity extends FragmentActivity {
     public void isTabSet(){
     	
     	if(setFragment==null){
-			ft.add(R.id.realtabcontent,new Set_Fragment(), "set");						
+			ft.add(R.id.realtabcontent,new SetFragment(), "set");						
 		}else{
 			ft.attach(setFragment);						
 		}
@@ -235,7 +235,7 @@ public class MainActivity extends FragmentActivity {
         tabHost.addTab(tSpecPub);
         tabIndicator3.setOnClickListener(new OnClickListener() {
  			public void onClick(View v) {
- 				Intent i=new Intent(getBaseContext(),Pub_Activity.class) ;  
+ 				Intent i=new Intent(getBaseContext(),PubActivity.class) ;  
  		         startActivity(i) ; 
  			}});
         TabHost.TabSpec tSpecMe= tabHost.newTabSpec("login");
