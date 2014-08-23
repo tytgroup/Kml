@@ -17,8 +17,21 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Goods_Applied extends Activity{
+	private ImageView gdimage;
+	private TextView gdname;
+	private TextView gdprice;
+	private TextView apid;
+	private TextView atime;
+	private TextView applystate;
+	private TextView transstate;
+	private TextView commentbuyer;
+	private Button apcancel;
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
@@ -32,6 +45,35 @@ public class Goods_Applied extends Activity{
 		getActionBar().setTitle(spannableString);
         actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.goods_applied);
+		gdimage =(ImageView)findViewById(R.id.list_image);
+		gdname =(TextView)findViewById(R.id.gdname);
+		gdprice =(TextView)findViewById(R.id.gdprice);
+		apid =(TextView)findViewById(R.id.apid);
+		atime =(TextView)findViewById(R.id.atime);
+		applystate =(TextView)findViewById(R.id.apply_state);
+		transstate =(TextView)findViewById(R.id.trans_state);
+		commentbuyer =(TextView)findViewById(R.id.t5);
+		apcancel =(Button)findViewById(R.id.apcancel);
+		
+		commentbuyer.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+     		
+     	});
+		
+		apcancel.setOnClickListener(new OnClickListener(){
+
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+     		
+     	});
 	}
 	public boolean onOptionsItemSelected(MenuItem item) {  
 	    switch (item.getItemId()) {  

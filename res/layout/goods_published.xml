@@ -65,14 +65,14 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/t1"
+            android:id="@+id/p1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="申请编号:" />
+            android:text="发布编号:" />
 
         <TextView
-            android:id="@+id/apid"
+            android:id="@+id/pid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -87,14 +87,14 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/t2"
+            android:id="@+id/p2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="申请日期:" />
+            android:text="发布日期:" />
 
         <TextView
-            android:id="@+id/atime"
+            android:id="@+id/ptime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -109,14 +109,14 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/t3"
+            android:id="@+id/p3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="申请状态:" />
+            android:text="收到的申请:" />
 
         <TextView
-            android:id="@+id/apply_state"
+            android:id="@+id/ausr"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
@@ -124,27 +124,7 @@
 
     </LinearLayout>
     
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"  
-        android:layout_weight="0.1"
-        android:padding="5dp">
-
-        <TextView
-            android:id="@+id/t4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="交易状态:" />
-
-        <TextView
-            android:id="@+id/trans_state"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="TextView" />
-
-    </LinearLayout>
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp" 
@@ -152,11 +132,11 @@
         android:padding="5dp">
 
         <TextView
-            android:id="@+id/t5"
+            android:id="@+id/p4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="评价卖家（举报)" />
+            android:text="评价买家（举报)" />
 
      </LinearLayout>
      

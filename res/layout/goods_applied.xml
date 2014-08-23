@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/listtop"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:divider="@android:drawable/divider_horizontal_textfield"
+    android:orientation="vertical"
+    android:showDividers="middle" >
+    
+    <RelativeLayout 
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="0dp"
     android:background="@drawable/list_selector"
     android:orientation="horizontal"
+    android:layout_weight="0.2"
     android:padding="5dip" >
  
     <!--  ListRow Left sied Thumbnail image -->
@@ -49,16 +56,124 @@
         android:layout_toRightOf="@+id/thumbnail"
         android:text="Just gona stand there and ..." />
  
-    <!-- Rightend Duration -->
-    
- 
-     <!-- Rightend Arrow -->
+ </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true" >
+        android:layout_width="match_parent"
+        android:layout_height="0dp" 
+        android:layout_weight="0.1"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/t1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="申请编号:" />
+
+        <TextView
+            android:id="@+id/apid"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="TextView" />
+
     </LinearLayout>
- 
-</RelativeLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp" 
+        android:layout_weight="0.1"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/t2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="申请日期:" />
+
+        <TextView
+            android:id="@+id/atime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="TextView" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp" 
+        android:layout_weight="0.1"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/t3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="申请状态:" />
+
+        <TextView
+            android:id="@+id/apply_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="TextView" />
+
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"  
+        android:layout_weight="0.1"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/t4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="交易状态:" />
+
+        <TextView
+            android:id="@+id/trans_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="TextView" />
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp" 
+        android:layout_weight="0.1"
+        android:padding="5dp">
+
+        <TextView
+            android:id="@+id/t5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:text="评价卖家（举报)" />
+
+     </LinearLayout>
+     
+
+      <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content" 
+          android:orientation="horizontal">
+         <Button
+        android:id="@+id/apcancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:background="@drawable/button_style"
+        android:text="取消申请" />
+        
+      </LinearLayout>
+
+      
+</LinearLayout>
