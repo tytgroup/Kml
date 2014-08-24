@@ -159,7 +159,7 @@ public class LoginFragment extends Fragment {
 	@SuppressLint("NewApi")
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		menu.add(0, 1, 0, "ע��")
+		menu.add(0, 1, 0, "注册")
 				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
 
 		return;

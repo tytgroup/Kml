@@ -11,11 +11,13 @@ import org.apache.http.message.BasicNameValuePair;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore.Images;
 import android.text.SpannableString;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -168,4 +170,15 @@ public class GoodsinActivity extends Activity {
 				handler.sendMessage(msg);
 	    }
 	};
+	public boolean onOptionsItemSelected(MenuItem item) {  
+	    switch (item.getItemId()) {  
+	        case android.R.id.home:  
+	            Intent intent = new Intent(this, MainActivity.class);  
+	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
+	            startActivity(intent);  
+	            return true;  
+	        default:  
+	            return super.onOptionsItemSelected(item);  
+	    }  
+	}
 }

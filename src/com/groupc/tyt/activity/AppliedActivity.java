@@ -27,6 +27,7 @@ import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.TypefaceSpan;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -82,6 +83,17 @@ public class AppliedActivity extends Activity {
 				startActivity(intent);	      
 				}
 			});
+	}
+    public boolean onOptionsItemSelected(MenuItem item) {  
+	    switch (item.getItemId()) {  
+	        case android.R.id.home:  
+	            Intent intent = new Intent(this, MainActivity.class);  
+	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
+	            startActivity(intent);  
+	            return true;  
+	        default:  
+	            return super.onOptionsItemSelected(item);  
+	    }  
 	}
 
 	}

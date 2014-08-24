@@ -91,11 +91,42 @@ public class RegActivity extends Activity{
             	phone = usrphone.getText().toString();
             	img_xsz = null;
             	img_head = null;
-            	new Thread(runnable).start();
+            	if (registerIsSuccess()) {
+            		new Thread(runnable).start();
+            	}
             }    
   
         });   
 	}
+	
+	private boolean registerIsSuccess(){
+		
+    	//获取用户输入的信息
+    	
+    	String password1=usrpsw.getText().toString();
+    	String password2=usrpsw2.getText().toString();
+    	String telRegex = "[1][358]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。  
+        
+    	if("".equals(uno)){
+    		Toast.makeText(RegActivity.this, "请输入学号!", Toast.LENGTH_SHORT).show();
+    		return false;
+    	}else if("".equals(name)){
+        		//用户输入用户名为空
+        		Toast.makeText(RegActivity.this, "用户名不能为空!", Toast.LENGTH_SHORT).show();
+        		return false;
+    	}else if("".equals(password1)){
+    		//密码不能为空
+    		Toast.makeText(RegActivity.this, "密码不能为空!", Toast.LENGTH_SHORT).show();
+    		return false;
+    	}else if(!password1.equals(password2)){
+    		Toast.makeText(RegActivity.this, "两次密码输入不一致！", Toast.LENGTH_SHORT).show();
+    		return false;
+    	}else if(!phone.matches(telRegex)){
+    		Toast.makeText(RegActivity.this, "请输入正确手机号!", Toast.LENGTH_SHORT).show();
+    		return false;
+    	}
+    	return true;
+    }
 	Handler handler = new Handler(){
 	    @Override
 	    public void handleMessage(Message msg) {
@@ -119,7 +150,7 @@ public class RegActivity extends Activity{
 		    	Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT).show();
 		    }
 		    else{
-		    	Toast.makeText(getApplicationContext(), "ע注册失败！", Toast.LENGTH_SHORT).show();
+		    	Toast.makeText(getApplicationContext(), "注册失败！", Toast.LENGTH_SHORT).show();
 		    }
 	    	
 	    }
