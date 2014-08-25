@@ -53,12 +53,7 @@ public class RegActivity extends Activity{
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getActionBar();
-		Resources r = getResources();
-		Drawable myDrawable = r.getDrawable(R.drawable.top_back);
-		actionBar.setBackgroundDrawable(myDrawable);
 		SpannableString spannableString = new SpannableString("登录");
-		spannableString.setSpan(new TypefaceSpan("monospace"), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		spannableString.setSpan(new AbsoluteSizeSpan(24, true), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
 		getActionBar().setTitle(spannableString);
         actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.reg);
@@ -177,10 +172,7 @@ public class RegActivity extends Activity{
 	public boolean onOptionsItemSelected(MenuItem item) {  
 	    switch (item.getItemId()) {  
 	        case android.R.id.home:  
-	            Intent intent = new Intent(this, MainActivity.class);  
-	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);  
-	            startActivity(intent);  
-	            return true;  
+	        	  finish();
 	        default:  
 	            return super.onOptionsItemSelected(item);  
 	    }  

@@ -19,6 +19,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.TypefaceSpan;
+import android.view.MenuItem;
 import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -35,17 +36,11 @@ public class SplashActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getActionBar();
-		Resources r = getResources();
-		Drawable myDrawable = r.getDrawable(R.drawable.top_back);
-		actionBar.setBackgroundDrawable(myDrawable);
-		SpannableString spannableString = new SpannableString("加载中");
-		spannableString.setSpan(new TypefaceSpan("monospace"), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
-		spannableString.setSpan(new AbsoluteSizeSpan(24, true), 0, spannableString.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+		Resources r = getResources();SpannableString spannableString = new SpannableString("加载中");
 		getActionBar().setTitle(spannableString);
 	    actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.splash);	
-
-		Thread thread=new Thread(runnable);//开始下载，UI界面继续保持progress
+        Thread thread=new Thread(runnable);//开始下载，UI界面继续保持progress
 		thread.start();
 	}	
 	@SuppressLint("HandlerLeak")
@@ -101,4 +96,13 @@ public class SplashActivity extends Activity {
 		}
 
 	};
+	public boolean onOptionsItemSelected(MenuItem item) {  
+	    switch (item.getItemId()) {  
+	        case android.R.id.home:  
+	        	  finish(); 
+	            return true;  
+	        default:  
+	            return super.onOptionsItemSelected(item);  
+	    }  
+	}
 }
