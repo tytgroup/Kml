@@ -18,6 +18,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.TypefaceSpan;
+import android.view.MenuItem;
 import android.widget.Toast;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
@@ -100,4 +101,13 @@ public class SplashActivity2  extends Activity {
 		}
 
 	};
+	public boolean onOptionsItemSelected(MenuItem item) {  
+	    switch (item.getItemId()) {  
+	        case android.R.id.home:  
+	        	  finish(); 
+	            return true;  
+	        default:  
+	            return super.onOptionsItemSelected(item);  
+	    }  
+	}
 }
