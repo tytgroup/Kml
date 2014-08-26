@@ -1,12 +1,14 @@
 package com.groupc.tyt.activity;
 
 import com.groupc.tyt.R;
+import com.groupc.tyt.constant.User;
 import com.groupc.tyt.fragment.FavorFragment;
 import com.groupc.tyt.fragment.HomeFragment;
 import com.groupc.tyt.fragment.LoginFragment;
 import com.groupc.tyt.fragment.MeFragment;
 import com.groupc.tyt.fragment.SetFragment;
 import com.groupc.tyt.util.DummyTabContent;
+
 import android.app.ActionBar;
 import android.app.Dialog;
 import android.content.Intent;
@@ -171,14 +173,22 @@ public class MainActivity extends FragmentActivity {
     }*/
 
      public void isTabMe(){
-     	
+     	if(User.uid.equals("-1")){
      	if(loginFragment==null){
  			ft.add(R.id.realtabcontent,new LoginFragment(), "login");						
  		}else{
  			ft.attach(loginFragment);	
  		}
+     }  
+     else{
+    	 if(setFragment==null){
+ 			ft.add(R.id.realtabcontent,new SetFragment(), "set");						
+ 		}else{
+ 			ft.attach(setFragment);						
+ 		}
      }
-     
+     }
+    
     public void isTabSet(){
     	
     	if(setFragment==null){
