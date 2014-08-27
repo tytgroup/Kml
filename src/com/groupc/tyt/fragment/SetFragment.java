@@ -36,22 +36,9 @@ public class SetFragment extends Fragment {
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.me,container,false);
-		listView = (ListView) v.findViewById(R.id.list);
-		init();
+		View v = inflater.inflate(R.layout.set,container,false);
 		return v;
 	}
 	
 	
-	private void init() {
-		List<String> items = new ArrayList<String>();
-		items.add("������Ľ���");
-		items.add("�ѷ����Ľ���");
-		items.add("ʮ�������");
-		items.add("������");
-		items.add("���и�õĽ��飨�����ͻ��)");
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, items);
-		listView.setAdapter(adapter);
-}
 }

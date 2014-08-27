@@ -43,8 +43,8 @@ public class MainActivity extends FragmentActivity {
 	FavorFragment favorFragment;
 	//Pub_Fragment pubFragment;
 	LoginFragment loginFragment;
-	MeFragment setFragment;
-	SetFragment meFragment;
+	SetFragment setFragment;
+	MeFragment meFragment;
     android.support.v4.app.FragmentTransaction ft;
 	LinearLayout tabIndicator1;
 	LinearLayout tabIndicator2;
@@ -69,8 +69,8 @@ public class MainActivity extends FragmentActivity {
 				favorFragment = (FavorFragment) fm.findFragmentByTag("favor");
 				//pubFragment = (Pub_Fragment) fm.findFragmentByTag("pub");
 				loginFragment = (LoginFragment) fm.findFragmentByTag("login");
-				setFragment = (MeFragment) fm.findFragmentByTag("set");
-				meFragment = (SetFragment) fm.findFragmentByTag("me");
+				setFragment = (SetFragment) fm.findFragmentByTag("set");
+				meFragment = (MeFragment) fm.findFragmentByTag("me");
 				ft = fm.beginTransaction();
 				
 				if(homeFragment!=null)
@@ -182,9 +182,9 @@ public class MainActivity extends FragmentActivity {
      }  
      else{
     	 if(setFragment==null){
- 			ft.add(R.id.realtabcontent,new MeFragment(), "set");						
+ 			ft.add(R.id.realtabcontent,new MeFragment(), "me");						
  		}else{
- 			ft.attach(setFragment);						
+ 			ft.attach(meFragment);						
  		}
      }
      }
@@ -192,7 +192,7 @@ public class MainActivity extends FragmentActivity {
     public void isTabSet(){
     	
     	if(setFragment==null){
-			ft.add(R.id.realtabcontent,new MeFragment(), "set");						
+			ft.add(R.id.realtabcontent,new SetFragment(), "set");						
 		}else{
 			ft.attach(setFragment);						
 		}
