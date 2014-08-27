@@ -104,7 +104,7 @@ public class MainActivity extends FragmentActivity {
 					isTabPub();
 					CURRENT_TAB = 3;
 				
-				}*/else if(tabId.equalsIgnoreCase("login")){	
+				}*/else if(tabId.equalsIgnoreCase("login")||tabId.equalsIgnoreCase("me")){	
 					isTabMe();
 					CURRENT_TAB = 4;
 					
@@ -181,7 +181,7 @@ public class MainActivity extends FragmentActivity {
  		}
      }  
      else{
-    	 if(setFragment==null){
+    	 if(meFragment==null){
  			ft.add(R.id.realtabcontent,new MeFragment(), "me");						
  		}else{
  			ft.attach(meFragment);						

@@ -105,7 +105,17 @@ public class GoodsinActivity extends Activity {
 			Date date = new Date();
 			atime = sdf.format(date);
 			gquantity=num.getText().toString();
-        	new Thread(runnable).start();
+			if(gquantity.equals("")){
+				Toast.makeText(getApplicationContext(), "请输入要买的数量！", Toast.LENGTH_SHORT).show();
+			}
+			else{
+				if(uid.equals(map.get("guid"))){
+					Toast.makeText(getApplicationContext(), "这是您自己的商品！", Toast.LENGTH_SHORT).show();
+				}
+				else{
+        	     new Thread(runnable).start();
+				}
+			}
 		}
  		
  	});
@@ -120,6 +130,7 @@ public class GoodsinActivity extends Activity {
 	else{
 		uid=User.uid;
 	  new Thread(runbegin).start();
+	
 	}
 }
 	public void setView(){

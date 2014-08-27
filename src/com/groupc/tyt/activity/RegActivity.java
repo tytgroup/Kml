@@ -168,9 +168,10 @@ public class RegActivity extends Activity{
 			feedback = HttpClientUtil.httpPostClient(getApplicationContext(), url, params);
 				msg.obj = feedback;
 				handler.sendMessage(msg);
-				Intent intent=new Intent();
-				intent.setClass(RegActivity.this, LoginFragment.class);
-				startActivity(intent);	
+//				Intent intent=new Intent();
+//				intent.setClass(RegActivity.this, MainActivity.class);
+//				startActivity(intent);	
+				finish();
 	    }
 	};
 	public boolean onOptionsItemSelected(MenuItem item) {  

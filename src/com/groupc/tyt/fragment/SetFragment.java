@@ -27,18 +27,17 @@ import android.widget.SearchView;
 import android.widget.Toast;
 
 public class SetFragment extends Fragment {
-	private ListView listView;
-	public void onCreate(Bundle savedInstanceState) {
-		// TODO Auto-generated method stub
-		super.onCreate(savedInstanceState);
-		
-	}
+
 	
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.set,container,false);
 		return v;
 	}
-	
+	@Override
+	public void onActivityCreated(Bundle savedInstanceState) {
+		super.onActivityCreated(savedInstanceState);
+		setHasOptionsMenu(true);
+	}
 	
 }
