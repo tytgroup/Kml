@@ -5,17 +5,14 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.provider.MediaStore.Images;
 import android.text.SpannableString;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +23,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.groupc.tyt.R;
 import com.groupc.tyt.adapter.AnimateFirstDisplayListener;
 import com.groupc.tyt.constant.ConstantDef;
@@ -40,8 +36,10 @@ import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
 import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
+@SuppressLint("SimpleDateFormat")
 public class GoodsinActivity extends Activity {
 	
+	private static int APPLY_TAG=0,COLLECTION_TAG=1,CHANGE_COLLECTION_TAG=2;
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	protected ImageLoader imageLoader;
 	DisplayImageOptions options;
@@ -49,6 +47,8 @@ public class GoodsinActivity extends Activity {
 	private Map<String,String> map;
 	private List<NameValuePair> params;
 	private String url=ConstantDef.BaseUil+"ApplyService";
+	private String urlbegin=ConstantDef.BaseUil+"CheckCollection";
+	private String urlchange=ConstantDef.BaseUil+"CollectionService";
 	private String gid,uid,atime,gquantity;
 	private ImageView gdimage;
 	private TextView gdname;
@@ -57,6 +57,7 @@ public class GoodsinActivity extends Activity {
 	private TextView gddescribe;
 	private EditText num;
 	private Button cfap;
+	private String isCollection;
     public void onCreate(Bundle savedInstanceState) {
 	super.onCreate(savedInstanceState);
 	ActionBar actionBar = getActionBar();
@@ -76,7 +77,20 @@ public class GoodsinActivity extends Activity {
 		@Override
 		public void onClick(View v) {
 			// TODO Auto-generated method stub
-			
+			if(User.uid.equals("-1")){
+			    Toast.makeText(getApplicationContext(), "您还没登录！", Toast.LENGTH_SHORT).show();
+			}
+			else{
+			if(isCollection.equals("1")){
+				favor.setImageResource(android.R.drawable.btn_star_big_off);
+				isCollection="0";
+			}
+			else{
+				favor.setImageResource(android.R.drawable.btn_star_big_on);
+				isCollection="1";
+			}
+			new Thread(runchange).start();
+		}
 		}
  		
  	});
@@ -99,9 +113,17 @@ public class GoodsinActivity extends Activity {
 	SerializableMap smap=(SerializableMap)extras.getSerializable(("map"));
 	map = smap.getMap();
 	ini();
-	setView();	 
+	setView();	
+	if(User.uid.equals("-1")){
+	    Toast.makeText(getApplicationContext(), "您还没登录！", Toast.LENGTH_SHORT).show();
+	}
+	else{
+		uid=User.uid;
+	  new Thread(runbegin).start();
+	}
 }
 	public void setView(){
+		gid=map.get("gid");
 		gdname.setText(map.get("gname"));
 		gdprice.setText(map.get("price"));
 		gddescribe.setText(map.get("gdescribe"));		
@@ -144,20 +166,43 @@ public class GoodsinActivity extends Activity {
 				.show();
 			}
 			else {
-		    if(feedback.equals("ok")){
-		    	Toast.makeText(getApplicationContext(), "申请成功！", Toast.LENGTH_SHORT).show();
-		    }
-		    else{
-		    	Toast.makeText(getApplicationContext(), "申请失败！", Toast.LENGTH_SHORT).show();
-		    }
-	    	
-	    }
+		         if(msg.what==APPLY_TAG){
+		            if(feedback.equals("ok")){
+		    	       Toast.makeText(getApplicationContext(), "申请成功！", Toast.LENGTH_SHORT).show();
+		              }
+		               else{
+		    	         Toast.makeText(getApplicationContext(), "申请失败！", Toast.LENGTH_SHORT).show();
+		                }
+	              }
+		            else if(msg.what==COLLECTION_TAG){
+		            	if(feedback.equals("ok")){
+		            		favor.setImageResource(android.R.drawable.btn_star_big_on);
+		            		isCollection="1";
+				              }
+				               else{
+				            	   favor.setImageResource(android.R.drawable.btn_star_big_off);
+				            	   isCollection="0";
+				                }
+		          }
+		            else if(msg.what==CHANGE_COLLECTION_TAG){
+		            	if(feedback.equals("ok")&&isCollection.equals("1")){
+		            		Toast.makeText(getApplicationContext(), "收藏成功！", Toast.LENGTH_SHORT).show();
+				              }
+				               else if(feedback.equals("ok")&&isCollection.equals("0")){
+				            	   Toast.makeText(getApplicationContext(), "取消收藏！", Toast.LENGTH_SHORT).show();
+				                }
+				               else{
+				            	   Toast.makeText(getApplicationContext(), "收藏出错！", Toast.LENGTH_SHORT).show();
+				               }
+		            }         
+	      }  
 	    }
 	}; 
 	Runnable runnable = new Runnable(){
 	    @Override
 	    public void run() {
 	        Message msg = new Message();
+	        msg.what=APPLY_TAG;
 	       // Bundle data = new Bundle();
 			params=new ArrayList<NameValuePair>();
 			params.add(new BasicNameValuePair("gid", gid));
@@ -166,6 +211,37 @@ public class GoodsinActivity extends Activity {
 			params.add(new BasicNameValuePair("gquantity", gquantity));
 			String feedback;
 			feedback = HttpClientUtil.httpPostClient(getApplicationContext(), url, params);
+				msg.obj = feedback;
+				handler.sendMessage(msg);
+	    }
+	};
+	Runnable runbegin = new Runnable(){
+	    @Override
+	    public void run() {
+	        Message msg = new Message();
+	        msg.what=COLLECTION_TAG;
+	       // Bundle data = new Bundle();
+			params=new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("gid", gid));
+			params.add(new BasicNameValuePair("uid", uid));
+			String feedback;
+			feedback = HttpClientUtil.httpPostClient(getApplicationContext(), urlbegin, params);
+				msg.obj = feedback;
+				handler.sendMessage(msg);
+	    }
+	};
+	Runnable runchange = new Runnable(){
+	    @Override
+	    public void run() {
+	        Message msg = new Message();
+	        msg.what=CHANGE_COLLECTION_TAG;
+	       // Bundle data = new Bundle();
+			params=new ArrayList<NameValuePair>();
+			params.add(new BasicNameValuePair("gid", gid));
+			params.add(new BasicNameValuePair("uid", uid));
+			params.add(new BasicNameValuePair("isCollection", isCollection));
+			String feedback;
+			feedback = HttpClientUtil.httpPostClient(getApplicationContext(), urlchange, params);
 				msg.obj = feedback;
 				handler.sendMessage(msg);
 	    }

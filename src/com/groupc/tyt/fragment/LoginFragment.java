@@ -113,6 +113,7 @@ public class LoginFragment extends Fragment {
 									 +"|jf="+User.jf+"|hydj="+User.hydj+"|xydj="+User.xydj);
 							 Toast.makeText(getActivity(), "登陆成功！", Toast.LENGTH_SHORT)
 								.show();
+							 
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
