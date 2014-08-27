@@ -35,6 +35,7 @@ import android.widget.Toast;
 
 import com.groupc.tyt.R;
 import com.groupc.tyt.constant.ConstantDef;
+import com.groupc.tyt.fragment.LoginFragment;
 import com.groupc.tyt.util.HttpClientUtil;
 
 public class RegActivity extends Activity{
@@ -167,6 +168,9 @@ public class RegActivity extends Activity{
 			feedback = HttpClientUtil.httpPostClient(getApplicationContext(), url, params);
 				msg.obj = feedback;
 				handler.sendMessage(msg);
+				Intent intent=new Intent();
+				intent.setClass(RegActivity.this, LoginFragment.class);
+				startActivity(intent);	
 	    }
 	};
 	public boolean onOptionsItemSelected(MenuItem item) {  

@@ -5,8 +5,8 @@ import com.groupc.tyt.constant.User;
 import com.groupc.tyt.fragment.FavorFragment;
 import com.groupc.tyt.fragment.HomeFragment;
 import com.groupc.tyt.fragment.LoginFragment;
-import com.groupc.tyt.fragment.MeFragment;
 import com.groupc.tyt.fragment.SetFragment;
+import com.groupc.tyt.fragment.MeFragment;
 import com.groupc.tyt.util.DummyTabContent;
 
 import android.app.ActionBar;
@@ -43,8 +43,8 @@ public class MainActivity extends FragmentActivity {
 	FavorFragment favorFragment;
 	//Pub_Fragment pubFragment;
 	LoginFragment loginFragment;
-	SetFragment setFragment;
-	MeFragment meFragment;
+	MeFragment setFragment;
+	SetFragment meFragment;
     android.support.v4.app.FragmentTransaction ft;
 	LinearLayout tabIndicator1;
 	LinearLayout tabIndicator2;
@@ -69,8 +69,8 @@ public class MainActivity extends FragmentActivity {
 				favorFragment = (FavorFragment) fm.findFragmentByTag("favor");
 				//pubFragment = (Pub_Fragment) fm.findFragmentByTag("pub");
 				loginFragment = (LoginFragment) fm.findFragmentByTag("login");
-				setFragment = (SetFragment) fm.findFragmentByTag("set");
-				meFragment = (MeFragment) fm.findFragmentByTag("me");
+				setFragment = (MeFragment) fm.findFragmentByTag("set");
+				meFragment = (SetFragment) fm.findFragmentByTag("me");
 				ft = fm.beginTransaction();
 				
 				if(homeFragment!=null)
@@ -182,7 +182,7 @@ public class MainActivity extends FragmentActivity {
      }  
      else{
     	 if(setFragment==null){
- 			ft.add(R.id.realtabcontent,new SetFragment(), "set");						
+ 			ft.add(R.id.realtabcontent,new MeFragment(), "set");						
  		}else{
  			ft.attach(setFragment);						
  		}
@@ -192,7 +192,7 @@ public class MainActivity extends FragmentActivity {
     public void isTabSet(){
     	
     	if(setFragment==null){
-			ft.add(R.id.realtabcontent,new SetFragment(), "set");						
+			ft.add(R.id.realtabcontent,new MeFragment(), "set");						
 		}else{
 			ft.attach(setFragment);						
 		}
