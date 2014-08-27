@@ -16,13 +16,19 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.groupc.tyt.activity.MainActivity"
-             android:windowSoftInputMode="stateHidden|adjustPan" 
-             android:configChanges="orientation|keyboardHidden" >
-            <intent-filter>
+            android:name="com.groupc.tyt.activity.WelcomeActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan"
+            android:configChanges="orientation|keyboardHidden" >
+         <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+         </activity>
+        <activity
+            android:name="com.groupc.tyt.activity.MainActivity"
+             android:windowSoftInputMode="stateHidden|adjustPan" 
+             android:configChanges="orientation|keyboardHidden" >
+            
         </activity>
          <activity
             android:name="com.groupc.tyt.activity.RegActivity"
