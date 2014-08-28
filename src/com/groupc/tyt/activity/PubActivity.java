@@ -60,6 +60,7 @@ public class PubActivity extends Activity {
 		list.add("书籍");
 		list.add("电子产品");
 		list.add("运动器材");
+		list.add("服饰");
 		list.add("其它");
 		mySpinner = (Spinner) findViewById(R.id.spinner);
 		adapter = new ArrayAdapter<String>(this,
