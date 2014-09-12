@@ -1,26 +1,29 @@
 package com.groupc.tyt.activity;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONObject;
-
+import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
+import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.text.Spannable;
+import android.provider.MediaStore;
 import android.text.SpannableString;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.TypefaceSpan;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -35,10 +38,14 @@ import android.widget.Toast;
 
 import com.groupc.tyt.R;
 import com.groupc.tyt.constant.ConstantDef;
-import com.groupc.tyt.fragment.LoginFragment;
 import com.groupc.tyt.util.HttpClientUtil;
 
 public class RegActivity extends Activity{
+	private static final int PHOTO_REQUEST_TAKEPHOTO = 1;
+	private static final int PHOTO_REQUEST_GALLERY = 2;
+	private static final int PHOTO_REQUEST_CUT = 3;
+	private boolean haveUpdateHead=false,haveUpdateXSZ=false;
+	private String filename;
 	private List<NameValuePair> params;
 	private String url=ConstantDef.BaseUil+"RegisterService";
 	private String uno,name,psd,phone,img_xsz,img_head;
@@ -50,10 +57,17 @@ public class RegActivity extends Activity{
 	private Button upstuphoto;
 	private Button upusrphoto;
 	private Button cfreg;
+	String saveDirPath = Environment.getExternalStorageDirectory().getPath()+"/TytImage";
+	File saveDir = new File(saveDirPath);
+	File tempFile = new File(saveDir, getPhotoFileName());  //临时保存
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getActionBar();
+		if(!saveDir.exists()){
+			saveDir.mkdirs();
+//			Log.e("createfile",saveDirPath);
+		}
 		SpannableString spannableString = new SpannableString("登录");
 		getActionBar().setTitle(spannableString);
         actionBar.setDisplayHomeAsUpEnabled(true);
@@ -69,13 +83,15 @@ public class RegActivity extends Activity{
 		
 		upstuphoto.setOnClickListener(new Button.OnClickListener(){//创建监听
             public void onClick(View v) {    
-                  
+            	  filename="userPhoto";
+                  showDialog();
             }    
   
         });    
 		upusrphoto.setOnClickListener(new Button.OnClickListener(){//创建监听 
             public void onClick(View v) {    
-                  
+          	  filename="xszPhoto";
+              showDialog();
             }    
   
         });   
@@ -85,8 +101,18 @@ public class RegActivity extends Activity{
             	name = usrname.getText().toString();
             	psd = usrpsw.getText().toString();
             	phone = usrphone.getText().toString();
-            	img_xsz = null;
-            	img_head = null;
+            	if(haveUpdateHead){
+            	    img_head = "head"+name;	
+            	}
+            	else{
+            		img_head = null;
+            	}
+            	if(haveUpdateXSZ){
+            		img_xsz = "xsz"+name;
+            	}
+            	else{
+            		Toast.makeText(RegActivity.this, "请先上传学生证照片!", Toast.LENGTH_SHORT).show();
+            	}         	
             	if (registerIsSuccess()) {
             		new Thread(runnable).start();
             	}
@@ -182,4 +208,104 @@ public class RegActivity extends Activity{
 	            return super.onOptionsItemSelected(item);  
 	    }  
 	}
+	private void showDialog() {
+		new AlertDialog.Builder(this).setTitle("头像设置").setPositiveButton("拍照", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.dismiss();
+				Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+				intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(tempFile));
+				startActivityForResult(intent, PHOTO_REQUEST_TAKEPHOTO);
+			}
+		}).setNegativeButton("选择照片", new DialogInterface.OnClickListener() {
+
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				// TODO Auto-generated method stub
+				dialog.dismiss();
+				Intent intent = new Intent(Intent.ACTION_PICK, null);
+				intent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+				startActivityForResult(intent, PHOTO_REQUEST_GALLERY);
+			}
+		}).show();
+	}
+
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		// TODO Auto-generated method stub
+
+		switch (requestCode) {
+		case PHOTO_REQUEST_TAKEPHOTO:
+			startPhotoZoom(Uri.fromFile(tempFile), 450);
+			break;
+
+		case PHOTO_REQUEST_GALLERY:
+			if (data != null)
+				startPhotoZoom(data.getData(), 450);
+			break;
+
+		case PHOTO_REQUEST_CUT:
+			if (data != null)
+				savePhoto(data,filename);
+			break;
+		}
+		super.onActivityResult(requestCode, resultCode, data);
+
+	}
+
+	private void startPhotoZoom(Uri uri, int size) {
+		Intent intent = new Intent("com.android.camera.action.CROP");
+		intent.setDataAndType(uri, "image/*");
+		// cropΪtrue
+		intent.putExtra("crop", "true");
+
+		// aspectX aspectY
+		intent.putExtra("aspectX", 1);
+		intent.putExtra("aspectY", 1);
+
+		// outputX,outputY
+		intent.putExtra("outputX", size);
+		intent.putExtra("outputY", size);
+		intent.putExtra("return-data", true);
+
+		startActivityForResult(intent, PHOTO_REQUEST_CUT);
+	}
+
+	private void savePhoto(Intent picdata,String name) {
+		Bundle bundle = picdata.getExtras();
+		if (bundle != null) {
+			Bitmap photo = bundle.getParcelable("data");
+			 FileOutputStream b = null;           
+	            File file = new File(saveDir,name+".jpg");  
+	            try {  
+	                b = new FileOutputStream(file);  
+	                photo.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件  
+	                if(name.equals("userPhoto")){
+	                	haveUpdateHead=true;
+	                }
+	                else{
+	                	haveUpdateXSZ=true;
+	                }
+	            } catch (FileNotFoundException e) {  
+	                e.printStackTrace();  
+	            } finally {  
+	                try {  
+	                    b.flush();  
+	                    b.close();  
+	                } catch (IOException e) {  
+	                    e.printStackTrace();  
+	                }  
+	            }  
+		}
+	}
+
+	@SuppressLint("SimpleDateFormat")
+	private String getPhotoFileName() {
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMdd_HHmmss");
+		return dateFormat.format(date) + ".jpg";
+	}
+
 }
