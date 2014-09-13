@@ -56,7 +56,7 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ActionBar actionBar = getActionBar();
-		SpannableString spannableString = new SpannableString("挑一跳");
+		SpannableString spannableString = new SpannableString("开卖啦");
 	    getActionBar().setTitle(spannableString);
         findTabView();
         tabHost.setup();

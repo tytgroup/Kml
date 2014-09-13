@@ -163,6 +163,7 @@
         android:layout_margin="10sp"
         android:background="@drawable/button_style" 
         android:text="上传学生证"
+        android:textColor="#FFFFFF"
         />
 
     <Button
@@ -172,7 +173,8 @@
         android:layout_margin="10sp"
         android:layout_weight="0.5"
         android:background="@drawable/button_style"
-        android:text="上传照片" />
+        android:text="上传照片"
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>
 
@@ -189,7 +191,7 @@
         android:background="@drawable/button_style"
         android:text="确认注册"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#FF4444" />
+        android:textColor="#FFFFFF" />
 
 </LinearLayout>
 

@@ -27,6 +27,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -35,7 +36,7 @@ import android.widget.Toast;
 @SuppressLint("HandlerLeak")
 public class LoginFragment extends Fragment {
 
-	private ImageButton LoginButton;
+	private Button LoginButton;
 	private EditText editText1, editText2;
 	private String name, psd;
 	private List<NameValuePair> params;
@@ -49,8 +50,8 @@ public class LoginFragment extends Fragment {
 		View v = inflater.inflate(R.layout.login, container, false);
 		editText1 = (EditText) v.findViewById(R.id.editText1);
 		editText2 = (EditText) v.findViewById(R.id.editText2);
-		txt_show = (TextView) v.findViewById(R.id.textShow);
-		LoginButton = (ImageButton) v.findViewById(R.id.LoginButton);
+		//txt_show = (TextView) v.findViewById(R.id.textShow);
+		LoginButton = (Button) v.findViewById(R.id.LoginButton);
 
 		return v;
 

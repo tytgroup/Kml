@@ -7,6 +7,7 @@ import com.groupc.tyt.R;
 import com.groupc.tyt.activity.AppliedActivity;
 import com.groupc.tyt.activity.SplashActivity;
 import com.groupc.tyt.activity.SplashActivity2;
+import com.groupc.tyt.activity.WantedActivity;
 import com.groupc.tyt.constant.User;
 
 import android.content.Intent;
@@ -80,8 +81,9 @@ public class MeFragment extends Fragment {
                         startActivity(localIntent2);
                         break;
                     case 2:
-                    	Toast.makeText(getActivity(), "功能开发中", Toast.LENGTH_SHORT).show();
-                    	break;
+                    	Intent localIntent3=new Intent(getActivity(),WantedActivity.class);
+                        startActivity(localIntent3);
+                        break;
                     case 3:
                     	Toast.makeText(getActivity(), "功能开发中", Toast.LENGTH_SHORT).show();
                     	break;

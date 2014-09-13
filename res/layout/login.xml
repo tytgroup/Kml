@@ -12,11 +12,12 @@
     android:orientation="vertical"
     tools:context=".fragment.Me_Fragment" >
 
-    <TextView
-        android:id="@+id/textShow"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">     
-    </TextView>"
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/loginbg" />
+    
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -35,6 +36,8 @@
                 android:layout_height="match_parent"
                 android:drawableLeft="@drawable/usr"
                 android:background="@drawable/bg_edittext"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:ems="10"
                 android:hint="用户名/手机号/学号"
                 android:inputType="textPersonName"
@@ -60,6 +63,8 @@
                 android:layout_height="match_parent"
                 android:background="@drawable/bg_edittext"
                 android:drawableLeft="@drawable/psw"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:hint="输入密码"
                 android:inputType="textPassword"
                 android:textSize="24sp" >
@@ -79,6 +84,7 @@
             android:id="@+id/forget"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
             android:background="#00000000"
             android:text="忘记密码？" />
     </LinearLayout>
@@ -90,14 +96,17 @@
         android:orientation="vertical"
         >
 
-        <ImageButton
+        <Button
             android:id="@+id/LoginButton"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_weight="1"
-            android:background="@drawable/login"
-            android:scaleType="fitCenter" />
+            android:background="@drawable/button_style"
+            android:text="登陆"
+            android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF" />
+ />
 
     </LinearLayout>
 

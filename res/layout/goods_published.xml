@@ -151,7 +151,8 @@
         android:layout_margin="20dp"
         android:layout_weight="0.5"
         android:background="@drawable/button_style"
-        android:text="交易完成" />
+        android:text="交易完成"
+        android:textColor="#FFFFFF" />
          <Button
         android:id="@+id/pubcancel"
         android:layout_width="0dp"
@@ -159,7 +160,8 @@
         android:layout_margin="20dp"
         android:layout_weight="0.5"
         android:background="@drawable/button_style"
-        android:text="取消发布" />
+        android:text="取消发布"
+        android:textColor="#FFFFFF" />
       </LinearLayout>
 
       

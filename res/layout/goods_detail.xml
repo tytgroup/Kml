@@ -114,7 +114,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
                 android:background="@drawable/button_style"
-                android:text="申请交易" />
+                android:text="申请交易" 
+                android:textColor="#FFFFFF"/>
         </LinearLayout>
     </LinearLayout>
 
