@@ -1,4 +1,4 @@
-package com.groupc.tyt.fragment;
+package com.groupc.tyt.activity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,59 +8,44 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.groupc.tyt.R;
-import com.groupc.tyt.activity.RegActivity;
+import com.groupc.tyt.activity.RegisterFirstStepActivity;
 import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.constant.User;
 import com.groupc.tyt.util.HttpClientUtil;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v4.app.Fragment;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
-import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("HandlerLeak")
-public class LoginFragment extends Fragment {
+public class LoginActivity  extends Activity{
 
 	private Button LoginButton;
 	private EditText editText1, editText2;
 	private String name, psd;
 	private List<NameValuePair> params;
-	private TextView txt_show;
 	private String url = ConstantDef.BaseUil+"loginService",
 			title = "user", keys[] = { "iduser", "uno", "username","phone","tx","jf","xydj",
 					"hydj","rzjg" };
-
-	public View onCreateView(LayoutInflater inflater, ViewGroup container,
-			Bundle savedInstanceState) {
-		View v = inflater.inflate(R.layout.login, container, false);
-		editText1 = (EditText) v.findViewById(R.id.editText1);
-		editText2 = (EditText) v.findViewById(R.id.editText2);
-		//txt_show = (TextView) v.findViewById(R.id.textShow);
-		LoginButton = (Button) v.findViewById(R.id.LoginButton);
-
-		return v;
-
-	}
-
-	@Override
-	public void onActivityCreated(Bundle savedInstanceState) {
-		super.onActivityCreated(savedInstanceState);
-		setHasOptionsMenu(true);
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+	
+		setContentView(R.layout.login);
+		editText1 = (EditText) findViewById(R.id.edt_username);
+		editText2 = (EditText) findViewById(R.id.edt_password);
+		LoginButton = (Button) findViewById(R.id.LoginButton);
 
 		LoginButton.setOnClickListener(new OnClickListener() {
 
@@ -82,15 +67,15 @@ public class LoginFragment extends Fragment {
 			String feedback = (String) msg.obj;
 
 			if (feedback.equals("null")) {
-				Toast.makeText(getActivity(), "请检查网络连接！", Toast.LENGTH_SHORT)
+				Toast.makeText(getApplicationContext(), "请检查网络连接！", Toast.LENGTH_SHORT)
 						.show();
 			} 
 			else if(feedback.equals("nd")){
-				Toast.makeText(getActivity(), "没有数据返回！", Toast.LENGTH_SHORT)
+				Toast.makeText(getApplicationContext(), "没有数据返回！", Toast.LENGTH_SHORT)
 				.show();
 			}
 			else if(feedback.equals("wtc")){
-				Toast.makeText(getActivity(), "网络连接出现问题！", Toast.LENGTH_SHORT)
+				Toast.makeText(getApplicationContext(), "网络连接出现问题！", Toast.LENGTH_SHORT)
 				.show();
 			}
 			else {
@@ -112,7 +97,7 @@ public class LoginFragment extends Fragment {
 							 Log.e("json", "uid="+User.uid+"|name="+User.name+"|uno="+User.uno
 									 +"|phone="+User.phone+"|tx="+User.tx+"|rzjg="+User.rzjg
 									 +"|jf="+User.jf+"|hydj="+User.hydj+"|xydj="+User.xydj);
-							 Toast.makeText(getActivity(), "登陆成功！", Toast.LENGTH_SHORT)
+							 Toast.makeText(getApplicationContext(), "登陆成功！", Toast.LENGTH_SHORT)
 								.show();
 							 
 				} catch (Exception e1) {
@@ -122,19 +107,19 @@ public class LoginFragment extends Fragment {
 				}
 			} else {
 				if (feedback.equalsIgnoreCase("2")) {
-					Toast.makeText(getActivity(), "用户名不存在！", Toast.LENGTH_SHORT)
+					Toast.makeText(getApplicationContext(), "用户名不存在！", Toast.LENGTH_SHORT)
 							.show();
 				} else if (feedback.equals("3")) {
-					Toast.makeText(getActivity(), "密码不正确!", Toast.LENGTH_SHORT)
+					Toast.makeText(getApplicationContext(), "密码不正确!", Toast.LENGTH_SHORT)
 							.show();
 
 				} else if (feedback.equals("0")) {
-					Toast.makeText(getActivity(), "其他原因错误!", Toast.LENGTH_SHORT)
+					Toast.makeText(getApplicationContext(), "其他原因错误!", Toast.LENGTH_SHORT)
 							.show();
 
 				}
 				else{
-					Toast.makeText(getActivity(), "想死的心都有了!", Toast.LENGTH_SHORT)
+					Toast.makeText(getApplicationContext(), "想死的心都有了!", Toast.LENGTH_SHORT)
 					.show();
 				}
 			}
@@ -151,7 +136,7 @@ public class LoginFragment extends Fragment {
 			params.add(new BasicNameValuePair("psd", psd));
 			String feedback;
 			feedback = HttpClientUtil
-					.httpPostClient(getActivity(), url, params);	
+					.httpPostClient(getApplicationContext(), url, params);	
 				msg.obj = feedback;
 				handler.sendMessage(msg);
 		}
@@ -159,21 +144,19 @@ public class LoginFragment extends Fragment {
 	};
 
 	@SuppressLint("NewApi")
-	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-		super.onCreateOptionsMenu(menu, inflater);
-		menu.add(0, 1, 0, "注册")
-				.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
-
-		return;
+	public boolean onCreateOptionsMenu(Menu menu){
+		menu.add(0, 1, 0, "注册");
+		return super.onCreateOptionsMenu(menu); 
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// TODO Auto-generated method stub
 		switch (item.getItemId()) {
 		case 1:
-			Intent i = new Intent(getActivity().getBaseContext(),
-					RegActivity.class);
+			Intent i = new Intent(getApplicationContext(),
+					RegisterFirstStepActivity.class);
 			startActivity(i);
+			finish();
 			break;
 		}
 		return true;

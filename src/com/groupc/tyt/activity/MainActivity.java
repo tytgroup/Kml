@@ -4,34 +4,20 @@ import com.groupc.tyt.R;
 import com.groupc.tyt.constant.User;
 import com.groupc.tyt.fragment.FavorFragment;
 import com.groupc.tyt.fragment.HomeFragment;
-import com.groupc.tyt.fragment.LoginFragment;
 import com.groupc.tyt.fragment.SetFragment;
 import com.groupc.tyt.fragment.MeFragment;
 import com.groupc.tyt.util.DummyTabContent;
 
-import android.app.ActionBar;
-import android.app.Dialog;
 import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TabHost;
 import android.widget.TabWidget;
-import android.widget.TextView;
 import android.support.v4.app.FragmentActivity;
-import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.TypefaceSpan;
-
-
 
 public class MainActivity extends FragmentActivity {
 
@@ -42,7 +28,7 @@ public class MainActivity extends FragmentActivity {
 	HomeFragment homeFragment;
 	FavorFragment favorFragment;
 	//Pub_Fragment pubFragment;
-	LoginFragment loginFragment;
+	LoginActivity loginActivity;
 	SetFragment setFragment;
 	MeFragment meFragment;
     android.support.v4.app.FragmentTransaction ft;
@@ -55,7 +41,6 @@ public class MainActivity extends FragmentActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ActionBar actionBar = getActionBar();
 		SpannableString spannableString = new SpannableString("开卖啦");
 	    getActionBar().setTitle(spannableString);
         findTabView();
@@ -68,7 +53,6 @@ public class MainActivity extends FragmentActivity {
 				homeFragment = (HomeFragment) fm.findFragmentByTag("home");
 				favorFragment = (FavorFragment) fm.findFragmentByTag("favor");
 				//pubFragment = (Pub_Fragment) fm.findFragmentByTag("pub");
-				loginFragment = (LoginFragment) fm.findFragmentByTag("login");
 				setFragment = (SetFragment) fm.findFragmentByTag("set");
 				meFragment = (MeFragment) fm.findFragmentByTag("me");
 				ft = fm.beginTransaction();
@@ -82,8 +66,6 @@ public class MainActivity extends FragmentActivity {
 				//if(pubFragment!=null)
 					//ft.detach(pubFragment);
 				
-				if(loginFragment!=null)
-					ft.detach(loginFragment);
 				
 				if(setFragment!=null)
 					ft.detach(setFragment);
@@ -104,7 +86,7 @@ public class MainActivity extends FragmentActivity {
 					isTabPub();
 					CURRENT_TAB = 3;
 				
-				}*/else if(tabId.equalsIgnoreCase("login")||tabId.equalsIgnoreCase("me")){	
+				}*/else if(tabId.equalsIgnoreCase("me")){	
 					isTabMe();
 					CURRENT_TAB = 4;
 					
@@ -174,11 +156,7 @@ public class MainActivity extends FragmentActivity {
 
      public void isTabMe(){
      	if(User.uid.equals("-1")){
-     	if(loginFragment==null){
- 			ft.add(R.id.realtabcontent,new LoginFragment(), "login");						
- 		}else{
- 			ft.attach(loginFragment);	
- 		}
+       startActivity(new Intent(getApplicationContext(),LoginActivity.class));
      }  
      else{
     	 if(meFragment==null){
@@ -248,7 +226,7 @@ public class MainActivity extends FragmentActivity {
  				Intent i=new Intent(getBaseContext(),PubActivity.class) ;  
  		         startActivity(i) ; 
  			}});
-        TabHost.TabSpec tSpecMe= tabHost.newTabSpec("login");
+        TabHost.TabSpec tSpecMe= tabHost.newTabSpec("me");
         tSpecMe.setIndicator(tabIndicator4);      
         tSpecMe.setContent(new DummyTabContent(getBaseContext()));
         tabHost.addTab(tSpecMe);

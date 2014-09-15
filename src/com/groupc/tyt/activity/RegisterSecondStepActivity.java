@@ -8,8 +8,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
@@ -17,6 +19,8 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -24,131 +28,112 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
 import android.text.SpannableString;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
-
-
-
-
-
-
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 import com.groupc.tyt.R;
 import com.groupc.tyt.constant.ConstantDef;
+import com.groupc.tyt.constant.User;
 import com.groupc.tyt.util.HttpClientUtil;
+import com.groupc.tyt.util.UploadUtil;
 
-public class RegActivity extends Activity{
+public class RegisterSecondStepActivity extends Activity implements OnClickListener{
 	private static final int PHOTO_REQUEST_TAKEPHOTO = 1;
 	private static final int PHOTO_REQUEST_GALLERY = 2;
 	private static final int PHOTO_REQUEST_CUT = 3;
-	private boolean haveUpdateHead=false,haveUpdateXSZ=false;
-	private String filename;
+	private int haveUpdateHead=0,haveUpdateXSZ=0;
+	private String filename,imgName;
 	private List<NameValuePair> params;
 	private String url=ConstantDef.BaseUil+"RegisterService";
-	private String uno,name,psd,phone,img_xsz,img_head;
-	private EditText stunum;
-	private EditText usrname;
-	private EditText usrpsw;
-	private EditText usrpsw2;
-	private EditText usrphone;
-	private Button upstuphoto;
-	private Button upusrphoto;
-	private Button cfreg;
+	private String img_xsz=null,img_head=null;
+    private ImageButton imgButton_head,imgButton_xsz;
+	private Button btn_head,btn_xsz,btn_nextstep;
 	String saveDirPath = Environment.getExternalStorageDirectory().getPath()+"/TytImage";
 	File saveDir = new File(saveDirPath);
 	File tempFile = new File(saveDir, getPhotoFileName());  //临时保存
+	File use;
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getActionBar();
 		if(!saveDir.exists()){
 			saveDir.mkdirs();
-//			Log.e("createfile",saveDirPath);
 		}
 		SpannableString spannableString = new SpannableString("登录");
 		getActionBar().setTitle(spannableString);
         actionBar.setDisplayHomeAsUpEnabled(true);
-		setContentView(R.layout.reg);
-		stunum = (EditText)findViewById(R.id.stunum);
-		usrname = (EditText)findViewById(R.id.usrname);
-		usrpsw = (EditText)findViewById(R.id.usrpsw);
-		usrpsw2 = (EditText)findViewById(R.id.usrpsw2);
-		usrphone = (EditText)findViewById(R.id.usrphone);
-		upstuphoto= (Button)findViewById(R.id.upstuphoto);
-		upusrphoto= (Button)findViewById(R.id.upusrphoto);
-		cfreg= (Button)findViewById(R.id.cfreg);
+		setContentView(R.layout.register_secondstep_activity);
+        Log.e("uno=",User.uno);
+		imgButton_head=(ImageButton)findViewById(R.id.image_tx);
+		imgButton_xsz=(ImageButton)findViewById(R.id.image_xsz);
+		btn_head= (Button)findViewById(R.id.btn_submittx);
+		btn_xsz= (Button)findViewById(R.id.btn_submitxsz);
+		btn_nextstep= (Button)findViewById(R.id.btn_nextstep);
 		
-		upstuphoto.setOnClickListener(new Button.OnClickListener(){//创建监听
-            public void onClick(View v) {    
-            	  filename="userPhoto";
-                  showDialog();
-            }    
-  
-        });    
-		upusrphoto.setOnClickListener(new Button.OnClickListener(){//创建监听 
-            public void onClick(View v) {    
-          	  filename="xszPhoto";
-              showDialog();
-            }    
-  
-        });   
-		cfreg.setOnClickListener(new Button.OnClickListener(){//创建监听  
-            public void onClick(View v) {    
-            	uno=stunum.getText().toString();
-            	name = usrname.getText().toString();
-            	psd = usrpsw.getText().toString();
-            	phone = usrphone.getText().toString();
-            	if(haveUpdateHead){
-            	    img_head = "head"+name;	
-            	}
-            	else{
-            		img_head = null;
-            	}
-            	if(haveUpdateXSZ){
-            		img_xsz = "xsz"+name;
-            	}
-            	else{
-            		Toast.makeText(RegActivity.this, "请先上传学生证照片!", Toast.LENGTH_SHORT).show();
-            	}         	
-            	if (registerIsSuccess()) {
-            		new Thread(runnable).start();
-            	}
-            }    
-  
-        });   
+		imgButton_head.setOnClickListener(this);
+		imgButton_xsz.setOnClickListener(this);
+		btn_head.setOnClickListener(this);
+		btn_xsz.setOnClickListener(this);
+		btn_nextstep.setOnClickListener(this);
+ 
+	}
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		switch(v.getId()){
+		case R.id.image_tx:
+			filename="img_tx_"+User.uno;
+			showDialog();
+			img_head=null;
+			break;		
+		case R.id.image_xsz:
+			filename="img_xsz_"+User.uno;
+			showDialog();
+			img_xsz=null;
+			break;			
+		case R.id.btn_submittx:
+	    	if(haveUpdateHead==0){
+	    		Toast.makeText(getApplicationContext(), "请先选择照片！", Toast.LENGTH_SHORT).show();
+	    	}
+	    	else if(haveUpdateHead==2){
+	    		Toast.makeText(getApplicationContext(), "您已上传头像！", Toast.LENGTH_SHORT).show();
+	    	}
+	    	else{
+	    		imgName="img_tx_"+User.uno;
+			new Thread(runnable2).start();
+	    	}
+			break;			
+		case R.id.btn_submitxsz:
+	    	if(haveUpdateXSZ==0){
+	    		Toast.makeText(getApplicationContext(), "请先选择照片！", Toast.LENGTH_SHORT).show();
+	    	}
+	    	else if(haveUpdateXSZ==2){
+	    		Toast.makeText(getApplicationContext(), "您已上传学生证！", Toast.LENGTH_SHORT).show();
+	    	}
+	    	else{
+	    		imgName="img_xsz_"+User.uno;
+			new Thread(runnable2).start();
+	    	}
+			break;			
+		case R.id.btn_nextstep:
+			if(img_xsz!=null){
+				User.tx=img_head;
+			new Thread(runnable).start();
+			}
+			else{
+				Toast.makeText(getApplicationContext(), "请确保已上传学生证图片！", Toast.LENGTH_SHORT)
+				.show();
+			}
+			break;						
+		}
 	}
 	
-	private boolean registerIsSuccess(){
-		
-    	//获取用户输入的信息
-    	
-    	String password1=usrpsw.getText().toString();
-    	String password2=usrpsw2.getText().toString();
-    	String telRegex = "[1][358]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。  
-        
-    	if("".equals(uno)){
-    		Toast.makeText(RegActivity.this, "请输入学号!", Toast.LENGTH_SHORT).show();
-    		return false;
-    	}else if("".equals(name)){
-        		//用户输入用户名为空
-        		Toast.makeText(RegActivity.this, "用户名不能为空!", Toast.LENGTH_SHORT).show();
-        		return false;
-    	}else if("".equals(password1)){
-    		//密码不能为空
-    		Toast.makeText(RegActivity.this, "密码不能为空!", Toast.LENGTH_SHORT).show();
-    		return false;
-    	}else if(!password1.equals(password2)){
-    		Toast.makeText(RegActivity.this, "两次密码输入不一致！", Toast.LENGTH_SHORT).show();
-    		return false;
-    	}else if(!phone.matches(telRegex)){
-    		Toast.makeText(RegActivity.this, "请输入正确手机号!", Toast.LENGTH_SHORT).show();
-    		return false;
-    	}
-    	return true;
-    }
+	@SuppressLint("HandlerLeak")
 	Handler handler = new Handler(){
 	    @Override
 	    public void handleMessage(Message msg) {
@@ -168,8 +153,11 @@ public class RegActivity extends Activity{
 				.show();
 			}
 			else {
-		    if(feedback.equals("ok")){
+		    if(!feedback.equals("no")){
+		    	User.uid=feedback;
 		    	Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT).show();
+		    	startActivity(new Intent(RegisterSecondStepActivity.this,MainActivity.class));
+		    	finish();
 		    }
 		    else{
 		    	Toast.makeText(getApplicationContext(), "注册失败！", Toast.LENGTH_SHORT).show();
@@ -184,22 +172,56 @@ public class RegActivity extends Activity{
 	        Message msg = new Message();
 	       // Bundle data = new Bundle();
 			params=new ArrayList<NameValuePair>();
-			params.add(new BasicNameValuePair("uno", uno));
-			params.add(new BasicNameValuePair("nickname", name));
-			params.add(new BasicNameValuePair("psd", psd));
-			params.add(new BasicNameValuePair("phone", phone));
+			params.add(new BasicNameValuePair("uno", User.uno));
+			params.add(new BasicNameValuePair("nickname", User.name));
+			params.add(new BasicNameValuePair("psd", User.passWord));
+			params.add(new BasicNameValuePair("phone", User.phone));
 			params.add(new BasicNameValuePair("img_xsz", img_xsz));
 			params.add(new BasicNameValuePair("img_head", img_head));
 			String feedback;
 			feedback = HttpClientUtil.httpPostClient(getApplicationContext(), url, params);
 				msg.obj = feedback;
 				handler.sendMessage(msg);
-//				Intent intent=new Intent();
-//				intent.setClass(RegActivity.this, MainActivity.class);
-//				startActivity(intent);	
-				finish();
+
 	    }
 	};
+	@SuppressLint("HandlerLeak")
+	Handler handler2 = new Handler(){
+	    @Override
+	    public void handleMessage(Message msg) {
+	        super.handleMessage(msg);
+	        int feedback=msg.what;
+	        if(feedback==200){
+        		if(haveUpdateHead==1){
+        			img_head="img_tx_"+User.uno;
+        			haveUpdateHead=2;
+        			Toast.makeText(getApplicationContext(), "上传头像成功！", Toast.LENGTH_SHORT).show();
+        		}
+        		else if(haveUpdateXSZ==1){
+        			img_xsz="img_xsz_"+User.uno;
+        			haveUpdateXSZ=2;
+        			Toast.makeText(getApplicationContext(), "上传学生证成功！", Toast.LENGTH_SHORT).show();
+        		}
+        	}
+        	else if(feedback==3){
+        		Toast.makeText(getApplicationContext(), "上传失败！", Toast.LENGTH_SHORT).show();
+        	}
+        	else if(feedback==2){
+        		Toast.makeText(getApplicationContext(), "请确保网络连接正常！", Toast.LENGTH_SHORT).show();
+        	}
+        	else {
+        		Toast.makeText(getApplicationContext(), "其它问题导致失败！", Toast.LENGTH_SHORT).show();
+        	}
+	    }
+	};
+	Runnable runnable2 = new Runnable(){
+	    @Override
+	    public void run() {
+	    	use = new File(saveDir,imgName+".jpg");  
+        	int feedback=UploadUtil.uploadFile(use, ConstantDef.BaseUil+"UploadPicture");
+        	handler2.sendEmptyMessage(feedback);    	
+	    }
+	    };
 	public boolean onOptionsItemSelected(MenuItem item) {  
 	    switch (item.getItemId()) {  
 	        case android.R.id.home:  
@@ -273,20 +295,24 @@ public class RegActivity extends Activity{
 		startActivityForResult(intent, PHOTO_REQUEST_CUT);
 	}
 
+	@SuppressWarnings("deprecation")
 	private void savePhoto(Intent picdata,String name) {
 		Bundle bundle = picdata.getExtras();
 		if (bundle != null) {
 			Bitmap photo = bundle.getParcelable("data");
+			Drawable drawable = new BitmapDrawable(photo);
 			 FileOutputStream b = null;           
 	            File file = new File(saveDir,name+".jpg");  
 	            try {  
 	                b = new FileOutputStream(file);  
 	                photo.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件  
-	                if(name.equals("userPhoto")){
-	                	haveUpdateHead=true;
+	                if(name.equals("img_tx_"+User.uno)){
+	                	haveUpdateHead=1;
+	                	imgButton_head.setBackgroundDrawable(drawable);
 	                }
 	                else{
-	                	haveUpdateXSZ=true;
+	                	haveUpdateXSZ=1;
+	                	imgButton_xsz.setBackgroundDrawable(drawable);
 	                }
 	            } catch (FileNotFoundException e) {  
 	                e.printStackTrace();  
@@ -307,5 +333,5 @@ public class RegActivity extends Activity{
 		SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMdd_HHmmss");
 		return dateFormat.format(date) + ".jpg";
 	}
-
 }
+
