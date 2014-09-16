@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="95dip"
+    android:background="@color/white"
+    android:baselineAligned="false" 
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="200dip"
+        android:layout_height="95dip"
+        android:layout_marginLeft="15dip"
+        android:orientation="vertical" >
+
+        <LinearLayout
+            android:layout_width="200dip"
+            android:layout_height="30dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="100dip"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="用户昵称：" />
+
+            <TextView
+                android:id="@+id/bname"
+                android:layout_width="100dip"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="买家的名字" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="200dip"
+            android:layout_height="30dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="100dip"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="申请时间：" />
+
+            <TextView
+                android:id="@+id/btime"
+                android:layout_width="100dip"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="2014-9-16" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="200dip"
+            android:layout_height="30dip"
+            android:orientation="horizontal" >
+
+            <TextView
+                android:layout_width="100dip"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="购买数量：" />
+
+            <TextView
+                android:id="@+id/bnum"
+                android:layout_width="100dip"
+                android:layout_height="fill_parent"
+                android:gravity="center_vertical"
+                android:text="4" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout 
+        android:layout_width="0dip"
+        android:layout_height="fill_parent"
+        android:layout_weight="1">
+    <Button
+        android:layout_width="100dip"
+        android:layout_height="35dip"
+        android:layout_gravity="center"
+        android:background="@drawable/button"
+        android:textColor="@color/white"
+        android:textSize="@dimen/text_size_14"
+        android:text="同意申请"/>
+    </LinearLayout>
+</LinearLayout>

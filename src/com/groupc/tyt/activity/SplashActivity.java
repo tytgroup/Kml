@@ -67,7 +67,7 @@ public class SplashActivity extends Activity {
 					 Intent intent=new Intent(SplashActivity.this,AppliedActivity.class);
 					 intent.putExtra("feedback", feedback);
 					 startActivity(intent);
-					 SplashActivity.this.finish();	
+					 	
 			} 
 			else {
 				if (feedback.equalsIgnoreCase("2")) {
@@ -79,6 +79,7 @@ public class SplashActivity extends Activity {
 				}
 			}
 		}
+			SplashActivity.this.finish();
 		}
 	};
 	Runnable runnable = new Runnable() {

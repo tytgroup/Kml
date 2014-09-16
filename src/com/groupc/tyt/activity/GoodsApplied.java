@@ -15,19 +15,14 @@ import com.nostra13.universalimageloader.core.listener.ImageLoadingListener;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.content.Intent;
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.text.Spannable;
 import android.text.SpannableString;
-import android.text.style.AbsoluteSizeSpan;
-import android.text.style.TypefaceSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 public class GoodsApplied extends Activity{
@@ -40,9 +35,10 @@ public class GoodsApplied extends Activity{
 	private TextView gdname;
 	private TextView gdprice;
 	private TextView apid;
+	private TextView gnum;
 	private TextView atime;
 	private TextView applystate;
-	private TextView commentbuyer;
+	private LinearLayout commentbuyer;
 	private Button apcancel;
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -57,8 +53,9 @@ public class GoodsApplied extends Activity{
 		gdprice =(TextView)findViewById(R.id.gdprice);
 		apid =(TextView)findViewById(R.id.apid);
 		atime =(TextView)findViewById(R.id.atime);
+		gnum=(TextView)findViewById(R.id.gnum);
 		applystate =(TextView)findViewById(R.id.apply_state);
-		commentbuyer =(TextView)findViewById(R.id.t5);
+		commentbuyer =(LinearLayout)findViewById(R.id.relative);
 		apcancel =(Button)findViewById(R.id.apcancel);
 		
 		commentbuyer.setOnClickListener(new OnClickListener(){
@@ -96,9 +93,11 @@ public class GoodsApplied extends Activity{
 		gdprice.setText(map.get("price"));
 		apid.setText(map.get("aid"));
 		atime.setText(map.get("atime"));
+		/** 待改进**/
+//		gnum.setText(map.get("gquantity")); 
 		applystate.setText(map.get("astate"));
 		
-		String imageurl=ConstantDef.BaseUil+"images/shu_lib.jpg";
+		String imageurl=ConstantDef.BaseImageUil+map.get("gpicture");
 		imageLoader.displayImage(imageurl, gdimage, options, animateFirstListener);
 //		transstate =(TextView)findViewById(R.id.trans_state);
 	}

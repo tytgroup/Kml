@@ -223,7 +223,7 @@ public class MainActivity extends FragmentActivity {
         tabHost.addTab(tSpecPub);
         tabIndicator3.setOnClickListener(new OnClickListener() {
  			public void onClick(View v) {
- 				Intent i=new Intent(getBaseContext(),PubActivity.class) ;  
+ 				Intent i=new Intent(getBaseContext(),PublishActivity.class) ;  
  		         startActivity(i) ; 
  			}});
         TabHost.TabSpec tSpecMe= tabHost.newTabSpec("me");

@@ -1,15 +1,21 @@
 package com.groupc.tyt.activity;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -23,6 +29,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.groupc.tyt.R;
 import com.groupc.tyt.adapter.AnimateFirstDisplayListener;
 import com.groupc.tyt.constant.ConstantDef;
@@ -55,6 +62,8 @@ public class GoodsinActivity extends Activity {
 	private ImageButton favor;
 	private TextView gdprice;
 	private TextView gddescribe;
+	private TextView gnum;
+	private TextView isfavor;
 	private EditText num;
 	private Button cfap;
 	private String isCollection;
@@ -67,6 +76,8 @@ public class GoodsinActivity extends Activity {
 	setContentView(R.layout.goods_detail);
 	
 	num=(EditText)findViewById(R.id.num);
+	gnum=(TextView)findViewById(R.id.gnum);
+	isfavor=(TextView)findViewById(R.id.txt_favor);
 	gdimage=(ImageView)findViewById(R.id.gdimage);
 	gdname=(TextView)findViewById(R.id.gdname);
 	gdprice=(TextView)findViewById(R.id.gdprice);
@@ -82,10 +93,12 @@ public class GoodsinActivity extends Activity {
 			}
 			else{
 			if(isCollection.equals("1")){
+				isfavor.setText("点击收藏");
 				favor.setImageResource(android.R.drawable.btn_star_big_off);
 				isCollection="0";
 			}
 			else{
+				isfavor.setText("取消收藏");
 				favor.setImageResource(android.R.drawable.btn_star_big_on);
 				isCollection="1";
 			}
@@ -135,10 +148,11 @@ public class GoodsinActivity extends Activity {
 }
 	public void setView(){
 		gid=map.get("gid");
+		gnum.setText(map.get("gquantity")); 
 		gdname.setText(map.get("gname"));
 		gdprice.setText(map.get("price"));
 		gddescribe.setText(map.get("gdescribe"));		
-		String imageurl=ConstantDef.BaseUil+"images/shu_lib.jpg";
+		String imageurl=ConstantDef.BaseImageUil+map.get("gpicture");
 		imageLoader.displayImage(imageurl, gdimage, options, animateFirstListener);
 //		transstate =(TextView)findViewById(R.id.trans_state);
 	}
@@ -257,6 +271,7 @@ public class GoodsinActivity extends Activity {
 				handler.sendMessage(msg);
 	    }
 	};
+
 	public boolean onOptionsItemSelected(MenuItem item) {  
 	    switch (item.getItemId()) {  
 	        case android.R.id.home:  

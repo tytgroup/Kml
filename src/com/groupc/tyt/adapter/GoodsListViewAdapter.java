@@ -92,7 +92,7 @@ public class GoodsListViewAdapter extends BaseAdapter {
 		}
 		holder.text_name.setText( mylist.get(position).get("gname"));
 		holder.text_price.setText( mylist.get(position).get("price"));
-		String imageurl=ConstantDef.BaseUil+"images/shu_lib.jpg";
+		String imageurl=ConstantDef.BaseImageUil+mylist.get(position).get("gpicture");
 		imageLoader.displayImage(imageurl, holder.img_head, options, animateFirstListener);
 		return view;
 	}

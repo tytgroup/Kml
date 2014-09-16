@@ -5,164 +5,202 @@
     android:divider="@android:drawable/divider_horizontal_textfield"
     android:orientation="vertical"
     android:showDividers="middle" >
-    
-    <RelativeLayout 
-    android:layout_width="fill_parent"
-    android:layout_height="60dp"
-    android:background="@drawable/list_selector"
-    android:orientation="horizontal"
-    android:padding="5dip" >
- 
-    <!--  ListRow Left sied Thumbnail image -->
-    <LinearLayout android:id="@+id/thumbnail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="3dip"
-        android:layout_alignParentLeft="true"
-        android:background="@drawable/image_bg"
-        android:layout_marginRight="5dip">
- 
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="60dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" >
+
         <ImageView
             android:id="@+id/list_image"
             android:layout_width="50dip"
             android:layout_height="50dip"
-            android:src="@drawable/tab1"/>
- 
-    </LinearLayout>
- 
-    <!-- Title Of Song-->
-    <TextView
-        android:id="@+id/gdname"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/thumbnail"
-        android:layout_toRightOf="@+id/thumbnail"
-        android:text="Rihanna Love the way lie"
-        android:textColor="#040404"
-        android:typeface="sans"
-        android:textSize="15dip"
-        android:textStyle="bold"/>
- 
-    <!-- Artist Name -->
-    <TextView
-        android:id="@+id/gdprice"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/gdname"
-        android:textColor="#343434"
-        android:textSize="10dip"
-        android:layout_marginTop="1dip"
-        android:layout_toRightOf="@+id/thumbnail"
-        android:text="Just gona stand there and ..." />
- 
- </RelativeLayout>
+            android:layout_marginLeft="15dip"
+            android:layout_marginRight="5dip"
+            android:src="@drawable/tab1" />
+
+        <TextView
+            android:id="@+id/gdname"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/list_image"
+            android:layout_toRightOf="@+id/list_image"
+            android:text="Rihanna Love the way lie"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_15"
+            android:textStyle="bold"
+            android:typeface="sans" />
+
+        <TextView
+            android:id="@+id/gdprice"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/gdname"
+            android:layout_marginTop="10dip"
+            android:layout_toRightOf="@+id/list_image"
+            android:text="Just gona stand there and ..."
+            android:textColor="@color/lightblack"
+            android:textSize="@dimen/text_size_12" />
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp" 
-        android:layout_weight="0.1"
-        android:padding="5dp">
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="10dip"
+        android:background="@color/white" >
 
         <TextView
-            android:id="@+id/p1"
+            android:id="@+id/t1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="发布编号:" />
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="15dip"
+            android:gravity="center_vertical"
+            android:text="发布编号: "
+            android:textSize="@dimen/text_size_15" />
 
         <TextView
             android:id="@+id/pid"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="TextView" />
-
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textSize="@dimen/text_size_14" />
     </LinearLayout>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp" 
-        android:layout_weight="0.1"
-        android:padding="5dp">
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/white" >
 
         <TextView
-            android:id="@+id/p2"
+            android:id="@+id/t2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="发布日期:" />
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="15dip"
+            android:gravity="center_vertical"
+            android:text="发布日期: "
+            android:textSize="@dimen/text_size_15" />
 
         <TextView
             android:id="@+id/ptime"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="TextView" />
-
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textSize="@dimen/text_size_14" />
     </LinearLayout>
-    
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp" 
-        android:layout_weight="0.1"
-        android:padding="5dp">
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/white" >
 
         <TextView
-            android:id="@+id/p3"
+            android:id="@+id/t4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="收到的申请:" />
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="15dip"
+            android:gravity="center_vertical"
+            android:text="商品数量: "
+            android:textSize="@dimen/text_size_15" />
 
         <TextView
-            android:id="@+id/ausr"
+            android:id="@+id/goods_num"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="TextView" />
-
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textSize="@dimen/text_size_14" />
     </LinearLayout>
-    
-    
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="0dp" 
-        android:layout_weight="0.1"
-        android:padding="5dp">
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/white" >
 
         <TextView
-            android:id="@+id/p4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="20sp"
-            android:text="评价买家（举报)" />
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="15dip"
+            android:gravity="center_vertical"
+            android:text="商品状态: "
+            android:textSize="@dimen/text_size_15" />
 
-     </LinearLayout>
-     
+        <TextView
+            android:id="@+id/goods_state"
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:gravity="center_vertical"
+            android:text="TextView"
+            android:textSize="@dimen/text_size_14" />
+    </LinearLayout>
 
-      <LinearLayout
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content" 
-          android:orientation="horizontal">
-         <Button
-        android:id="@+id/finish"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:id="@+id/ausr"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="10dip"
+        android:background="@color/white" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="15dip"
+            android:gravity="center_vertical"
+            android:text="收到的申请: "
+            android:textSize="@dimen/text_size_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/relative"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center_vertical"
+        android:background="@color/white" >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="fill_parent"
+            android:layout_marginLeft="15dip"
+            android:gravity="center_vertical"
+            android:text="评价买家（举报）"
+            android:textSize="@dimen/text_size_15" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_weight="0.5"
-        android:background="@drawable/button_style"
-        android:text="交易完成"
-        android:textColor="#FFFFFF" />
-         <Button
-        android:id="@+id/pubcancel"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:layout_weight="0.5"
-        android:background="@drawable/button_style"
-        android:text="取消发布"
-        android:textColor="#FFFFFF" />
-      </LinearLayout>
+        android:orientation="horizontal" 
+        android:layout_marginTop="10dip">
 
-      
+        <Button
+            android:id="@+id/finish"
+            android:layout_width="0dp"
+            android:layout_height="45dip"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/button_style"
+            android:text="交易完成"
+            android:textColor="#FFFFFF" />
+
+        <Button
+            android:id="@+id/pubcancel"
+            android:layout_width="0dp"
+            android:layout_height="45dip"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="0.5"
+            android:background="@drawable/button_style"
+            android:text="取消发布"
+            android:textColor="#FFFFFF" />
+    </LinearLayout>
+
 </LinearLayout>

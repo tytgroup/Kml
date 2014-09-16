@@ -1,163 +1,158 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/scrollView1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
-
-<LinearLayout 
+    android:id="@+id/scrollView1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:divider="@android:drawable/divider_horizontal_textfield"
-    android:orientation="vertical"
-    android:showDividers="middle" >
+    android:background="@color/system_background_color" >
 
- 
-<LinearLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_margin="10dp">
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView0"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" 名称:   "
-             android:textSize="20sp"
-            android:textColor="#0A0A0A" />
-
-        <EditText
-            android:id="@+id/gdname"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:textSize="20sp"
-            android:ems="10"
-            android:hint="此处填写商品名称" />
-
-    </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical" >
+            android:layout_height="90dp"
+            android:background="@color/white"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" >
+
+            <ImageButton
+                android:id="@+id/image_goods"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="25dip"
+                android:background="@drawable/imagebutton"
+                android:contentDescription="@string/app_name"
+                android:scaleType="centerCrop" />
+
+            <Button
+                android:id="@+id/addphoto"
+                android:layout_width="140dip"
+                android:layout_height="40dip"
+                android:layout_marginLeft="30dip"
+                android:background="@drawable/button"
+                android:text="上传照片"
+                android:textColor="@color/white" />
         </LinearLayout>
-    
-    <Button
-        android:id="@+id/addphoto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/button_style"
-        android:textColor="#FFFFFF"
-        android:text="添加图片" />
 
-    <EditText
-        android:id="@+id/gddecribe"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:layout_margin="20dp" android:ems="10"
-        android:hint="点此添加描述"
-        android:inputType="textMultiLine" >
+        <LinearLayout style="@style/LinearLayout_bg_white" 
+                        android:layout_marginTop="10dip">
 
-        <requestFocus />
-    </EditText>
- 
- 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_margin="10dp">
+            <TextView
+                style="@style/textview_style1"
+                android:text="商品名称：" />
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" 价格:   "
-             android:textSize="20sp"
-            android:textColor="#0A0A0A" />
+            <EditText
+                android:id="@+id/gdname"
+                style="@style/EditText_style"
+                android:layout_marginLeft="20dp"
+                android:hint="请输入名称" />
+        </LinearLayout>
 
-        <EditText
-            android:id="@+id/price"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@null"
-            android:textSize="20sp"
-            android:ems="10"
-            android:hint="点此修改价格"
-            android:inputType="numberDecimal" />
+        <ImageView
+            style="@style/line"
+            android:contentDescription="@string/app_name" />
 
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_margin="10dp">
+        <LinearLayout style="@style/LinearLayout_bg_white" >
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" 数量:   "
-             android:textSize="20sp"
-             android:textColor="#0A0A0A" />
+            <TextView
+                style="@style/textview_style1"
+                android:text="选择分类：" />
 
-        <EditText
-            android:id="@+id/num"
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginLeft="20dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            style="@style/LinearLayout_bg_white"
+            android:layout_marginTop="10dp" >
+
+            <TextView
+                style="@style/textview_style1"
+                android:text="商品单价：" />
+
+            <EditText
+                android:id="@+id/price"
+                style="@style/EditText_style"
+                android:layout_marginLeft="20dp"
+                android:hint="请输入价格"
+                android:inputType="numberDecimal" />
+        </LinearLayout>
+
+        <ImageView
+            style="@style/line"
+            android:contentDescription="@string/app_name" />
+
+        <LinearLayout style="@style/LinearLayout_bg_white" >
+
+            <TextView
+                style="@style/textview_style1"
+                android:text="商品数量：" />
+
+            <EditText
+                android:id="@+id/num"
+                style="@style/EditText_style"
+                android:layout_marginLeft="20dp"
+                android:hint="请输入数量"
+                android:inputType="number" />
+        </LinearLayout>
+
+        <ImageView
+            style="@style/line"
+            android:layout_marginTop="10dp" />
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="90dp"
+            android:background="@color/white" >
+
+            <EditText
+                android:id="@+id/gddecribe"
+                style="@style/EditText_style"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="15dp"
+                android:gravity="center_vertical|left"
+                android:hint="在这里描述商品信息"
+                android:textSize="@dimen/text_size_15" />
+        </LinearLayout>
+
+        <ImageView style="@style/line" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="45dip"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:gravity="center_vertical" >
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:text="短信提醒业务（需积分）"
+                android:textColor="@color/lightblack" />
+
+            <CheckBox
+                android:id="@+id/checkBox1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/cfpub"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@null"
-            android:ems="10"
-            android:textSize="20sp"
-            android:inputType="number" />
-
-    </LinearLayout>
-    
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_margin="10dp">
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" 选择分类:"
-             android:textSize="20sp"
-             android:textColor="#0A0A0A" />
-
-        <Spinner
-            android:id="@+id/spinner"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content" />
-
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" 
-        android:layout_margin="5dp">
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="短信提醒业务（需积分）" />
-
-        <CheckBox
-            android:id="@+id/checkBox1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" 
-            />
+            android:layout_margin="20dp"
+            android:background="@drawable/button_style"
+            android:text="确认发布"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 
-    <Button
-        android:id="@+id/cfpub"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@drawable/button_style"
-        android:textColor="#FFFFFF"
-        android:text="确认发布" />
-
-</LinearLayout>
 </ScrollView>

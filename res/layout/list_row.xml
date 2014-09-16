@@ -25,14 +25,14 @@
  
     <TextView
         android:id="@+id/gdname"
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/thumbnail"
         android:layout_toRightOf="@+id/thumbnail"
         android:text="Rihanna Love the way lie"
-        android:textColor="#040404"
+        android:textColor="@color/black"
         android:typeface="sans"
-        android:textSize="15dip"
+        android:textSize="@dimen/text_size_15"
         android:textStyle="bold"/>
  
     <TextView
@@ -40,9 +40,9 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/gdname"
-        android:textColor="#343434"
-        android:textSize="10dip"
-        android:layout_marginTop="1dip"
+        android:textColor="@color/lightblack"
+        android:textSize="@dimen/text_size_12"
+        android:layout_marginTop="10dip"
         android:layout_toRightOf="@+id/thumbnail"
         android:text="Just gona stand there and ..." />
  

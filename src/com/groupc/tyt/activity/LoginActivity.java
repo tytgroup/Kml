@@ -145,8 +145,13 @@ public class LoginActivity  extends Activity{
 
 	@SuppressLint("NewApi")
 	public boolean onCreateOptionsMenu(Menu menu){
-		menu.add(0, 1, 0, "注册");
-		return super.onCreateOptionsMenu(menu); 
+		super.onCreateOptionsMenu(menu);
+	     //添加菜单项
+		 MenuItem reg=menu.add(0, 1, 0, "注册");
+        //绑定到ActionBar  
+	    reg.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+		return super.onCreateOptionsMenu(menu);   
+
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {

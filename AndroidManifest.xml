@@ -48,7 +48,7 @@
             android:configChanges="orientation|keyboardHidden" >
          </activity>
          <activity
-            android:name="com.groupc.tyt.activity.PubActivity"
+            android:name="com.groupc.tyt.activity.PublishActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"
             android:configChanges="orientation|keyboardHidden" >
          </activity>

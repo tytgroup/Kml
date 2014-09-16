@@ -28,9 +28,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
-public class GoodsPublished extends Activity {
+public class GoodsPublished extends Activity implements OnClickListener{
 
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	protected ImageLoader imageLoader;
@@ -41,8 +42,10 @@ public class GoodsPublished extends Activity {
 	private TextView gdprice;
 	private TextView pid;
 	private TextView ptime;
-	private TextView ausr;
-	private TextView commentseller;
+	private TextView gnum;
+	private TextView gstate;
+	private LinearLayout ausr;
+	private LinearLayout commentseller;
 	private Button pubcancel;
 	private Button finish;
 
@@ -54,41 +57,25 @@ public class GoodsPublished extends Activity {
 		getActionBar().setTitle(spannableString);
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.goods_published);
+		
 		gdimage = (ImageView) findViewById(R.id.list_image);
 		gdname = (TextView) findViewById(R.id.gdname);
 		gdprice = (TextView) findViewById(R.id.gdprice);
 		pid = (TextView) findViewById(R.id.pid);
-		ptime = (TextView) findViewById(R.id.ptime);
-		ausr = (TextView) findViewById(R.id.ausr);
-		commentseller = (TextView) findViewById(R.id.p4);
+		gnum=(TextView) findViewById(R.id.goods_num);
+		ptime = (TextView) findViewById(R.id.ptime);	
+		gstate=(TextView) findViewById(R.id.goods_state);
+		
+		ausr = (LinearLayout) findViewById(R.id.ausr);
+		commentseller = (LinearLayout) findViewById(R.id.relative);
 		pubcancel = (Button) findViewById(R.id.pubcancel);
 		finish = (Button) findViewById(R.id.finish);
-		commentseller.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
-			}
-
-		});
-		pubcancel.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-		finish.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-
-			}
-		});
-
+		
+		commentseller.setOnClickListener(this);
+		pubcancel.setOnClickListener(this);
+		finish.setOnClickListener(this);
+		ausr.setOnClickListener(this);
+		
 		Bundle extras = getIntent().getExtras();// 获取传递过来的json
 		SerializableMap smap = (SerializableMap) extras
 				.getSerializable(("map"));
@@ -103,9 +90,11 @@ public class GoodsPublished extends Activity {
 		gdname.setText(map.get("gname"));
 		gdprice.setText(map.get("price"));
 		pid.setText(map.get("gid"));
+		/**  待定   **/
+//		gnum.setText(map.get("gquantity"));
 		ptime.setText(map.get("ptime"));
-
-		String imageurl = ConstantDef.BaseUil + "images/shu_lib.jpg";
+		gstate.setText(map.get("gstate"));
+		String imageurl = ConstantDef.BaseImageUil+map.get("gpicture");
 		imageLoader.displayImage(imageurl, gdimage, options,
 				animateFirstListener);
 		// transstate =(TextView)findViewById(R.id.trans_state);
@@ -135,5 +124,11 @@ public class GoodsPublished extends Activity {
 				// 延时
 				.displayer(new RoundedBitmapDisplayer(70))
 				.displayer(new FadeInBitmapDisplayer(100)).build();
+	}
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
 	}
 }

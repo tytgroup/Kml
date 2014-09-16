@@ -36,7 +36,7 @@
                     android:layout_marginLeft="30dip"
                     android:background="@drawable/button"
                     android:text="上传头像"
-                    android:textColor="@color/white"/>"
+                    android:textColor="@color/white"/>
             </LinearLayout>
         <ImageView
         style="@style/line"
