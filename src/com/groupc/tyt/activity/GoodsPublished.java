@@ -90,11 +90,10 @@ public class GoodsPublished extends Activity implements OnClickListener{
 		gdname.setText(map.get("gname"));
 		gdprice.setText(map.get("price"));
 		pid.setText(map.get("gid"));
-		/**  待定   **/
-//		gnum.setText(map.get("gquantity"));
+		gnum.setText(map.get("gquantity"));
 		ptime.setText(map.get("ptime"));
 		gstate.setText(map.get("gstate"));
-		String imageurl = ConstantDef.BaseImageUil+map.get("gpicture");
+		String imageurl = ConstantDef.BaseImageUil+map.get("gpicture")+".jpg";
 		imageLoader.displayImage(imageurl, gdimage, options,
 				animateFirstListener);
 		// transstate =(TextView)findViewById(R.id.trans_state);
@@ -120,7 +119,7 @@ public class GoodsPublished extends Activity implements OnClickListener{
 				.cacheOnDisk(true).considerExifParams(true)
 				.imageScaleType(ImageScaleType.EXACTLY_STRETCHED)
 				// 缩放图片
-				.delayBeforeLoading(2000)
+//				.delayBeforeLoading(2000)
 				// 延时
 				.displayer(new RoundedBitmapDisplayer(70))
 				.displayer(new FadeInBitmapDisplayer(100)).build();

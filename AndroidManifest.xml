@@ -29,63 +29,75 @@
         <activity
             android:name="com.groupc.tyt.activity.MainActivity"
              android:windowSoftInputMode="stateHidden|adjustPan" 
-             android:configChanges="orientation|keyboardHidden" >
+             android:configChanges="orientation|keyboardHidden" 
+             android:screenOrientation="portrait">
             
         </activity>
          <activity
             android:name="com.groupc.tyt.activity.RegisterFirstStepActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden" 
+            android:screenOrientation="portrait">
          </activity>
          <activity
             android:name="com.groupc.tyt.activity.LoginActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden" 
+            android:screenOrientation="portrait">
          </activity>
                   <activity
             android:name="com.groupc.tyt.activity.RegisterSecondStepActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden" 
+            android:screenOrientation="portrait">
          </activity>
          <activity
             android:name="com.groupc.tyt.activity.PublishActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
          </activity>
           <activity
             android:name="com.groupc.tyt.activity.AppliedActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
          </activity>
          <activity
             android:name="com.groupc.tyt.activity.PublishedActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden" 
+            android:screenOrientation="portrait">
          </activity>
          <activity
             android:name="com.groupc.tyt.activity.SplashActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
          </activity>
          <activity
             android:name="com.groupc.tyt.activity.SplashActivity2"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
             </activity>
             <activity
             android:name="com.groupc.tyt.activity.GoodsApplied"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden" 
+            android:screenOrientation="portrait">
          </activity>
           <activity
             android:name="com.groupc.tyt.activity.GoodsPublished"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
          </activity>
           <activity
             android:name="com.groupc.tyt.activity.GoodsinActivity"
             android:windowSoftInputMode="stateHidden|adjustPan"
-            android:configChanges="orientation|keyboardHidden" >
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="portrait" >
          </activity>
     </application>
 

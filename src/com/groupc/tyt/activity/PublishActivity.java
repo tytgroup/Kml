@@ -163,7 +163,7 @@ public class PublishActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				imgName = "" + User.uno + "_" + getPhotoFileName();
+				imgName = "" + User.uno + "_" + getTime();
 				showDialog();
 			}
 		});
@@ -189,6 +189,8 @@ public class PublishActivity extends Activity {
 				if (feedback.equals("ok")) {
 					Toast.makeText(getApplicationContext(), "发布成功！",
 							Toast.LENGTH_SHORT).show();
+					startActivity(new Intent(getApplicationContext(),MainActivity.class));
+					finish();
 				} else {
 					Toast.makeText(getApplicationContext(), "发布失败！",
 							Toast.LENGTH_SHORT).show();
@@ -362,6 +364,12 @@ public class PublishActivity extends Activity {
 		SimpleDateFormat dateFormat = new SimpleDateFormat(
 				"'IMG'_yyyyMMdd_HHmmss");
 		return dateFormat.format(date) + ".jpg";
+	}
+	private String getTime() {
+		Date date = new Date(System.currentTimeMillis());
+		SimpleDateFormat dateFormat = new SimpleDateFormat(
+				"'IMG'_yyyyMMdd_HHmmss");
+		return dateFormat.format(date) ;
 	}
 
 	public boolean onOptionsItemSelected(MenuItem item) {

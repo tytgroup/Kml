@@ -53,7 +53,7 @@ public class GoodsApplied extends Activity{
 		gdprice =(TextView)findViewById(R.id.gdprice);
 		apid =(TextView)findViewById(R.id.apid);
 		atime =(TextView)findViewById(R.id.atime);
-		gnum=(TextView)findViewById(R.id.gnum);
+		gnum=(TextView)findViewById(R.id.apply_num);
 		applystate =(TextView)findViewById(R.id.apply_state);
 		commentbuyer =(LinearLayout)findViewById(R.id.relative);
 		apcancel =(Button)findViewById(R.id.apcancel);
@@ -93,11 +93,10 @@ public class GoodsApplied extends Activity{
 		gdprice.setText(map.get("price"));
 		apid.setText(map.get("aid"));
 		atime.setText(map.get("atime"));
-		/** 待改进**/
-//		gnum.setText(map.get("gquantity")); 
+		gnum.setText(map.get("gquantity")); 
 		applystate.setText(map.get("astate"));
 		
-		String imageurl=ConstantDef.BaseImageUil+map.get("gpicture");
+		String imageurl=ConstantDef.BaseImageUil+map.get("gpicture")+".jpg";
 		imageLoader.displayImage(imageurl, gdimage, options, animateFirstListener);
 //		transstate =(TextView)findViewById(R.id.trans_state);
 	}
@@ -121,7 +120,7 @@ public class GoodsApplied extends Activity{
 	.cacheOnDisk(true)
 	.considerExifParams(true)
 	.imageScaleType(ImageScaleType.EXACTLY_STRETCHED)//缩放图片
-	.delayBeforeLoading(2000)//延时
+//	.delayBeforeLoading(2000)//延时
 	.displayer(new RoundedBitmapDisplayer(70))
 	.displayer(new FadeInBitmapDisplayer(100))
 	.build();

@@ -42,7 +42,6 @@ public class FavorFragment extends Fragment implements OnItemClickListener{
 			Bundle savedInstanceState) {
 		return inflater.inflate(R.layout.goods_list,container,false);
 		
-
 }
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
@@ -66,6 +65,7 @@ public class FavorFragment extends Fragment implements OnItemClickListener{
 			Toast.makeText(getActivity(), "您还没登录！", Toast.LENGTH_SHORT).show();
 		}
 		else{
+			Log.e("FavorFragment", "start");
 			uid=User.uid;
 		new Thread(runnable).start();
 		}
@@ -146,5 +146,16 @@ public class FavorFragment extends Fragment implements OnItemClickListener{
 		intent.setClass(getActivity(), GoodsinActivity.class);
 		startActivity(intent);	 
 	}
+	@Override
+    public void setUserVisibleHint(boolean isVisibleToUser) {
+        super.setUserVisibleHint(isVisibleToUser);
+    	Log.e("FavorFragment", "isvisible1");
+        if (getUserVisibleHint()) {
+        	Log.e("FavorFragment", "isvisible2");
+//    		new Thread(runnable).start();
+        } else {
+            //相当于Fragment的onPause
+        }
+    }
 
 }

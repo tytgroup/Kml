@@ -61,6 +61,7 @@ public class GoodsinActivity extends Activity {
 	private TextView gdname;
 	private ImageButton favor;
 	private TextView gdprice;
+	private TextView gtime;
 	private TextView gddescribe;
 	private TextView gnum;
 	private TextView isfavor;
@@ -77,6 +78,7 @@ public class GoodsinActivity extends Activity {
 	
 	num=(EditText)findViewById(R.id.num);
 	gnum=(TextView)findViewById(R.id.gnum);
+	gtime=(TextView)findViewById(R.id.gtime);
 	isfavor=(TextView)findViewById(R.id.txt_favor);
 	gdimage=(ImageView)findViewById(R.id.gdimage);
 	gdname=(TextView)findViewById(R.id.gdname);
@@ -148,11 +150,12 @@ public class GoodsinActivity extends Activity {
 }
 	public void setView(){
 		gid=map.get("gid");
+		gtime.setText(map.get("ptime").substring(0, 10));
 		gnum.setText(map.get("gquantity")); 
 		gdname.setText(map.get("gname"));
 		gdprice.setText(map.get("price"));
 		gddescribe.setText(map.get("gdescribe"));		
-		String imageurl=ConstantDef.BaseImageUil+map.get("gpicture");
+		String imageurl=ConstantDef.BaseImageUil+map.get("gpicture")+".jpg";
 		imageLoader.displayImage(imageurl, gdimage, options, animateFirstListener);
 //		transstate =(TextView)findViewById(R.id.trans_state);
 	}
@@ -167,7 +170,7 @@ public class GoodsinActivity extends Activity {
 	.cacheOnDisk(true)
 	.considerExifParams(true)
 	.imageScaleType(ImageScaleType.EXACTLY_STRETCHED)//缩放图片
-	.delayBeforeLoading(2000)//延时
+//	.delayBeforeLoading(2000)//延时
 	.displayer(new RoundedBitmapDisplayer(70))
 	.displayer(new FadeInBitmapDisplayer(100))
 	.build();

@@ -99,7 +99,8 @@ public class LoginActivity  extends Activity{
 									 +"|jf="+User.jf+"|hydj="+User.hydj+"|xydj="+User.xydj);
 							 Toast.makeText(getApplicationContext(), "登陆成功！", Toast.LENGTH_SHORT)
 								.show();
-							 
+							 startActivity(new Intent(getApplicationContext(),MainActivity.class));
+							 finish();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

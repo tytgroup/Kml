@@ -50,7 +50,7 @@ public class HomePageGoodsAdapter extends BaseAdapter {
 	.cacheOnDisk(true)
 	.considerExifParams(true)
 	.imageScaleType(ImageScaleType.EXACTLY_STRETCHED)//缩放图片
-	.delayBeforeLoading(2000)//延时
+//	.delayBeforeLoading(2000)//延时
 	.displayer(new RoundedBitmapDisplayer(70))
 	.displayer(new FadeInBitmapDisplayer(100))
 	.build();
@@ -92,7 +92,7 @@ public class HomePageGoodsAdapter extends BaseAdapter {
 		}
 		holder.text_name.setText( mylist.get(position).get("gname"));
 		holder.text_price.setText( mylist.get(position).get("gprice"));
-		String imageurl=ConstantDef.BaseImageUil+mylist.get(position).get("gpicture");
+		String imageurl=ConstantDef.BaseImageUil+mylist.get(position).get("gpicture")+".jpg";
 		imageLoader.displayImage(imageurl, holder.img_head, options, animateFirstListener);
 		return view;
 	}

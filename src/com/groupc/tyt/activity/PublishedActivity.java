@@ -31,7 +31,7 @@ public class PublishedActivity extends Activity {
 	private ListView listView1;
 	private String feedback;
 	private List<Map<String, String>> mylist = new ArrayList<Map<String, String>>();
-	private String title = "publish", keys[] = { "gname","price","gpicture","gid","ptime","gstate"};
+	private String title = "publish", keys[] = { "gname","price","gpicture","gid","ptime","gstate","gquantity"};
 	private GoodsListViewAdapter adapter;
 	
     public void onCreate(Bundle savedInstanceState) {
