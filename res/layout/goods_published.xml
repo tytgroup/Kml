@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -145,15 +148,23 @@
         android:layout_height="40dp"
         android:layout_gravity="center_vertical"
         android:layout_marginTop="10dip"
-        android:background="@color/white" >
+        android:background="@drawable/linearlayout" >
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="fill_parent"
             android:layout_marginLeft="15dip"
+            android:layout_weight="1"
             android:gravity="center_vertical"
-            android:text="收到的申请: "
+            android:text="收到的申请: （点击查看详细）"
             android:textSize="@dimen/text_size_15" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dip"
+            android:background="@drawable/turn_right_img" />
     </LinearLayout>
 
     <LinearLayout
@@ -161,27 +172,35 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:layout_gravity="center_vertical"
-        android:background="@color/white" >
+        android:layout_marginTop="10dip"
+        android:background="@drawable/linearlayout">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:layout_marginLeft="15dip"
             android:gravity="center_vertical"
             android:text="评价买家（举报）"
             android:textSize="@dimen/text_size_15" />
+                <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dip"
+            android:background="@drawable/turn_right_img" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal" 
-        android:layout_marginTop="10dip">
+        android:layout_marginTop="10dip"
+        android:orientation="horizontal" >
 
         <Button
             android:id="@+id/finish"
             android:layout_width="0dp"
-            android:layout_height="45dip"
+            android:layout_height="40dip"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"
             android:layout_weight="0.5"
@@ -192,7 +211,7 @@
         <Button
             android:id="@+id/pubcancel"
             android:layout_width="0dp"
-            android:layout_height="45dip"
+            android:layout_height="40dip"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"
             android:layout_weight="0.5"
@@ -202,3 +221,4 @@
     </LinearLayout>
 
 </LinearLayout>
+</ScrollView>

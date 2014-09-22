@@ -3,14 +3,12 @@ package com.groupc.tyt.fragment;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.List;
-
 import com.groupc.tyt.R;
 import com.groupc.tyt.TytApplication;
+import com.groupc.tyt.activity.AdviceActivity;
+import com.groupc.tyt.activity.LoginActivity;
 import com.groupc.tyt.activity.SplashActivity;
 import com.groupc.tyt.activity.SplashActivity2;
-import com.groupc.tyt.activity.WantedActivity;
 import com.groupc.tyt.adapter.AnimateFirstDisplayListener;
 import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.constant.User;
@@ -29,20 +27,20 @@ import android.os.Environment;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class MeFragment extends Fragment {
-	private ListView listView;
+public class MeFragment extends Fragment implements OnClickListener{
 	private ImageView img_tx;
 	private String imgUrl;
 	private TextView txt_name,txt_xydj,txt_hydj,txt_jf;
+	private LinearLayout haveApply,havePublish,advice;
+	private Button logout;
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
 	String saveDirPath = Environment.getExternalStorageDirectory().getPath()+"/TytImage/";
 	protected ImageLoader imageLoader;
@@ -57,11 +55,14 @@ public class MeFragment extends Fragment {
 			Bundle savedInstanceState) {
 		View v = inflater.inflate(R.layout.me,container,false);
 		img_tx=(ImageView)v.findViewById(R.id.imageView1);
-		txt_name=(TextView)v.findViewById(R.id.textView1);
+		txt_name=(TextView)v.findViewById(R.id.textView8);
 		txt_xydj=(TextView)v.findViewById(R.id.textView5);
 		txt_hydj=(TextView)v.findViewById(R.id.textView6);
 		txt_jf=(TextView)v.findViewById(R.id.textView7);
-		listView = (ListView) v.findViewById(R.id.listviewme);
+		haveApply=(LinearLayout) v.findViewById(R.id.haveapplyed);
+		havePublish=(LinearLayout) v.findViewById(R.id.havepublish);
+		advice=(LinearLayout) v.findViewById(R.id.advice);
+		logout=(Button) v.findViewById(R.id.logout);
 		if(User.uid.equals("-1")){
 			Toast.makeText(getActivity(), "您还没有登陆！", Toast.LENGTH_SHORT).show();
 		}
@@ -97,42 +98,11 @@ public class MeFragment extends Fragment {
          }
 	 }
 	private void init() {
-		List<String> items = new ArrayList<String>();
-		items.add("已申请的交易");
-		items.add("已发布的交易");
-		items.add("十万火急求买");
-		items.add("购买积分");
-		items.add("我有更好的建议（采纳送积分)");
-		
-		ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_list_item_1, items);
-		listView.setAdapter(adapter);
-		listView.setOnItemClickListener(new OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View view,
-                            int position, long id) {
-                    switch(position){
-                    case 0:
-                            Intent localIntent=new Intent(getActivity(),SplashActivity.class);
-                            startActivity(localIntent);
-                            break;
-                    case 1:
-                    	Intent localIntent2=new Intent(getActivity(),SplashActivity2.class);
-                        startActivity(localIntent2);
-                        break;
-                    case 2:
-                    	Intent localIntent3=new Intent(getActivity(),WantedActivity.class);
-                        startActivity(localIntent3);
-                    	break;
-                    case 3:
-                    	Toast.makeText(getActivity(), "功能开发中", Toast.LENGTH_SHORT).show();
-                    	break;
-                    case 4:
-                    	Toast.makeText(getActivity(), "功能开发中", Toast.LENGTH_SHORT).show();
-                    	break;
-                    }
-                    
-            }
-    });
-}
+		haveApply.setOnClickListener(this);
+		havePublish.setOnClickListener(this);
+		advice.setOnClickListener(this);
+		logout.setOnClickListener(this);
+   }
     public void ini(){
     	imageLoader = ImageLoader.getInstance();
       options = new DisplayImageOptions.Builder()
@@ -149,4 +119,31 @@ public class MeFragment extends Fragment {
 	.displayer(new FadeInBitmapDisplayer(100))
 	.build();
 }
+
+	@Override
+	public void onClick(View v) {
+		// TODO Auto-generated method stub
+		
+		int id=v.getId();
+		switch(id){
+        case R.id.haveapplyed:
+                Intent localIntent=new Intent(getActivity(),SplashActivity.class);
+                startActivity(localIntent);
+                break;
+        case R.id.havepublish:
+        	Intent localIntent2=new Intent(getActivity(),SplashActivity2.class);
+            startActivity(localIntent2);
+            break;
+        case R.id.advice:
+        	Intent localIntent3=new Intent(getActivity(),AdviceActivity.class);
+            startActivity(localIntent3);
+        	break;
+        case R.id.logout:
+        	User.uid="-1";
+        	Intent localIntent4=new Intent(getActivity(),LoginActivity.class);
+            startActivity(localIntent4);
+        	break;
+
+        }
+	}
 }

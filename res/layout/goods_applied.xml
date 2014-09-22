@@ -156,12 +156,19 @@
         android:background="@color/white">
 
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="0dip"
             android:layout_height="fill_parent"
+            android:layout_weight="1"
             android:layout_marginLeft="15dip"
             android:gravity="center_vertical"
             android:textSize="@dimen/text_size_15"
             android:text="评价卖家（举报）" />
+                <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginRight="15dip"
+            android:background="@drawable/turn_right_img" />
 
     </LinearLayout>
     

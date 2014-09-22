@@ -5,26 +5,6 @@
     android:background="@drawable/welcomebg" >
 
     <ImageView
-        android:id="@+id/logo2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="106dp"
-        android:background="@drawable/logo2"
-        android:contentDescription="@null" />
-
-    <ImageView
-        android:id="@+id/logo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/logo2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="36dp"
-        android:background="@drawable/logo1"
-        android:contentDescription="@null" />
-
-    <ImageView
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,5 +13,24 @@
         android:layout_marginLeft="40dp"
         android:layout_marginRight="40dp"
         android:src="@drawable/logo3" />
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_above="@+id/logo2"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_marginBottom="19dp"
+        android:background="@drawable/logo1"
+        android:contentDescription="@null" />
+
+    <ImageView
+        android:id="@+id/logo2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/logo2"
+        android:contentDescription="@null" />
 
 </RelativeLayout>

@@ -50,7 +50,7 @@ public class RegisterSecondStepActivity extends Activity implements OnClickListe
 	private String filename,imgName;
 	private List<NameValuePair> params;
 	private String url=ConstantDef.BaseUil+"RegisterService";
-	private String img_xsz=null,img_head=null;
+	private String img_xsz=null,img_head="black";
     private ImageButton imgButton_head,imgButton_xsz;
 	private Button btn_head,btn_xsz,btn_nextstep;
 	String saveDirPath = Environment.getExternalStorageDirectory().getPath()+"/TytImage";
@@ -89,7 +89,7 @@ public class RegisterSecondStepActivity extends Activity implements OnClickListe
 		case R.id.image_tx:
 			filename="img_tx_"+User.uno;
 			showDialog();
-			img_head=null;
+			img_head="black";
 			break;		
 		case R.id.image_xsz:
 			filename="img_xsz_"+User.uno;

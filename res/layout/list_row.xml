@@ -5,8 +5,7 @@
     android:background="@drawable/list_selector"
     android:orientation="horizontal"
     android:padding="5dip" >
- 
-    <!--  ListRow Left sied Thumbnail image -->
+
     <LinearLayout android:id="@+id/thumbnail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -45,11 +44,5 @@
         android:layout_marginTop="10dip"
         android:layout_toRightOf="@+id/thumbnail"
         android:text="Just gona stand there and ..." />
- 
-    <!-- Rightend Duration -->
-    
- 
-     <!-- Rightend Arrow -->
-    
  
 </RelativeLayout>

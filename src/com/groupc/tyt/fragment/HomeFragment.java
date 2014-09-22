@@ -8,13 +8,10 @@ import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 
 import com.groupc.tyt.R;
-import com.groupc.tyt.activity.AppliedActivity;
-import com.groupc.tyt.activity.GoodsApplied;
 import com.groupc.tyt.activity.GoodsinActivity;
 import com.groupc.tyt.adapter.GoodsListViewAdapter;
 import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.constant.SerializableMap;
-import com.groupc.tyt.constant.User;
 import com.groupc.tyt.util.HttpClientUtil;
 
 import android.annotation.SuppressLint;
@@ -35,7 +32,6 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;

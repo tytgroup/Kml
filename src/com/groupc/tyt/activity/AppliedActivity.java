@@ -31,7 +31,7 @@ public class AppliedActivity extends Activity {
 	private ListView listView1;
 	private String feedback;
 	private List<Map<String, String>> mylist = new ArrayList<Map<String, String>>();
-	private String title = "apply", keys[] = { "gname","price","gpicture","aid","atime","astate","gquantity"};
+	private String title = "apply", keys[] = { "uid","gname","price","gpicture","aid","atime","astate","gquantity","brelative","srelative"};
 	private GoodsListViewAdapter adapter;
 	
     public void onCreate(Bundle savedInstanceState) {
@@ -55,9 +55,7 @@ public class AppliedActivity extends Activity {
 			mylist = HttpClientUtil.jsonToList(feedback, title, keys);
 			adapter = new GoodsListViewAdapter(getApplicationContext(), mylist);
 			listView1.setAdapter(adapter);			
-					 Log.e("json", "uid="+User.uid+"|name="+User.name+"|uno="+User.uno
-							 +"|phone="+User.phone+"|tx="+User.tx+"|rzjg="+User.rzjg
-							 +"|jf="+User.jf+"|hydj="+User.hydj+"|xydj="+User.xydj);	
+
 		} catch (Exception e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();

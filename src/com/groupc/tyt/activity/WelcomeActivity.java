@@ -22,7 +22,7 @@ public class WelcomeActivity extends Activity {
         actionBar.hide();
 		ImageView logo = (ImageView) findViewById(R.id.logo2);
         Animation logo_animation = AnimationUtils.loadAnimation(WelcomeActivity.this, 
-        		R.anim.push_left_in);
+        		R.anim.alpha_in);
         logo.setAnimation(logo_animation);
         logo_animation.setAnimationListener(new AnimationListener() {
 			

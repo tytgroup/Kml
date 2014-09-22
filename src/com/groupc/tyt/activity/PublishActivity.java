@@ -33,7 +33,10 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
+import android.text.Editable;
 import android.text.SpannableString;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -44,6 +47,7 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("SimpleDateFormat")
@@ -52,23 +56,23 @@ public class PublishActivity extends Activity {
 	private static final int PHOTO_REQUEST_GALLERY = 2;
 	private static final int PHOTO_REQUEST_CUT = 3;
 	private List<NameValuePair> params;
+	private boolean flag=false;
 	private String url = ConstantDef.BaseUil + "PublishService";
 	private String gname, gtype, guid, ptime, gprice, gpicture, gquantity,
 			gdescribe;
 	private ImageButton img_goods;
-	private Button addphoto;
 	private Button confirm;
 	private EditText describe;
 	private EditText name;
 	private EditText price;
 	private EditText num;
+	private TextView txt_advice;
 	private CheckBox checkbox1;
 	private SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	private String[] list = { "自行车", "书籍", "电子产品", "运动器材", "服饰", "其它" };
 	private Spinner mySpinner;
 	private ArrayAdapter<String> adapter;
 	private String imgName;
-	private int haveUpImg = 0;
 	String saveDirPath = Environment.getExternalStorageDirectory().getPath()
 			+ "/TytImage";
 	File saveDir = new File(saveDirPath);
@@ -86,12 +90,18 @@ public class PublishActivity extends Activity {
 
 		img_goods = (ImageButton) findViewById(R.id.image_goods);
 		mySpinner = (Spinner) findViewById(R.id.spinner);
+		describe = (EditText) findViewById(R.id.gddecribe);
+		txt_advice=(TextView)findViewById(R.id.txt_advice);
+		name = (EditText) findViewById(R.id.gname);
+		price = (EditText) findViewById(R.id.price);
+		num = (EditText) findViewById(R.id.num);
+		confirm = (Button) findViewById(R.id.cfpub);
+//		checkbox1 = (CheckBox) findViewById(R.id.checkBox1);
 		adapter = new ArrayAdapter<String>(this, R.layout.simple_spinner_item,
 				list);
 		adapter.setDropDownViewResource(R.layout.my_spinner);
 		mySpinner.setAdapter(adapter);
-		mySpinner
-				.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
+		mySpinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
 					public void onItemSelected(AdapterView<?> arg0, View arg1,
 							int arg2, long arg3) {
 						gtype = "" + arg2;
@@ -103,35 +113,16 @@ public class PublishActivity extends Activity {
 					}
 				});
 
-		/* 下拉菜单弹出的内容选项焦点改变事件处理 */
-		mySpinner.setOnFocusChangeListener(new Spinner.OnFocusChangeListener() {
-			public void onFocusChange(View v, boolean hasFocus) {
-			}
-		});
-		describe = (EditText) findViewById(R.id.gddecribe);
-		name = (EditText) findViewById(R.id.gdname);
-		price = (EditText) findViewById(R.id.price);
-		num = (EditText) findViewById(R.id.num);
-		addphoto = (Button) findViewById(R.id.addphoto);
-		confirm = (Button) findViewById(R.id.cfpub);
-		checkbox1 = (CheckBox) findViewById(R.id.checkBox1);
-		addphoto.setOnClickListener(new OnClickListener() {
+		img_goods.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				if (haveUpImg == 0) {
-					Toast.makeText(getApplicationContext(), "请先选择照片！",
-							Toast.LENGTH_SHORT).show();
-				} else if (haveUpImg == 2) {
-					Toast.makeText(getApplicationContext(), "您已上传头像！",
-							Toast.LENGTH_SHORT).show();
-				} else {
-					new Thread(runnable2).start();
-				}
+				imgName = "" + User.uno + "_" + getTime();
+				showDialog();
 			}
-
 		});
+
 		confirm.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -149,24 +140,21 @@ public class PublishActivity extends Activity {
 					gprice = price.getText().toString();
 					gquantity = num.getText().toString();
 					gdescribe = describe.getText().toString();
-					new Thread(runnable).start();
+					if(flag){
+					new Thread(runnable2).start();
+					}
+					else{
+						imgName="black";
+						new Thread(runnable).start();
+					}
 				}
 			}
-
 		});
 		if (User.uid.equals("-1")) {
 			Toast.makeText(getApplicationContext(), "您还没登陆，请先登陆！",
 					Toast.LENGTH_SHORT).show();
+			finish();
 		}
-		img_goods.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				imgName = "" + User.uno + "_" + getTime();
-				showDialog();
-			}
-		});
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -227,14 +215,10 @@ public class PublishActivity extends Activity {
 			super.handleMessage(msg);
 			int feedback = msg.what;
 			if (feedback == 200) {
-				if (haveUpImg == 1) {
-					haveUpImg = 2;
-					Toast.makeText(getApplicationContext(), "上传成功！",
-							Toast.LENGTH_SHORT).show();
 					gpicture=imgName;
-				}
+					new Thread(runnable).start();
 			} else if (feedback == 3) {
-				Toast.makeText(getApplicationContext(), "上传失败！",
+				Toast.makeText(getApplicationContext(), "上传图片失败！",
 						Toast.LENGTH_SHORT).show();
 			} else if (feedback == 2) {
 				Toast.makeText(getApplicationContext(), "请确保网络连接正常！",
@@ -342,8 +326,8 @@ public class PublishActivity extends Activity {
 			try {
 				b = new FileOutputStream(file);
 				photo.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
-				haveUpImg = 1;
 				img_goods.setBackgroundDrawable(drawable);
+				img_goods.clearFocus();
 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -351,6 +335,9 @@ public class PublishActivity extends Activity {
 				try {
 					b.flush();
 					b.close();
+					flag=true;
+					txt_advice.setText("图像添加完成，您还可以点击图像修改！");
+					Log.e("photo","finish");
 				} catch (IOException e) {
 					e.printStackTrace();
 				}

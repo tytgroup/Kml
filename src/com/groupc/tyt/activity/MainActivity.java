@@ -7,9 +7,9 @@ import com.groupc.tyt.fragment.HomeFragment;
 import com.groupc.tyt.fragment.SetFragment;
 import com.groupc.tyt.fragment.MeFragment;
 import com.groupc.tyt.util.DummyTabContent;
-
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -237,5 +237,13 @@ public class MainActivity extends FragmentActivity {
         tabHost.addTab(tSpecSet);
         
     }
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+				return true;
+		}
+		return super.onKeyDown(keyCode, event);
+
+	}
     
 }

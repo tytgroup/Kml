@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/system_background_color"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+        
+     <LinearLayout
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:layout_margin="5dp"
+         android:background="@drawable/box"
+         android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/leave_message"
+            android:layout_width="fill_parent"
+            android:layout_height="130dp"
+            android:layout_margin="7dp"
+            android:gravity="top|left"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_12"
+            android:background="@null"
+            android:hint="请在这里留下您宝贵的建议，以便我们做的更好，谢谢！"/>
+        <ImageView
+            style="@style/line"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"/>
+         <EditText
+            android:id="@+id/connection"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="7dp"
+            android:layout_marginRight="7dp"
+            android:layout_marginTop="9dp"
+            android:layout_marginBottom="9dp"
+            android:gravity="center_vertical|left"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_12"
+            android:background="@null"
+            android:hint="请在这里留下您的邮箱"/>
+     </LinearLayout>
+           <Button
+            android:id="@+id/submit_button"
+            style="@style/Button_style2"
+            android:layout_width="200dp"
+            android:layout_marginTop="25dp"
+            android:text="提      交"/>
+</LinearLayout>
