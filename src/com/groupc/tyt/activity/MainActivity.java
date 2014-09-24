@@ -1,14 +1,18 @@
 package com.groupc.tyt.activity;
 
 import com.groupc.tyt.R;
+import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.constant.User;
 import com.groupc.tyt.fragment.FavorFragment;
 import com.groupc.tyt.fragment.HomeFragment;
 import com.groupc.tyt.fragment.SetFragment;
 import com.groupc.tyt.fragment.MeFragment;
 import com.groupc.tyt.util.DummyTabContent;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,234 +20,217 @@ import android.view.View.OnClickListener;
 import android.widget.LinearLayout;
 import android.widget.TabHost;
 import android.widget.TabWidget;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.text.SpannableString;
 
 public class MainActivity extends FragmentActivity {
-
+	private Fragment currentFragment;
 	TabHost tabHost;
-	TabWidget tabWidget; 
+	TabWidget tabWidget;
 	LinearLayout bottom_layout;
-	int CURRENT_TAB = 0;	
-	HomeFragment homeFragment;
-	FavorFragment favorFragment;
-	//Pub_Fragment pubFragment;
+	int CURRENT_TAB = 0;
+	HomeFragment homeFragment=new HomeFragment();
+	FavorFragment favorFragment=new FavorFragment();
 	LoginActivity loginActivity;
-	SetFragment setFragment;
-	MeFragment meFragment;
-    android.support.v4.app.FragmentTransaction ft;
+	SetFragment setFragment=new SetFragment();
+	MeFragment meFragment=new MeFragment();
 	LinearLayout tabIndicator1;
 	LinearLayout tabIndicator2;
 	LinearLayout tabIndicator3;
 	LinearLayout tabIndicator4;
 	LinearLayout tabIndicator5;
 
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
 		SpannableString spannableString = new SpannableString("开卖啦");
-	    getActionBar().setTitle(spannableString);
-        findTabView();
-        tabHost.setup();
-        
-        TabHost.OnTabChangeListener tabChangeListener = new TabHost.OnTabChangeListener(){
-			public void onTabChanged(String tabId) {
-				
-				android.support.v4.app.FragmentManager fm =  getSupportFragmentManager();
-				homeFragment = (HomeFragment) fm.findFragmentByTag("home");
-				favorFragment = (FavorFragment) fm.findFragmentByTag("favor");
-				//pubFragment = (Pub_Fragment) fm.findFragmentByTag("pub");
-				setFragment = (SetFragment) fm.findFragmentByTag("set");
-				meFragment = (MeFragment) fm.findFragmentByTag("me");
-				ft = fm.beginTransaction();
-				
-				if(homeFragment!=null)
-					ft.detach(homeFragment);
-				
-				if(favorFragment!=null)
-					ft.detach(favorFragment);
-				
-				//if(pubFragment!=null)
-					//ft.detach(pubFragment);
-				
-				
-				if(setFragment!=null)
-					ft.detach(setFragment);
-				
-				if(meFragment!=null)
-					ft.detach(meFragment);
-				
-				
-				if(tabId.equalsIgnoreCase("home")){
-					isTabHome();
-					CURRENT_TAB = 1;
-					
-				}else if(tabId.equalsIgnoreCase("favor")){	
-					isTabFavor();
-					CURRENT_TAB = 2;
-					
-				}/*else if(tabId.equalsIgnoreCase("pub")){	
-					isTabPub();
-					CURRENT_TAB = 3;
-				
-				}*/else if(tabId.equalsIgnoreCase("me")){	
-					isTabMe();
-					CURRENT_TAB = 4;
-					
-				}else if(tabId.equalsIgnoreCase("set")){	
-					isTabSet();
-					CURRENT_TAB = 5;
-				}else{
-					switch (CURRENT_TAB) {
-					case 1:
-						isTabHome();
-						break;
-					case 2:
-						isTabFavor();
-						break;
-					/*case 3:
-						isTabPub();
-						break;*/
-					case 4:
-						isTabMe();
-						break;
-					case 5:
-						isTabSet();
-						break;
-					default:
-						isTabHome();
-						break;
-					}		
-					
-				}
-					ft.commit();	
+		getActionBar().setTitle(spannableString);
+
+		findTabView();
+		tabHost.setup();
+		initTab();
+		tabHost.setOnTabChangedListener(tabChangeListener);
+
+	}
+
+//	public void isTabHome() {
+//
+//		if (homeFragment == null) {
+//			ft.add(R.id.realtabcontent, new HomeFragment(), "home");
+//		} else {
+//			ft.attach(homeFragment);
+//		}
+//	}
+//
+//	public void isTabFavor() {
+//
+//		if (favorFragment == null) {
+//			ft.add(R.id.realtabcontent, new FavorFragment(), "favor");
+//		} else {
+//			ft.attach(favorFragment);
+//		}
+//	}
+//
+//	public void isTabMe() {
+//		if (User.uid.equals("-1")) {
+//			startActivity(new Intent(getApplicationContext(),
+//					LoginActivity.class));
+//		} else {
+//			if (meFragment == null) {
+//				ft.add(R.id.realtabcontent, new MeFragment(), "me");
+//			} else {
+//				ft.attach(meFragment);
+//			}
+//		}
+//	}
+//
+//	public void isTabSet() {
+//
+//		if (setFragment == null) {
+//			ft.add(R.id.realtabcontent, new SetFragment(), "set");
+//		} else {
+//			ft.attach(setFragment);
+//		}
+//	}
+
+	public void findTabView() {
+
+		tabHost = (TabHost) findViewById(android.R.id.tabhost);
+		tabWidget = (TabWidget) findViewById(android.R.id.tabs);
+		LinearLayout layout = (LinearLayout) tabHost.getChildAt(0);
+		TabWidget tw = (TabWidget) layout.getChildAt(1);
+
+		tabIndicator1 = (LinearLayout) LayoutInflater.from(this).inflate(
+				R.layout.main_home, tw, false);
+
+		tabIndicator2 = (LinearLayout) LayoutInflater.from(this).inflate(
+				R.layout.main_favor, tw, false);
+
+		tabIndicator3 = (LinearLayout) LayoutInflater.from(this).inflate(
+				R.layout.main_publish, tw, false);
+
+		tabIndicator4 = (LinearLayout) LayoutInflater.from(this).inflate(
+				R.layout.main_info, tw, false);
+
+		tabIndicator5 = (LinearLayout) LayoutInflater.from(this).inflate(
+				R.layout.main_set, tw, false);
+
+	}
+
+	public void initTab() {
+
+		TabHost.TabSpec tSpecHome = tabHost.newTabSpec("home");
+		tSpecHome.setIndicator(tabIndicator1);
+		tSpecHome.setContent(new DummyTabContent(getBaseContext()));
+		tabHost.addTab(tSpecHome);
+
+		TabHost.TabSpec tSpecFavor = tabHost.newTabSpec("favor");
+		tSpecFavor.setIndicator(tabIndicator2);
+		tSpecFavor.setContent(new DummyTabContent(getBaseContext()));
+		tabHost.addTab(tSpecFavor);
+
+		TabHost.TabSpec tSpecPub = tabHost.newTabSpec("pub");
+		tSpecPub.setIndicator(tabIndicator3);
+		tSpecPub.setContent(new DummyTabContent(getBaseContext()));
+		tabHost.addTab(tSpecPub);
+		tabIndicator3.setOnClickListener(new OnClickListener() {
+			public void onClick(View v) {
+				Intent i = new Intent(getBaseContext(), PublishActivity.class);
+				startActivity(i);
 			}
-        	
-        };
-        tabHost.setCurrentTab(0);
-        tabHost.setOnTabChangedListener(tabChangeListener);
-        initTab();
-        tabHost.setCurrentTab(0);
+		});
+		TabHost.TabSpec tSpecMe = tabHost.newTabSpec("me");
+		tSpecMe.setIndicator(tabIndicator4);
+		tSpecMe.setContent(new DummyTabContent(getBaseContext()));
+		tabHost.addTab(tSpecMe);
 
-    }
-    
-     public void isTabHome(){
-    	
-    	if(homeFragment==null){		
-			ft.add(R.id.realtabcontent,new HomeFragment(), "home");						
-		}else{
-			ft.attach(homeFragment);						
-		}
-    }
-    
-    public void isTabFavor(){
-    	
-    	if(favorFragment==null){
-			ft.add(R.id.realtabcontent,new FavorFragment(), "favor");						
-		}else{
-			ft.attach(favorFragment);						
-		}
-    }
-    
-     /*public void isTabPub(){
-    	
-    	if(pubFragment==null){		
-			ft.add(R.id.realtabcontent,new Pub_Fragment(), "pub");						
-		}else{
-			ft.attach(pubFragment);						
-		}
-    }*/
+		TabHost.TabSpec tSpecSet = tabHost.newTabSpec("set");
+		tSpecSet.setIndicator(tabIndicator5);
+		tSpecSet.setContent(new DummyTabContent(getBaseContext()));
+		tabHost.addTab(tSpecSet);
 
-     public void isTabMe(){
-     	if(User.uid.equals("-1")){
-       startActivity(new Intent(getApplicationContext(),LoginActivity.class));
-     }  
-     else{
-    	 if(meFragment==null){
- 			ft.add(R.id.realtabcontent,new MeFragment(), "me");						
- 		}else{
- 			ft.attach(meFragment);						
- 		}
-     }
-     }
-    
-    public void isTabSet(){
-    	
-    	if(setFragment==null){
-			ft.add(R.id.realtabcontent,new SetFragment(), "set");						
-		}else{
-			ft.attach(setFragment);						
+	}
+
+	TabHost.OnTabChangeListener tabChangeListener = new TabHost.OnTabChangeListener() {
+		public void onTabChanged(String tabId) {
+
+			if (tabId.equalsIgnoreCase("home")) {
+				currentFragment=homeFragment;
+			} else if (tabId.equalsIgnoreCase("favor")) {
+				currentFragment=favorFragment;
+			} else if (tabId.equalsIgnoreCase("me")) {
+				if (User.uid.equals("-1")) {
+					startActivity(new Intent(getApplicationContext(),
+							LoginActivity.class));
+				} else {
+				currentFragment=meFragment;
+				}
+			} else if (tabId.equalsIgnoreCase("set")) {
+				currentFragment=setFragment;
+			}
+			getSupportFragmentManager().beginTransaction().replace(R.id.realtabcontent, currentFragment).commit();
 		}
-    }
-    
-   public void findTabView(){
-    	
-    	 tabHost = (TabHost) findViewById(android.R.id.tabhost);
-         tabWidget = (TabWidget) findViewById(android.R.id.tabs);
-         LinearLayout layout = (LinearLayout)tabHost.getChildAt(0);
-         TabWidget tw = (TabWidget)layout.getChildAt(1);
-         
-         tabIndicator1 = (LinearLayout) LayoutInflater.from(this)
-         		.inflate(R.layout.main_home, tw, false);
-         
-        
-         tabIndicator2 = (LinearLayout) LayoutInflater.from(this)
-        		 .inflate(R.layout.main_favor, tw, false);
-         
-         
-         tabIndicator3 = (LinearLayout) LayoutInflater.from(this)
-        		 .inflate(R.layout.main_publish, tw, false);
-         
-         
-         tabIndicator4 = (LinearLayout) LayoutInflater.from(this)
-        		 .inflate(R.layout.main_info, tw, false);
-         
-        
-         tabIndicator5 = (LinearLayout) LayoutInflater.from(this)
-        		 .inflate(R.layout.main_set, tw, false);
-         
-         
-    }
-    
-   public void initTab(){
-    	
-        TabHost.TabSpec tSpecHome = tabHost.newTabSpec("home");
-        tSpecHome.setIndicator(tabIndicator1);        
-        tSpecHome.setContent(new DummyTabContent(getBaseContext()));
-        tabHost.addTab(tSpecHome);
-        
-        TabHost.TabSpec tSpecFavor = tabHost.newTabSpec("favor");
-        tSpecFavor.setIndicator(tabIndicator2);        
-        tSpecFavor.setContent(new DummyTabContent(getBaseContext()));
-        tabHost.addTab(tSpecFavor);
-        
-        TabHost.TabSpec tSpecPub = tabHost.newTabSpec("pub");
-        tSpecPub.setIndicator(tabIndicator3);        
-        tSpecPub.setContent(new DummyTabContent(getBaseContext()));
-        tabHost.addTab(tSpecPub);
-        tabIndicator3.setOnClickListener(new OnClickListener() {
- 			public void onClick(View v) {
- 				Intent i=new Intent(getBaseContext(),PublishActivity.class) ;  
- 		         startActivity(i) ; 
- 			}});
-        TabHost.TabSpec tSpecMe= tabHost.newTabSpec("me");
-        tSpecMe.setIndicator(tabIndicator4);      
-        tSpecMe.setContent(new DummyTabContent(getBaseContext()));
-        tabHost.addTab(tSpecMe);
-        
-        TabHost.TabSpec tSpecSet= tabHost.newTabSpec("set");
-        tSpecSet.setIndicator(tabIndicator5);        
-        tSpecSet.setContent(new DummyTabContent(getBaseContext()));
-        tabHost.addTab(tSpecSet);
-        
-    }
+
+	};
+private void changeF(){
+
+	switch (ConstantDef.currenttab) {
+	case 0:
+		currentFragment=homeFragment;
+		tabHost.setCurrentTab(ConstantDef.currenttab);
+		break;
+	case 1:
+		currentFragment=favorFragment;
+		tabHost.setCurrentTab(ConstantDef.currenttab);
+		break;
+	case 2:
+		currentFragment=meFragment;
+		tabHost.setCurrentTab(ConstantDef.currenttab+1);
+		break;
+	case 3:
+		currentFragment=setFragment;
+		tabHost.setCurrentTab(ConstantDef.currenttab+1);
+		break;
+	}
+	getSupportFragmentManager().beginTransaction().replace(R.id.realtabcontent, currentFragment).commit();
+}
+	protected void onResume() {
+		super.onResume();
+		changeF();
+		Log.e("Mainactivity", "onResume");
+	}
+
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-				return true;
+			AlertDialog.Builder builder = new AlertDialog.Builder(
+					MainActivity.this);
+			builder.setTitle("确定退出程序吗")
+					.setPositiveButton("确定",
+							new DialogInterface.OnClickListener() {
+
+								public void onClick(DialogInterface dialog,
+										int which) {
+									finish();
+								}
+							})
+					.setNegativeButton("取消",
+							new DialogInterface.OnClickListener() {
+
+								@Override
+								public void onClick(DialogInterface dialog,
+										int which) {
+									// TODO Auto-generated method stub
+
+								}
+							});
+			builder.show();
+			return true;
 		}
 		return super.onKeyDown(keyCode, event);
 
 	}
-    
+
 }

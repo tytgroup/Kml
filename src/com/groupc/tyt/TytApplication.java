@@ -1,7 +1,6 @@
 package com.groupc.tyt;
 
 import java.io.File;
-
 import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.UsingFreqLimitedMemoryCache;
@@ -13,7 +12,7 @@ import com.nostra13.universalimageloader.utils.StorageUtils;
 import android.app.Application;
 import android.content.Context;
 
-public class TytApplication extends Application{
+public class TytApplication extends Application {
 	
 	private static TytApplication instance;
 	
@@ -52,5 +51,6 @@ public class TytApplication extends Application{
 		// Initialize ImageLoader with configuration.
 		ImageLoader.getInstance().init(config);
 	}
+ 
 	
 }

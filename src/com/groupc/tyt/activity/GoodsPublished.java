@@ -183,7 +183,7 @@ public class GoodsPublished extends Activity implements OnClickListener{
 			else {
 		    if(feedback.equals("finishok")){
 		    	Toast.makeText(getApplicationContext(), "操作成功！", Toast.LENGTH_SHORT).show();
-		    	startActivity(new Intent(GoodsPublished.this,SplashActivity2.class));
+		    	ConstantDef.publishflag=1;
 		    	finish();
 		    }
 		    else if(feedback.equals("finishno")){
@@ -191,7 +191,7 @@ public class GoodsPublished extends Activity implements OnClickListener{
 		    }
 		    else if(feedback.equals("cancelok")){
 		    	Toast.makeText(getApplicationContext(), "取消成功！", Toast.LENGTH_SHORT).show();
-		    	startActivity(new Intent(GoodsPublished.this,SplashActivity2.class));
+		    	ConstantDef.publishflag=1;
 		    	finish();
 		    }
 		    else{

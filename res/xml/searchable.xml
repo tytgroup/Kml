@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <searchable xmlns:android="http://schemas.android.com/apk/res/android"
-  android:label="1"
-    android:hint="2"
+  android:label="搜索"
+    android:hint="请输入搜索关键字"
 />

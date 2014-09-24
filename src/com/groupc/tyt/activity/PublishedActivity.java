@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.groupc.tyt.adapter.GoodsListViewAdapter;
+import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.constant.SerializableMap;
 import com.groupc.tyt.constant.User;
 import com.groupc.tyt.util.HttpClientUtil;
@@ -21,6 +22,7 @@ import android.text.SpannableString;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.TypefaceSpan;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -71,6 +73,14 @@ public class PublishedActivity extends Activity {
 				}
 			});
 	}
+    protected void onResume() {
+		super.onResume();
+		if( ConstantDef.publishflag==1){
+      startActivity(new Intent(PublishedActivity.this,SplashActivity2.class));
+      ConstantDef.publishflag=0;
+      finish();
+		}
+    }
     public boolean onOptionsItemSelected(MenuItem item) {  
 	    switch (item.getItemId()) {  
 	        case android.R.id.home:  
@@ -80,4 +90,12 @@ public class PublishedActivity extends Activity {
 	            return super.onOptionsItemSelected(item);  
 	    }  
 	}
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+			return true;
+		}
+		return super.onKeyDown(keyCode, event);
+		}
 	}

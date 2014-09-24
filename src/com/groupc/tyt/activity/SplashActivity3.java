@@ -76,7 +76,7 @@ public class SplashActivity3 extends Activity {
 			} 
 			else {
 				if (feedback.equalsIgnoreCase("2")) {
-					Toast.makeText(getApplicationContext(), "没有发布过！", Toast.LENGTH_SHORT)
+					Toast.makeText(getApplicationContext(), "没有用户申请！", Toast.LENGTH_SHORT)
 							.show();
 				} else {
 					Toast.makeText(getApplicationContext(), "其他原因错误!", Toast.LENGTH_SHORT)

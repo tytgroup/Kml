@@ -15,11 +15,14 @@ import com.groupc.tyt.util.HttpClientUtil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -99,7 +102,7 @@ public class LoginActivity  extends Activity{
 									 +"|jf="+User.jf+"|hydj="+User.hydj+"|xydj="+User.xydj);
 							 Toast.makeText(getApplicationContext(), "登陆成功！", Toast.LENGTH_SHORT)
 								.show();
-							 startActivity(new Intent(getApplicationContext(),MainActivity.class));
+							 ConstantDef.currenttab=2;
 							 finish();
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
@@ -166,6 +169,15 @@ public class LoginActivity  extends Activity{
 			break;
 		}
 		return true;
+
+	}
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+		   return true;
+		}
+		return super.onKeyDown(keyCode, event);
 
 	}
 

@@ -50,6 +50,7 @@ public class GoodsApplied extends Activity{
 	private String relative;
 	private List<NameValuePair> params;
 	private Map<String,String> map;
+	private Boolean flag=true;
 	private ImageView gdimage;
 	private TextView gdname;
 	private TextView gdprice;
@@ -89,6 +90,7 @@ public class GoodsApplied extends Activity{
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
+				if(flag){
 				if(map.get("astate").equals("true")){
 					if(map.get("brelative").equals("0")){
 					newDialog(); 
@@ -100,6 +102,10 @@ public class GoodsApplied extends Activity{
 				else{
 					Toast.makeText(getApplicationContext(), "交易还没完成", Toast.LENGTH_SHORT).show();
 				}
+			}
+			else{
+				Toast.makeText(getApplicationContext(), "您已经评价过！", Toast.LENGTH_SHORT).show();
+			}
 			}
      		
      	});
@@ -153,11 +159,12 @@ public class GoodsApplied extends Activity{
 			else {
 		    if(feedback.equals("cancelok")){
 		    	Toast.makeText(getApplicationContext(), "取消成功！", Toast.LENGTH_SHORT).show();
-		    	startActivity(new Intent(GoodsApplied.this,SplashActivity.class));
+		    	ConstantDef.applyflag=1;
 		    	finish();
 		    }
 		    else if(feedback.equals("relativeok")){
 		    	Toast.makeText(getApplicationContext(), "评价成功！", Toast.LENGTH_SHORT).show();
+		    	flag=false;
 		    }
 		    else{
 		    	Toast.makeText(getApplicationContext(), "操作失败请重试！", Toast.LENGTH_SHORT).show();
@@ -198,6 +205,7 @@ public class GoodsApplied extends Activity{
         layout.setOrientation(LinearLayout.VERTICAL);
 
         final EditText textviewGid = new EditText(GoodsApplied.this);
+        textviewGid.setBackgroundColor(getResources().getColor(R.color.font_white));
         textviewGid.setHint("-5分到5分之间");
         textviewGid.setInputType(EditorInfo.TYPE_CLASS_NUMBER);
         layout.addView(textviewGid);

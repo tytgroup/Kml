@@ -79,9 +79,12 @@ public class MeFragment extends Fragment implements OnClickListener{
 				img_tx.setImageBitmap(bitmap);
 			}
 			txt_name.setText(User.name);
-			txt_xydj.setText(""+User.xydj);
-			txt_hydj.setText(""+User.hydj);
-			txt_jf.setText(""+User.jf);
+			int xydj=(int)User.xydj/50;
+			if(User.xydj%50>0)
+				xydj++;
+			txt_xydj.setText("等级"+xydj);
+			txt_hydj.setText("等级"+(int)User.hydj);
+			txt_jf.setText("等级"+(int)User.jf);
 		}
 		init();	
 		return v;
@@ -129,19 +132,23 @@ public class MeFragment extends Fragment implements OnClickListener{
         case R.id.haveapplyed:
                 Intent localIntent=new Intent(getActivity(),SplashActivity.class);
                 startActivity(localIntent);
+                ConstantDef.currenttab=2;
                 break;
         case R.id.havepublish:
         	Intent localIntent2=new Intent(getActivity(),SplashActivity2.class);
             startActivity(localIntent2);
+            ConstantDef.currenttab=2;
             break;
         case R.id.advice:
         	Intent localIntent3=new Intent(getActivity(),AdviceActivity.class);
             startActivity(localIntent3);
+            ConstantDef.currenttab=2;
         	break;
         case R.id.logout:
         	User.uid="-1";
         	Intent localIntent4=new Intent(getActivity(),LoginActivity.class);
             startActivity(localIntent4);
+            ConstantDef.currenttab=0;
         	break;
 
         }

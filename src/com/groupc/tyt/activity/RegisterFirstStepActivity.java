@@ -2,9 +2,12 @@ package com.groupc.tyt.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -12,6 +15,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.groupc.tyt.R;
+import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.constant.User;
 
 public class RegisterFirstStepActivity extends Activity{
@@ -28,7 +32,7 @@ public class RegisterFirstStepActivity extends Activity{
 		super.onCreate(savedInstanceState);
 		ActionBar actionBar = getActionBar();
 
-		SpannableString spannableString = new SpannableString("登录");
+		SpannableString spannableString = new SpannableString("注册");
 		getActionBar().setTitle(spannableString);
         actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.register_firststep_activity); 
@@ -94,6 +98,31 @@ public class RegisterFirstStepActivity extends Activity{
 	            return super.onOptionsItemSelected(item);  
 	    }  
 	}
-	
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			 AlertDialog.Builder builder = new AlertDialog.Builder(
+		        		RegisterFirstStepActivity.this);
+		        builder.setTitle("确定退出注册吗").setPositiveButton("确定",
+		                new DialogInterface.OnClickListener() {
+
+		                    public void onClick(DialogInterface dialog, int which) {
+		                    	ConstantDef.currenttab=0;
+                                finish();
+		                    }
+		                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+							
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								
+							}
+						});
+		        builder.show();
+		   return true;
+		}
+		return super.onKeyDown(keyCode, event);
+
+	}
 
 }

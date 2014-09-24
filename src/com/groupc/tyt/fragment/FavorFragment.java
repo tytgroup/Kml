@@ -48,19 +48,8 @@ public class FavorFragment extends Fragment implements OnItemClickListener{
 		super.onActivityCreated(savedInstanceState);
 		setHasOptionsMenu(true);
 		listview=(ListView)getActivity().findViewById(R.id.list);
-		listview.setOnItemClickListener(new OnItemClickListener() {
-		public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-			// TODO Auto-generated method stub
-			Intent intent=new Intent();
-			Bundle value=new Bundle();
-			SerializableMap smap=new SerializableMap();  
-		    smap.setMap(mylist.get(arg2));  
-			value.putSerializable("map", smap);
-			intent.putExtras(value);
-			intent.setClass(getActivity(), GoodsinActivity.class);
-			startActivity(intent);	 
-		}
-		});
+		listview.setOnItemClickListener(this);
+
 		if(User.uid.equals("-1")){
 			Toast.makeText(getActivity(), "您还没登录！", Toast.LENGTH_SHORT).show();
 		}
@@ -144,18 +133,9 @@ public class FavorFragment extends Fragment implements OnItemClickListener{
 		value.putSerializable("map", smap);
 		intent.putExtras(value);
 		intent.setClass(getActivity(), GoodsinActivity.class);
-		startActivity(intent);	 
+		startActivity(intent);	
+		
 	}
-	@Override
-    public void setUserVisibleHint(boolean isVisibleToUser) {
-        super.setUserVisibleHint(isVisibleToUser);
-    	Log.e("FavorFragment", "isvisible1");
-        if (getUserVisibleHint()) {
-        	Log.e("FavorFragment", "isvisible2");
-//    		new Thread(runnable).start();
-        } else {
-            //相当于Fragment的onPause
-        }
-    }
+
 
 }

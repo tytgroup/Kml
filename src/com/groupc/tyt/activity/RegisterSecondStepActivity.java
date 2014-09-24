@@ -29,6 +29,7 @@ import android.os.Message;
 import android.provider.MediaStore;
 import android.text.SpannableString;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -64,7 +65,7 @@ public class RegisterSecondStepActivity extends Activity implements OnClickListe
 		if(!saveDir.exists()){
 			saveDir.mkdirs();
 		}
-		SpannableString spannableString = new SpannableString("登录");
+		SpannableString spannableString = new SpannableString("注册");
 		getActionBar().setTitle(spannableString);
         actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.register_secondstep_activity);
@@ -121,14 +122,9 @@ public class RegisterSecondStepActivity extends Activity implements OnClickListe
 	    	}
 			break;			
 		case R.id.btn_nextstep:
-			if(img_xsz!=null){
 				User.tx=img_head;
+				User.szx=img_xsz;
 			new Thread(runnable).start();
-			}
-			else{
-				Toast.makeText(getApplicationContext(), "请确保已上传学生证图片！", Toast.LENGTH_SHORT)
-				.show();
-			}
 			break;						
 		}
 	}
@@ -156,7 +152,7 @@ public class RegisterSecondStepActivity extends Activity implements OnClickListe
 		    if(!feedback.equals("no")){
 		    	User.uid=feedback;
 		    	Toast.makeText(getApplicationContext(), "注册成功！", Toast.LENGTH_SHORT).show();
-		    	startActivity(new Intent(RegisterSecondStepActivity.this,MainActivity.class));
+		    	ConstantDef.currenttab=0;
 		    	finish();
 		    }
 		    else{
@@ -332,6 +328,16 @@ public class RegisterSecondStepActivity extends Activity implements OnClickListe
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMdd_HHmmss");
 		return dateFormat.format(date) + ".jpg";
+	}
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		// TODO Auto-generated method stub
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			startActivity(new Intent(getApplicationContext(),RegisterFirstStepActivity.class));
+			finish();
+		   return true;
+		}
+		return super.onKeyDown(keyCode, event);
+
 	}
 }
 

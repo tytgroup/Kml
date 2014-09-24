@@ -88,6 +88,8 @@ public class PublishActivity extends Activity {
 		actionBar.setDisplayHomeAsUpEnabled(true);
 		setContentView(R.layout.publish);
 
+		ConstantDef.currenttab=0;
+		
 		img_goods = (ImageButton) findViewById(R.id.image_goods);
 		mySpinner = (Spinner) findViewById(R.id.spinner);
 		describe = (EditText) findViewById(R.id.gddecribe);

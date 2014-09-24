@@ -35,6 +35,8 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class HomeFragment extends Fragment implements OnClickListener,OnItemClickListener{
@@ -43,12 +45,14 @@ public class HomeFragment extends Fragment implements OnClickListener,OnItemClic
 	private List<NameValuePair> params;
 	private String url = ConstantDef.BaseUil+"GoodsService",title = "goods", 
 			keys[] = {"gid","gname","guid","price","gpicture","gquantity","gdescribe","ptime"};
+	private String url2=ConstantDef.BaseUil+"SearchGoodsService",txtSearch;
 	private ImageButton bicycle;
 	private ImageButton book;
 	private ImageButton electronic;
 	private ImageButton sport;
 	private ImageButton more;
 	private ImageButton hotlist;
+	private TextView nodata;
 	private List<Map<String, String>> mylist = new ArrayList<Map<String, String>>();
 	private ListView homelist;
 	private GoodsListViewAdapter adapter;
@@ -71,19 +75,10 @@ public class HomeFragment extends Fragment implements OnClickListener,OnItemClic
 		new Thread(runnable).start();
 	}
 	
-public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
-	super.onCreateOptionsMenu(menu, inflater);
-	getActivity().getMenuInflater().inflate(R.menu.options_menu, menu);  
-        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
-        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
-        SearchableInfo info=searchManager.getSearchableInfo(getActivity().getComponentName());
-        searchView.setSearchableInfo(info);
-        searchView.setIconifiedByDefault(false); 
-        return;
-    }
 
 
 public void findview(View v){
+	nodata=(TextView)v.findViewById(R.id.nodata);
 	bicycle = (ImageButton)v.findViewById(R.id.imageButton1);
 	book = (ImageButton)v.findViewById(R.id.imageButton2);
 	electronic = (ImageButton)v.findViewById(R.id.imageButton3);
@@ -151,18 +146,17 @@ Handler handler = new Handler() {
 		}
 		else {
 		if (HttpClientUtil.isjson(feedback)) {			
-			
+			nodata.setVisibility(View.GONE);
+			homelist.setVisibility(View.VISIBLE);
 			try {
 				mylist = HttpClientUtil.jsonToList(feedback, title, keys);
 				if(isFirstTime){
 					adapter = new GoodsListViewAdapter(getActivity(), mylist);
 					homelist.setAdapter(adapter);
-					Log.e("gtype1", gtype);
 				}
 				else{
 				adapter.setdata(mylist);
 				adapter.notifyDataSetInvalidated();
-				Log.e("gtype", gtype);
 			}
 			} catch (Exception e1) {
 				// TODO Auto-generated catch block
@@ -173,8 +167,11 @@ Handler handler = new Handler() {
 		else {
 			Log.e("feedback", ""+feedback);
 			if (feedback.equalsIgnoreCase("no")) {
-				Toast.makeText(getActivity(), "没有数据！", Toast.LENGTH_SHORT)
-						.show();
+//				Toast.makeText(getActivity(), "没有数据！", Toast.LENGTH_SHORT)
+//						.show();
+				homelist.setVisibility(View.GONE);
+				nodata.setVisibility(View.VISIBLE);
+
 			} else {
 				Toast.makeText(getActivity(), "其他原因错误!", Toast.LENGTH_SHORT)
 						.show();
@@ -198,6 +195,48 @@ Runnable runnable = new Runnable() {
 	}
 
 };
+Runnable runnable2 = new Runnable() {
+	@Override
+	public void run() {
+		Message msg = new Message();
+		// Bundle data = new Bundle();
+		params = new ArrayList<NameValuePair>();
+		params.add(new BasicNameValuePair("search", txtSearch));
+		String feedback;
+		feedback = HttpClientUtil
+				.httpPostClient(getActivity(), url2, params);	
+			msg.obj = feedback;
+			handler.sendMessage(msg);
+	}
+
+};
+public void onCreateOptionsMenu(Menu menu,MenuInflater inflater) {
+	super.onCreateOptionsMenu(menu, inflater);
+	getActivity().getMenuInflater().inflate(R.menu.options_menu, menu);  
+        SearchManager searchManager = (SearchManager) getActivity().getSystemService(Context.SEARCH_SERVICE);
+        SearchView searchView = (SearchView) menu.findItem(R.id.search).getActionView();
+//        SearchableInfo info=searchManager.getSearchableInfo(getActivity().getComponentName());
+//        searchView.setSearchableInfo(info);
+        searchView.setIconifiedByDefault(true); 
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setOnQueryTextListener(new OnQueryTextListener(){
+
+			@Override
+			public boolean onQueryTextChange(String arg0) {
+				// TODO Auto-generated method stub
+
+				return false;
+			}
+
+			@Override
+			public boolean onQueryTextSubmit(String arg0) {
+				// TODO Auto-generated method stub
+				txtSearch=arg0;
+                new Thread(runnable2).start();
+				return false;
+			}});
+        return;
+    }
 
 @Override
 public void onItemClick(AdapterView<?> arg0, View arg1, int arg2, long arg3) {

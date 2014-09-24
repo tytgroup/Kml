@@ -71,8 +71,19 @@
         android:id="@+id/homelist"
         android:layout_width="match_parent"
         android:layout_height="fill_parent"
-        android:listSelector="@android:color/transparent"
+        android:listSelector="@android:color/transparent"       
         >
     </ListView>
-
+<TextView
+    android:id="@+id/nodata"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:layout_marginTop="10dip"
+    android:layout_marginLeft="25dip"
+    android:textSize="@dimen/text_size_17"
+    android:textColor="@color/lightblack"
+    android:visibility="gone"
+    android:text="没有此类物品信息！"
+    />
 </LinearLayout>
