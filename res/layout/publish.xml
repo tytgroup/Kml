@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="110dp"
             android:background="@color/white"
-            android:gravity="center">
+            android:gravity="center" >
 
             <ImageButton
                 android:id="@+id/image_goods"
@@ -23,34 +23,17 @@
                 android:background="@drawable/imagebutton"
                 android:contentDescription="@string/app_name"
                 android:scaleType="centerCrop" />
-            
-       </RelativeLayout>
-       <TextView
-           android:id="@+id/txt_advice"
-           android:layout_width="fill_parent"
-           android:layout_height="20dip"
-           android:gravity="center_vertical"
-           android:textColor="@color/lightblack"
-           android:layout_marginLeft="25dip"
-           android:textSize="@dimen/text_size_12"
-           android:text="说明：除了照片和描述信息，其它必填"
-           />
-        <LinearLayout style="@style/LinearLayout_bg_white" >
+        </RelativeLayout>
 
-            <TextView
-                style="@style/textview_style1"
-                android:text="商品名称：" />
-
-            <EditText
-                android:id="@+id/gname"
-                style="@style/EditText_style"
-                android:layout_marginLeft="20dp"
-                android:hint="请输入名称" />
-        </LinearLayout>
-
-        <ImageView
-            style="@style/line"
-            android:contentDescription="@string/app_name" />
+        <TextView
+            android:id="@+id/txt_advice"
+            android:layout_width="fill_parent"
+            android:layout_height="20dip"
+            android:layout_marginLeft="25dip"
+            android:gravity="center_vertical"
+            android:text="说明：除了照片和描述信息，其它必填"
+            android:textColor="@color/lightblack"
+            android:textSize="@dimen/text_size_12" />
 
         <LinearLayout style="@style/LinearLayout_bg_white" >
 
@@ -63,6 +46,23 @@
                 android:layout_width="wrap_content"
                 android:layout_height="40dp"
                 android:layout_marginLeft="20dp" />
+        </LinearLayout>
+
+        <ImageView
+            style="@style/line"
+            android:contentDescription="@string/app_name" />
+
+        <LinearLayout style="@style/LinearLayout_bg_white" >
+
+            <TextView
+                style="@style/textview_style1"
+                android:text="商品名称：" />
+
+            <EditText
+                android:id="@+id/publishgname"
+                style="@style/EditText_style"
+                android:layout_marginLeft="20dp"
+                android:hint="请输入名称" />
         </LinearLayout>
 
         <LinearLayout
@@ -127,8 +127,8 @@
             android:layout_height="45dip"
             android:layout_marginTop="10dp"
             android:background="@color/white"
-            android:gravity="center_vertical" 
-            android:visibility="gone">
+            android:gravity="center_vertical"
+            android:visibility="gone" >
 
             <TextView
                 android:id="@+id/textView4"

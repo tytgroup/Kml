@@ -94,7 +94,7 @@ public class PublishActivity extends Activity {
 		mySpinner = (Spinner) findViewById(R.id.spinner);
 		describe = (EditText) findViewById(R.id.gddecribe);
 		txt_advice=(TextView)findViewById(R.id.txt_advice);
-		name = (EditText) findViewById(R.id.gname);
+		name = (EditText) findViewById(R.id.publishgname);
 		price = (EditText) findViewById(R.id.price);
 		num = (EditText) findViewById(R.id.num);
 		confirm = (Button) findViewById(R.id.cfpub);
