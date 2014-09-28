@@ -11,6 +11,7 @@ import com.groupc.tyt.R;
 import com.groupc.tyt.adapter.AnimateFirstDisplayListener;
 import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.constant.SerializableMap;
+import com.groupc.tyt.constant.User;
 import com.groupc.tyt.util.HttpClientUtil;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -57,6 +58,7 @@ public class GoodsApplied extends Activity{
 	private TextView apid;
 	private TextView gnum;
 	private TextView atime;
+	private TextView xydj;
 	private TextView applystate;
 	private LinearLayout commentbuyer;
 	private Button apcancel;
@@ -74,6 +76,7 @@ public class GoodsApplied extends Activity{
 		apid =(TextView)findViewById(R.id.apid);
 		atime =(TextView)findViewById(R.id.atime);
 		gnum=(TextView)findViewById(R.id.apply_num);
+		xydj=(TextView)findViewById(R.id.sellerxydj);
 		applystate =(TextView)findViewById(R.id.apply_state);
 		commentbuyer =(LinearLayout)findViewById(R.id.relative);
 		apcancel =(Button)findViewById(R.id.apcancel);
@@ -134,6 +137,11 @@ public class GoodsApplied extends Activity{
 		else{
 			applystate.setText("申请中");
 		}
+		int dj=(int)Double.parseDouble(map.get("xydj"));
+		int x=dj/50;
+		if(dj%50>0)
+			x++;
+		xydj.setText("等级"+x); 
 		String imageurl=ConstantDef.BaseImageUil+map.get("gpicture")+".jpg";
 		imageLoader.displayImage(imageurl, gdimage, options, animateFirstListener);
 //		transstate =(TextView)findViewById(R.id.trans_state);

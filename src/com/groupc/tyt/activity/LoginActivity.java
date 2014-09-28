@@ -56,8 +56,13 @@ public class LoginActivity  extends Activity{
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				name = editText1.getText().toString();
+				if(name.equals("")){
+					Toast.makeText(getApplicationContext(), "请先输入用户名", Toast.LENGTH_SHORT).show();
+				}
+				else{
 				psd = editText2.getText().toString();
 				new Thread(runnable).start();
+				}
 			}
 		});
 
@@ -174,6 +179,7 @@ public class LoginActivity  extends Activity{
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			ConstantDef.currenttab=0;
 			finish();
 		   return true;
 		}

@@ -44,7 +44,7 @@ public class HomeFragment extends Fragment implements OnClickListener,OnItemClic
 	private String  gtype;
 	private List<NameValuePair> params;
 	private String url = ConstantDef.BaseUil+"GoodsService",title = "goods", 
-			keys[] = {"gid","gname","guid","price","gpicture","gquantity","gdescribe","ptime"};
+			keys[] = {"gid","gname","guid","price","gpicture","gquantity","gdescribe","ptime","rzjg"};
 	private String url2=ConstantDef.BaseUil+"SearchGoodsService",txtSearch;
 	private ImageButton bicycle;
 	private ImageButton book;

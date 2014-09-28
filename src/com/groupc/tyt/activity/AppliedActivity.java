@@ -33,7 +33,7 @@ public class AppliedActivity extends Activity {
 	private ListView listView1;
 	private String feedback;
 	private List<Map<String, String>> mylist = new ArrayList<Map<String, String>>();
-	private String title = "apply", keys[] = { "uid","gname","price","gpicture","aid","atime","astate","gquantity","brelative","srelative"};
+	private String title = "apply", keys[] = { "uid","gname","xydj","price","gpicture","aid","atime","astate","gquantity","brelative","srelative"};
 	private GoodsListViewAdapter adapter;
 	
     public void onCreate(Bundle savedInstanceState) {

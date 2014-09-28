@@ -64,6 +64,7 @@ public class GoodsinActivity extends Activity {
 	private TextView gtime;
 	private TextView gddescribe;
 	private TextView gnum;
+	private TextView srzjg;
 	private TextView isfavor;
 	private EditText num;
 	private Button cfap;
@@ -82,6 +83,7 @@ public class GoodsinActivity extends Activity {
 	isfavor=(TextView)findViewById(R.id.txt_favor);
 	gdimage=(ImageView)findViewById(R.id.gdimage);
 	gdname=(TextView)findViewById(R.id.gdname);
+	srzjg=(TextView)findViewById(R.id.srzjg);
 	gdprice=(TextView)findViewById(R.id.gdprice);
 	gddescribe=(TextView)findViewById(R.id.gddescribe);
 	favor=(ImageButton)findViewById(R.id.favorbutton);
@@ -154,6 +156,14 @@ public class GoodsinActivity extends Activity {
 		gnum.setText(map.get("gquantity")); 
 		gdname.setText(map.get("gname"));
 		gdprice.setText(map.get("price"));
+		String rzjg;
+		if(map.get("rzjg").equals("1")){
+			rzjg="已认证用户";
+		}
+		else{
+			rzjg="未认证用户";
+		}
+		srzjg.setText(rzjg);
 		gddescribe.setText(map.get("gdescribe"));		
 		String imageurl=ConstantDef.BaseImageUil+map.get("gpicture")+".jpg";
 		imageLoader.displayImage(imageurl, gdimage, options, animateFirstListener);

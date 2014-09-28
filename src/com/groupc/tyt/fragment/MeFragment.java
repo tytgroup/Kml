@@ -38,7 +38,7 @@ import android.widget.Toast;
 public class MeFragment extends Fragment implements OnClickListener{
 	private ImageView img_tx;
 	private String imgUrl;
-	private TextView txt_name,txt_xydj,txt_hydj,txt_jf;
+	private TextView txt_name,txt_xydj,txt_hydj,txt_jf,txt_rzjg;
 	private LinearLayout haveApply,havePublish,advice;
 	private Button logout;
 	private ImageLoadingListener animateFirstListener = new AnimateFirstDisplayListener();
@@ -59,6 +59,7 @@ public class MeFragment extends Fragment implements OnClickListener{
 		txt_xydj=(TextView)v.findViewById(R.id.textView5);
 		txt_hydj=(TextView)v.findViewById(R.id.textView6);
 		txt_jf=(TextView)v.findViewById(R.id.textView7);
+		txt_rzjg=(TextView)v.findViewById(R.id.userrzjg);
 		haveApply=(LinearLayout) v.findViewById(R.id.haveapplyed);
 		havePublish=(LinearLayout) v.findViewById(R.id.havepublish);
 		advice=(LinearLayout) v.findViewById(R.id.advice);
@@ -85,6 +86,12 @@ public class MeFragment extends Fragment implements OnClickListener{
 			txt_xydj.setText("等级"+xydj);
 			txt_hydj.setText("等级"+(int)User.hydj);
 			txt_jf.setText("等级"+(int)User.jf);
+			if(User.rzjg){
+				txt_rzjg.setText("您已是认证用户，可以正常使用交易功能");
+			}
+			else{
+				txt_rzjg.setText("您还未认证，请及时认证哦");
+			}
 		}
 		init();	
 		return v;
@@ -117,7 +124,7 @@ public class MeFragment extends Fragment implements OnClickListener{
 	.cacheOnDisk(true)
 	.considerExifParams(true)
 	.imageScaleType(ImageScaleType.EXACTLY_STRETCHED)//缩放图片
-	.delayBeforeLoading(2000)//延时
+//	.delayBeforeLoading(2000)//延时
 	.displayer(new RoundedBitmapDisplayer(70))
 	.displayer(new FadeInBitmapDisplayer(100))
 	.build();

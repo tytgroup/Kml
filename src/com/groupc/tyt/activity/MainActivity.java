@@ -31,10 +31,10 @@ public class MainActivity extends FragmentActivity {
 	LinearLayout bottom_layout;
 	int CURRENT_TAB = 0;
 	HomeFragment homeFragment=new HomeFragment();
-	FavorFragment favorFragment=new FavorFragment();
+//	FavorFragment favorFragment=new FavorFragment();
 	LoginActivity loginActivity;
 	SetFragment setFragment=new SetFragment();
-	MeFragment meFragment=new MeFragment();
+//	MeFragment meFragment=new MeFragment();
 	LinearLayout tabIndicator1;
 	LinearLayout tabIndicator2;
 	LinearLayout tabIndicator3;
@@ -54,46 +54,6 @@ public class MainActivity extends FragmentActivity {
 		tabHost.setOnTabChangedListener(tabChangeListener);
 
 	}
-
-//	public void isTabHome() {
-//
-//		if (homeFragment == null) {
-//			ft.add(R.id.realtabcontent, new HomeFragment(), "home");
-//		} else {
-//			ft.attach(homeFragment);
-//		}
-//	}
-//
-//	public void isTabFavor() {
-//
-//		if (favorFragment == null) {
-//			ft.add(R.id.realtabcontent, new FavorFragment(), "favor");
-//		} else {
-//			ft.attach(favorFragment);
-//		}
-//	}
-//
-//	public void isTabMe() {
-//		if (User.uid.equals("-1")) {
-//			startActivity(new Intent(getApplicationContext(),
-//					LoginActivity.class));
-//		} else {
-//			if (meFragment == null) {
-//				ft.add(R.id.realtabcontent, new MeFragment(), "me");
-//			} else {
-//				ft.attach(meFragment);
-//			}
-//		}
-//	}
-//
-//	public void isTabSet() {
-//
-//		if (setFragment == null) {
-//			ft.add(R.id.realtabcontent, new SetFragment(), "set");
-//		} else {
-//			ft.attach(setFragment);
-//		}
-//	}
 
 	public void findTabView() {
 
@@ -158,16 +118,20 @@ public class MainActivity extends FragmentActivity {
 
 			if (tabId.equalsIgnoreCase("home")) {
 				currentFragment=homeFragment;
+				ConstantDef.currenttab=0;
 			} else if (tabId.equalsIgnoreCase("favor")) {
-				currentFragment=favorFragment;
+				ConstantDef.currenttab=1;
+				currentFragment=new FavorFragment();
 			} else if (tabId.equalsIgnoreCase("me")) {
+				ConstantDef.currenttab=2;
 				if (User.uid.equals("-1")) {
 					startActivity(new Intent(getApplicationContext(),
 							LoginActivity.class));
 				} else {
-				currentFragment=meFragment;
+				currentFragment=new MeFragment();
 				}
 			} else if (tabId.equalsIgnoreCase("set")) {
+				ConstantDef.currenttab=3;
 				currentFragment=setFragment;
 			}
 			getSupportFragmentManager().beginTransaction().replace(R.id.realtabcontent, currentFragment).commit();
@@ -182,11 +146,11 @@ private void changeF(){
 		tabHost.setCurrentTab(ConstantDef.currenttab);
 		break;
 	case 1:
-		currentFragment=favorFragment;
+		currentFragment=new FavorFragment();
 		tabHost.setCurrentTab(ConstantDef.currenttab);
 		break;
 	case 2:
-		currentFragment=meFragment;
+		currentFragment=new MeFragment();
 		tabHost.setCurrentTab(ConstantDef.currenttab+1);
 		break;
 	case 3:

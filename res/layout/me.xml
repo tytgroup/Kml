@@ -93,103 +93,116 @@
             android:text="TextView" />
     </RelativeLayout>
 
-    <ScrollView 
+    <TextView
+        android:id="@+id/userrzjg"
+        android:layout_width="fill_parent"
+        android:layout_height="25dip"
+        android:layout_marginLeft="15dip"
+        android:gravity="center_vertical"
+        android:text="您还没有认证"
+        android:textColor="@color/lightblack"
+        android:textSize="@dimen/text_size_14" >
+    </TextView>
+
+<ScrollView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:scrollbars="none">
-        <LinearLayout 
-         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-    <LinearLayout
-        android:id="@+id/haveapplyed"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center_vertical"
-        android:layout_marginTop="10dip"
-        android:background="@drawable/linearlayout" >
+        android:scrollbars="none" >
 
-        <TextView
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="15dip"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="已申请的交易"
-            android:textColor="@color/lightblack"
-            android:textSize="@dimen/text_size_17" />
-
-        <ImageView
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="15dip"
-            android:background="@drawable/turn_right_img" />
-    </LinearLayout>
+            android:orientation="vertical" >
 
-    <ImageView style="@style/line" />
+            <LinearLayout
+                android:id="@+id/haveapplyed"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/linearlayout" >
 
-    <LinearLayout
-        android:id="@+id/havepublish"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/linearlayout"
-        android:orientation="horizontal" >
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="15dip"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="已申请的交易"
+                    android:textColor="@color/lightblack"
+                    android:textSize="@dimen/text_size_17" />
 
-        <TextView
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="15dip"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="已发布的交易"
-            android:textColor="@color/lightblack"
-            android:textSize="@dimen/text_size_17" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="15dip"
+                    android:background="@drawable/turn_right_img" />
+            </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="15dip"
-            android:background="@drawable/turn_right_img" />
-    </LinearLayout>
+            <ImageView style="@style/line" />
 
-    <ImageView style="@style/line" />
+            <LinearLayout
+                android:id="@+id/havepublish"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/linearlayout"
+                android:orientation="horizontal" >
 
-    <LinearLayout
-        android:id="@+id/advice"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_gravity="center_vertical"
-        android:background="@drawable/linearlayout" >
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="15dip"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="已发布的交易"
+                    android:textColor="@color/lightblack"
+                    android:textSize="@dimen/text_size_17" />
 
-        <TextView
-            android:layout_width="0dip"
-            android:layout_height="fill_parent"
-            android:layout_marginLeft="15dip"
-            android:layout_weight="1"
-            android:gravity="center_vertical"
-            android:text="我的建议（采纳送积分)"
-            android:textColor="@color/lightblack"
-            android:textSize="@dimen/text_size_17" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="15dip"
+                    android:background="@drawable/turn_right_img" />
+            </LinearLayout>
 
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginRight="15dip"
-            android:background="@drawable/turn_right_img" />
-    </LinearLayout>
+            <ImageView style="@style/line" />
 
-         <Button
-        android:id="@+id/logout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="15dp"
-        android:background="@drawable/button_style"
-        android:text="注销登录"
-        android:textColor="#FFFFFF" />
-         </LinearLayout>
-</ScrollView>
+            <LinearLayout
+                android:id="@+id/advice"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="center_vertical"
+                android:background="@drawable/linearlayout" >
+
+                <TextView
+                    android:layout_width="0dip"
+                    android:layout_height="fill_parent"
+                    android:layout_marginLeft="15dip"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="我的建议（采纳送积分)"
+                    android:textColor="@color/lightblack"
+                    android:textSize="@dimen/text_size_17" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="15dip"
+                    android:background="@drawable/turn_right_img" />
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/logout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="15dp"
+                android:background="@drawable/button_style"
+                android:text="注销登录"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
+    </ScrollView>
+
 </LinearLayout>

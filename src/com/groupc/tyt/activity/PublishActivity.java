@@ -131,10 +131,10 @@ public class PublishActivity extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				// gname ;
-				if (User.uid.equals("-1")) {
-					Toast.makeText(getApplicationContext(), "您还没登陆，请先登陆！",
-							Toast.LENGTH_SHORT).show();
-				} else {
+//				if (!User.rzjg) {
+//					Toast.makeText(getApplicationContext(), "您不是认证用户，不能发布商品！",
+//							Toast.LENGTH_SHORT).show();
+//				} else {
 					guid = User.uid;
 					Date date = new Date();
 					ptime = sdf.format(date);
@@ -149,7 +149,7 @@ public class PublishActivity extends Activity {
 						imgName="black";
 						new Thread(runnable).start();
 					}
-				}
+//				}
 			}
 		});
 		if (User.uid.equals("-1")) {
@@ -157,6 +157,10 @@ public class PublishActivity extends Activity {
 					Toast.LENGTH_SHORT).show();
 			finish();
 		}
+//		else if (!User.rzjg) {
+//			Toast.makeText(getApplicationContext(), "您不是认证用户，不能发布商品！",
+//					Toast.LENGTH_SHORT).show();
+//		}
 	}
 
 	@SuppressLint("HandlerLeak")
@@ -243,7 +247,7 @@ public class PublishActivity extends Activity {
 
 	private void showDialog() {
 		new AlertDialog.Builder(this)
-				.setTitle("头像设置")
+				.setTitle("物品照片设置")
 				.setPositiveButton("拍照", new DialogInterface.OnClickListener() {
 
 					@Override
