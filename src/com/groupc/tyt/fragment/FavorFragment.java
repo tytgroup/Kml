@@ -33,7 +33,7 @@ import android.widget.AdapterView.OnItemClickListener;
 public class FavorFragment extends Fragment implements OnItemClickListener{
 	private List<NameValuePair> params;
 	private String url = ConstantDef.BaseUil+"FavorGoodsService",title = "favorgoods", 
-			keys[] = {"gid","gname","guid","price","gpicture","gquantity","gdescribe","ptime"};
+			keys[] = {"gid","gname","guid","price","gpicture","gquantity","gdescribe","ptime","rzjg"};
 	private List<Map<String, String>> mylist = new ArrayList<Map<String, String>>();
 	private ListView listview;
 	private GoodsListViewAdapter adapter;

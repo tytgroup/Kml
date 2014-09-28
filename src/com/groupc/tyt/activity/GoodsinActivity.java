@@ -1,7 +1,5 @@
 package com.groupc.tyt.activity;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -14,8 +12,6 @@ import org.apache.http.message.BasicNameValuePair;
 import android.annotation.SuppressLint;
 import android.app.ActionBar;
 import android.app.Activity;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -215,10 +211,12 @@ public class GoodsinActivity extends Activity {
 		            else if(msg.what==COLLECTION_TAG){
 		            	if(feedback.equals("ok")){
 		            		favor.setImageResource(android.R.drawable.btn_star_big_on);
+		            		isfavor.setText("取消收藏");
 		            		isCollection="1";
 				              }
 				               else{
 				            	   favor.setImageResource(android.R.drawable.btn_star_big_off);
+				            	   isfavor.setText("点击收藏");
 				            	   isCollection="0";
 				                }
 		          }
