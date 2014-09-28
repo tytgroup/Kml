@@ -15,8 +15,6 @@ import com.groupc.tyt.util.HttpClientUtil;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -102,6 +100,8 @@ public class LoginActivity  extends Activity{
 							 User.jf=Double.parseDouble(mylist.get(i).get("jf"));
 							 User.hydj=Double.parseDouble(mylist.get(i).get("hydj"));
 							 User.xydj=Double.parseDouble(mylist.get(i).get("xydj"));
+							 
+							 User.saveLoginInfo(getApplicationContext());
 							 Log.e("json", "uid="+User.uid+"|name="+User.name+"|uno="+User.uno
 									 +"|phone="+User.phone+"|tx="+User.tx+"|rzjg="+User.rzjg
 									 +"|jf="+User.jf+"|hydj="+User.hydj+"|xydj="+User.xydj);

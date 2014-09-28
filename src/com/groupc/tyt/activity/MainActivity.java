@@ -48,6 +48,7 @@ public class MainActivity extends FragmentActivity {
 		SpannableString spannableString = new SpannableString("开卖啦");
 		getActionBar().setTitle(spannableString);
 
+		User.getLoginInfo(getApplicationContext());
 		findTabView();
 		tabHost.setup();
 		initTab();
