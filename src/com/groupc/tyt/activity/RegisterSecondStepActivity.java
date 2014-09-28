@@ -218,14 +218,6 @@ public class RegisterSecondStepActivity extends Activity implements OnClickListe
         	handler2.sendEmptyMessage(feedback);    	
 	    }
 	    };
-	public boolean onOptionsItemSelected(MenuItem item) {  
-	    switch (item.getItemId()) {  
-	        case android.R.id.home:  
-	        	  finish();
-	        default:  
-	            return super.onOptionsItemSelected(item);  
-	    }  
-	}
 	private void showDialog() {
 		new AlertDialog.Builder(this).setTitle("头像设置").setPositiveButton("拍照", new DialogInterface.OnClickListener() {
 
@@ -328,6 +320,15 @@ public class RegisterSecondStepActivity extends Activity implements OnClickListe
 		Date date = new Date(System.currentTimeMillis());
 		SimpleDateFormat dateFormat = new SimpleDateFormat("'IMG'_yyyyMMdd_HHmmss");
 		return dateFormat.format(date) + ".jpg";
+	}
+	public boolean onOptionsItemSelected(MenuItem item) {  
+	    switch (item.getItemId()) {  
+	        case android.R.id.home:  
+	        	startActivity(new Intent(getApplicationContext(),RegisterFirstStepActivity.class));
+	        	  finish();
+	        default:  
+	            return super.onOptionsItemSelected(item);  
+	    }  
 	}
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub

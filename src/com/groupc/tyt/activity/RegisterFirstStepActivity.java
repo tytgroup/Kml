@@ -93,7 +93,24 @@ public class RegisterFirstStepActivity extends Activity{
 	public boolean onOptionsItemSelected(MenuItem item) {  
 	    switch (item.getItemId()) {  
 	        case android.R.id.home:  
-	        	  finish();
+	        	AlertDialog.Builder builder = new AlertDialog.Builder(
+		        		RegisterFirstStepActivity.this);
+		        builder.setTitle("确定退出注册吗").setPositiveButton("确定",
+		                new DialogInterface.OnClickListener() {
+
+		                    public void onClick(DialogInterface dialog, int which) {
+		                    	ConstantDef.currenttab=0;
+                                finish();
+		                    }
+		                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
+							
+							@Override
+							public void onClick(DialogInterface dialog, int which) {
+								// TODO Auto-generated method stub
+								
+							}
+						});
+		        builder.show();
 	        default:  
 	            return super.onOptionsItemSelected(item);  
 	    }  
