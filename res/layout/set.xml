@@ -13,7 +13,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:src="@drawable/thx" />
-
+  
 
             <ScrollView
                 android:id="@+id/scrollView1"
@@ -83,6 +83,22 @@
                 android:layout_height="wrap_content"
                 android:textColor="#808080" 
                 android:text="7.该软件最终解释权归Tyteam所有 祝您使用愉快!" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_marginTop="20dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/more" />
+
+            <ImageView 
+                android:id="@+id/imageView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:src="@drawable/more2" />
+             
                 </LinearLayout>
             </ScrollView>
 </LinearLayout>
