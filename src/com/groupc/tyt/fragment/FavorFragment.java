@@ -91,7 +91,7 @@ public class FavorFragment extends Fragment implements OnItemClickListener{
 				} catch (Exception e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
-					Log.e("json", "json解析出错");
+					Log.e("json", "json解析出错了");
 				}	
 			} 
 			else {
