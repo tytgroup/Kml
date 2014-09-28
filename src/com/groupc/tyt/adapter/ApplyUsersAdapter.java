@@ -89,6 +89,7 @@ public class ApplyUsersAdapter extends BaseAdapter{
 			holder.btn_agree.setText("同意申请");
 		}
 		else{
+			haverelative[position]="done";
 			holder.btn_agree.setText("已确认申请");
 		}
 
