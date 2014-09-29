@@ -72,7 +72,7 @@ public class PublishActivity extends Activity {
 	private String[] list = { "自行车", "书籍", "电子产品", "运动器材", "服饰", "其它" };
 	private Spinner mySpinner;
 	private ArrayAdapter<String> adapter;
-	private String imgName;
+	private String imgName,doNothing;
 	String saveDirPath = Environment.getExternalStorageDirectory().getPath()
 			+ "/TytImage";
 	File saveDir = new File(saveDirPath);
@@ -89,7 +89,11 @@ public class PublishActivity extends Activity {
 		setContentView(R.layout.publish);
 
 		ConstantDef.currenttab=0;
-		
+		Log.e("sd",saveDirPath);
+		if (android.os.Environment.getExternalStorageState().equals(android.os.Environment.MEDIA_MOUNTED))
+				{
+			Log.e("sd","have sd");
+				}
 		img_goods = (ImageButton) findViewById(R.id.image_goods);
 		mySpinner = (Spinner) findViewById(R.id.spinner);
 		describe = (EditText) findViewById(R.id.gddecribe);
@@ -122,6 +126,7 @@ public class PublishActivity extends Activity {
 				// TODO Auto-generated method stub
 				imgName = "" + User.uno + "_" + getTime();
 				showDialog();
+				doNothing="black"; //申请的一句话
 			}
 		});
 
