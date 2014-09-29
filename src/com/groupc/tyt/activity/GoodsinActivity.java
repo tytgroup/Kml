@@ -121,6 +121,9 @@ public class GoodsinActivity extends Activity {
 			if(gquantity.equals("")){
 				Toast.makeText(getApplicationContext(), "请输入要买的数量！", Toast.LENGTH_SHORT).show();
 			}
+			else if(Integer.parseInt(gquantity)>Integer.parseInt(map.get("gquantity"))){
+				Toast.makeText(getApplicationContext(), "购买数量不能多于总数！", Toast.LENGTH_SHORT).show();
+			}
 			else{
 				if(uid.equals(map.get("guid"))){
 					Toast.makeText(getApplicationContext(), "这是您自己的商品！", Toast.LENGTH_SHORT).show();
