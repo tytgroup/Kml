@@ -33,9 +33,7 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore;
-import android.text.Editable;
 import android.text.SpannableString;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -63,7 +61,7 @@ public class PublishActivity extends Activity {
 	private ImageButton img_goods;
 	private Button confirm;
 	private EditText describe;
-	private EditText name;
+	private EditText goodsname;
 	private EditText price;
 	private EditText num;
 	private TextView txt_advice;
@@ -98,7 +96,7 @@ public class PublishActivity extends Activity {
 		mySpinner = (Spinner) findViewById(R.id.spinner);
 		describe = (EditText) findViewById(R.id.gddecribe);
 		txt_advice=(TextView)findViewById(R.id.txt_advice);
-		name = (EditText) findViewById(R.id.publishgname);
+		goodsname = (EditText) findViewById(R.id.publishgname);
 		price = (EditText) findViewById(R.id.price);
 		num = (EditText) findViewById(R.id.num);
 		confirm = (Button) findViewById(R.id.cfpub);
@@ -143,7 +141,7 @@ public class PublishActivity extends Activity {
 					guid = User.uid;
 					Date date = new Date();
 					ptime = sdf.format(date);
-					gname = name.getText().toString();
+					gname = goodsname.getText().toString();
 					gprice = price.getText().toString();
 					gquantity = num.getText().toString();
 					gdescribe = describe.getText().toString();
@@ -337,8 +335,6 @@ public class PublishActivity extends Activity {
 			try {
 				b = new FileOutputStream(file);
 				photo.compress(Bitmap.CompressFormat.JPEG, 100, b);// 把数据写入文件
-				img_goods.setBackgroundDrawable(drawable);
-				img_goods.clearFocus();
 
 			} catch (FileNotFoundException e) {
 				e.printStackTrace();
@@ -353,6 +349,11 @@ public class PublishActivity extends Activity {
 					e.printStackTrace();
 				}
 			}
+			img_goods.setBackgroundDrawable(drawable);
+			img_goods.clearFocus();
+			goodsname.setFocusable(true);
+			goodsname.setFocusableInTouchMode(true);
+			goodsname.requestFocus();
 		}
 	}
 

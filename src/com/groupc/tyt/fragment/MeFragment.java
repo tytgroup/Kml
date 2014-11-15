@@ -153,6 +153,8 @@ public class MeFragment extends Fragment implements OnClickListener{
         	break;
         case R.id.logout:
         	User.uid="-1";
+        	//注销
+        	User.logOut(getActivity().getApplicationContext());
         	Intent localIntent4=new Intent(getActivity(),LoginActivity.class);
             startActivity(localIntent4);
             ConstantDef.currenttab=0;

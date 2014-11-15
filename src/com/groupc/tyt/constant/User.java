@@ -58,5 +58,12 @@ public class User {
       hydj=(double)sharedPre.getFloat("hydj", 0);
       xydj=(double)sharedPre.getFloat("xydj", 0);
 	}
+	public static void logOut(Context context){
+		@SuppressWarnings({ "static-access" })
+		SharedPreferences sharedPre = context.getSharedPreferences("config",
+				context.MODE_PRIVATE);
+		//清除
+		sharedPre.edit().clear().commit();
+	}
 	
 }

@@ -16,6 +16,7 @@ import com.groupc.tyt.util.HttpClientUtil;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -27,12 +28,20 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("HandlerLeak")
 public class LoginActivity  extends Activity{
 
 	private Button LoginButton;
+	private LinearLayout rememberPsd;
+	private ImageView ibRememberPsd;
+	private Boolean remember_psw = false;
+	private TextView forgetPsd;
 	private EditText editText1, editText2;
 	private String name, psd;
 	private List<NameValuePair> params;
@@ -44,10 +53,38 @@ public class LoginActivity  extends Activity{
 		super.onCreate(savedInstanceState);
 	
 		setContentView(R.layout.login);
+		rememberPsd = (LinearLayout) findViewById(R.id.remember_password);
+		ibRememberPsd = (ImageView) findViewById(R.id.ib_remember_psw);
+		forgetPsd = (TextView) findViewById(R.id.forget);
 		editText1 = (EditText) findViewById(R.id.edt_username);
 		editText2 = (EditText) findViewById(R.id.edt_password);
 		LoginButton = (Button) findViewById(R.id.LoginButton);
 
+		rememberPsd.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				if (remember_psw == false) {
+					ibRememberPsd.setImageResource(R.drawable.remember_psw_selected);
+					remember_psw = true;
+				} else {
+					ibRememberPsd.setImageResource(R.drawable.remember_psw_unselected);
+					remember_psw = false;
+				}
+
+			}
+		});
+
+		
+		forgetPsd.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
+		forgetPsd.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		LoginButton.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -101,7 +138,10 @@ public class LoginActivity  extends Activity{
 							 User.hydj=Double.parseDouble(mylist.get(i).get("hydj"));
 							 User.xydj=Double.parseDouble(mylist.get(i).get("xydj"));
 							 
+							 //记住密码
+							 if(remember_psw){
 							 User.saveLoginInfo(getApplicationContext());
+							 }
 							 Log.e("json", "uid="+User.uid+"|name="+User.name+"|uno="+User.uno
 									 +"|phone="+User.phone+"|tx="+User.tx+"|rzjg="+User.rzjg
 									 +"|jf="+User.jf+"|hydj="+User.hydj+"|xydj="+User.xydj);
