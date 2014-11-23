@@ -172,6 +172,7 @@ public class RegisterSecondStepActivity extends Activity implements OnClickListe
 			params.add(new BasicNameValuePair("nickname", User.name));
 			params.add(new BasicNameValuePair("psd", User.passWord));
 			params.add(new BasicNameValuePair("phone", User.phone));
+			params.add(new BasicNameValuePair("email", User.email));
 			params.add(new BasicNameValuePair("img_xsz", img_xsz));
 			params.add(new BasicNameValuePair("img_head", img_head));
 			String feedback;

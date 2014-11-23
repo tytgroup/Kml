@@ -8,6 +8,8 @@ import com.groupc.tyt.fragment.HomeFragment;
 import com.groupc.tyt.fragment.SetFragment;
 import com.groupc.tyt.fragment.MeFragment;
 import com.groupc.tyt.util.DummyTabContent;
+import com.groupc.tyt.util.TytDialog;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -170,28 +172,26 @@ private void changeF(){
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			AlertDialog.Builder builder = new AlertDialog.Builder(
-					MainActivity.this);
-			builder.setTitle("确定退出程序吗")
-					.setPositiveButton("确定",
-							new DialogInterface.OnClickListener() {
-
-								public void onClick(DialogInterface dialog,
-										int which) {
-									finish();
-								}
-							})
-					.setNegativeButton("取消",
-							new DialogInterface.OnClickListener() {
-
-								@Override
-								public void onClick(DialogInterface dialog,
-										int which) {
-									// TODO Auto-generated method stub
-
-								}
-							});
-			builder.show();
+			final TytDialog dialog = new TytDialog(MainActivity.this,R.style.TytDialogStyle1);
+            dialog.show();
+			 dialog.setTitleValue("温馨提示");
+			 dialog.setBody("您确定要退出程序吗？");
+			 dialog.setLeftButton("我确定", new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					finish();
+				}
+			});
+			 dialog.setRightButton("按错了", new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();
+				}
+			});
 			return true;
 		}
 		return super.onKeyDown(keyCode, event);

@@ -28,7 +28,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -46,7 +45,7 @@ public class LoginActivity  extends Activity{
 	private String name, psd;
 	private List<NameValuePair> params;
 	private String url = ConstantDef.BaseUil+"loginService",
-			title = "user", keys[] = { "iduser", "uno", "username","phone","tx","jf","xydj",
+			title = "user", keys[] = { "iduser", "uno", "username","phone","email","tx","jf","xydj",
 					"hydj","rzjg" };
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -73,16 +72,23 @@ public class LoginActivity  extends Activity{
 				}
 
 			}
-		});
-
-		
+		});	
 		forgetPsd.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG);
 		forgetPsd.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				
+				name = editText1.getText().toString();
+				if(name.isEmpty()){
+					Toast.makeText(LoginActivity.this, "请先输入用户名", Toast.LENGTH_SHORT).show();
+				}else{
+//				Bundle bundle =new Bundle();
+//				bundle.putString("username", name);
+				Intent intent = new Intent(LoginActivity.this,CheckEmailActivity.class);
+				intent.putExtra("username", name);
+				startActivity(intent);
+				}
 			}
 		});
 		LoginButton.setOnClickListener(new OnClickListener() {
@@ -132,6 +138,7 @@ public class LoginActivity  extends Activity{
 							 User.name=mylist.get(i).get("username");
 							 User.uno=mylist.get(i).get("uno");
 							 User.phone=mylist.get(i).get("phone");
+							 User.email=mylist.get(i).get("email");
 							 User.tx=mylist.get(i).get("tx");
 							 User.rzjg=mylist.get(i).get("rzjg").equals("1")?true:false;
 							 User.jf=Double.parseDouble(mylist.get(i).get("jf"));
@@ -143,7 +150,7 @@ public class LoginActivity  extends Activity{
 							 User.saveLoginInfo(getApplicationContext());
 							 }
 							 Log.e("json", "uid="+User.uid+"|name="+User.name+"|uno="+User.uno
-									 +"|phone="+User.phone+"|tx="+User.tx+"|rzjg="+User.rzjg
+									 +"|phone="+User.phone+"|email="+User.email+"|tx="+User.tx+"|rzjg="+User.rzjg
 									 +"|jf="+User.jf+"|hydj="+User.hydj+"|xydj="+User.xydj);
 							 Toast.makeText(getApplicationContext(), "登陆成功！", Toast.LENGTH_SHORT)
 								.show();

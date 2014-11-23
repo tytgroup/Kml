@@ -11,6 +11,7 @@ public class User {
 	public static String passWord;
 	public static String uno;
 	public static String phone;
+	public static String email;
 	public static String szx;
 	public static String tx;
 //	public static boolean isvip;
@@ -31,6 +32,7 @@ public class User {
 //		editor.putString("passWord",passWord);
 		editor.putString("uno", uno);
 		editor.putString("phone", phone);
+		editor.putString("email", email);
 //		editor.putString("szx", szx);
 		editor.putString("tx", tx);
 //		editor.putBoolean("isvip", isvip);
@@ -52,6 +54,7 @@ public class User {
       name=sharedPre.getString("name", "");
       uno=sharedPre.getString("uno", "");
       phone=sharedPre.getString("phone", "");
+      email=sharedPre.getString("email", "");
       tx=sharedPre.getString("tx", "");
       rzjg=sharedPre.getBoolean("rzjg", false);
       jf=(double)sharedPre.getFloat("jf", 0);

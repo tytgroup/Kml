@@ -2,14 +2,13 @@ package com.groupc.tyt.activity;
 
 import android.app.ActionBar;
 import android.app.Activity;
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -17,15 +16,17 @@ import android.widget.Toast;
 import com.groupc.tyt.R;
 import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.constant.User;
+import com.groupc.tyt.util.TytDialog;
 
 public class RegisterFirstStepActivity extends Activity{
 
-	private String uno,name,psd,phone;
+	private String uno,name,psd,phone,email;
 	private EditText stunum;
 	private EditText usrname;
 	private EditText usrpsw;
 	private EditText usrpsw2;
 	private EditText usrphone;
+	private EditText usremail;
 	private Button btn_nextstep;
 	public void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -41,6 +42,7 @@ public class RegisterFirstStepActivity extends Activity{
 		usrpsw = (EditText)findViewById(R.id.usrpsw);
 		usrpsw2 = (EditText)findViewById(R.id.usrpsw2);
 		usrphone = (EditText)findViewById(R.id.usrphone);
+		usremail = (EditText)findViewById(R.id.email);
 		btn_nextstep= (Button)findViewById(R.id.btn_nextstep);
 		
 		btn_nextstep.setOnClickListener(new Button.OnClickListener(){//创建监听  
@@ -49,11 +51,13 @@ public class RegisterFirstStepActivity extends Activity{
             	name = usrname.getText().toString();
             	psd = usrpsw.getText().toString();
             	phone = usrphone.getText().toString();
+            	email = usremail.getText().toString();
             	if (registerIsSuccess()) {
             		User.name=name;
             		User.uno=uno;
             		User.passWord=psd;
             		User.phone=phone;
+            		User.email=email;
             		startActivity(new Intent(RegisterFirstStepActivity.this,RegisterSecondStepActivity.class));
             		finish();
             }    
@@ -93,24 +97,27 @@ public class RegisterFirstStepActivity extends Activity{
 	public boolean onOptionsItemSelected(MenuItem item) {  
 	    switch (item.getItemId()) {  
 	        case android.R.id.home:  
-	        	AlertDialog.Builder builder = new AlertDialog.Builder(
-		        		RegisterFirstStepActivity.this);
-		        builder.setTitle("确定退出注册吗").setPositiveButton("确定",
-		                new DialogInterface.OnClickListener() {
-
-		                    public void onClick(DialogInterface dialog, int which) {
-		                    	ConstantDef.currenttab=0;
-                                finish();
-		                    }
-		                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-							
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								// TODO Auto-generated method stub
-								
-							}
-						});
-		        builder.show();
+	        	final TytDialog dialog = new TytDialog(RegisterFirstStepActivity.this,R.style.TytDialogStyle2);
+	             dialog.show();
+				 dialog.setTitleValue("温馨提示");
+				 dialog.setBody("您确定要退出注册吗？");
+				 dialog.setLeftButton("我确定", new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						ConstantDef.currenttab=0;
+						finish();
+					}
+				});
+				 dialog.setRightButton("按错了", new OnClickListener() {
+					
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						dialog.dismiss();
+					}
+				});
 	        default:  
 	            return super.onOptionsItemSelected(item);  
 	    }  
@@ -118,24 +125,27 @@ public class RegisterFirstStepActivity extends Activity{
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		// TODO Auto-generated method stub
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			 AlertDialog.Builder builder = new AlertDialog.Builder(
-		        		RegisterFirstStepActivity.this);
-		        builder.setTitle("确定退出注册吗").setPositiveButton("确定",
-		                new DialogInterface.OnClickListener() {
-
-		                    public void onClick(DialogInterface dialog, int which) {
-		                    	ConstantDef.currenttab=0;
-                                finish();
-		                    }
-		                    }).setNegativeButton("取消", new DialogInterface.OnClickListener() {
-							
-							@Override
-							public void onClick(DialogInterface dialog, int which) {
-								// TODO Auto-generated method stub
-								
-							}
-						});
-		        builder.show();
+			final TytDialog dialog = new TytDialog(RegisterFirstStepActivity.this,R.style.TytDialogStyle2);
+             dialog.show();
+			 dialog.setTitleValue("温馨提示");
+			 dialog.setBody("您确定要退出注册吗？");
+			 dialog.setLeftButton("我确定", new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					ConstantDef.currenttab=0;
+					finish();
+				}
+			});
+			 dialog.setRightButton("按错了", new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					// TODO Auto-generated method stub
+					dialog.dismiss();
+				}
+			});
 		   return true;
 		}
 		return super.onKeyDown(keyCode, event);

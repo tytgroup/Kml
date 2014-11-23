@@ -86,7 +86,23 @@
             android:hint="请输入手机号"
             android:inputType="number" />
     </LinearLayout>
+    <ImageView
+        style="@style/line"
+        android:contentDescription="@string/app_name" />
 
+    <LinearLayout style="@style/LinearLayout_bg_white" >
+
+        <TextView
+            style="@style/textview_style1"
+            android:text="邮箱绑定：" />
+
+        <EditText
+            android:id="@+id/email"
+            style="@style/EditText_style"
+            android:layout_marginLeft="20dp"
+            android:hint="邮箱可用于获取忘记的密码"/>
+    </LinearLayout>
+    
     <Button
         android:id="@+id/btn_nextstep"
         style="@style/Button_style2"
