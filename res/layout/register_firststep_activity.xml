@@ -100,7 +100,7 @@
             android:id="@+id/email"
             style="@style/EditText_style"
             android:layout_marginLeft="20dp"
-            android:hint="邮箱可用于获取忘记的密码"/>
+            android:hint="用于获取忘记的密码（选填）"/>
     </LinearLayout>
     
     <Button

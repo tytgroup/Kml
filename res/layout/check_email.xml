@@ -11,7 +11,7 @@
         android:layout_marginTop="10dip"
         android:background="@color/white"
         android:padding="7dip"
-        android:text="输入绑定邮箱并提交后，您的邮箱将会收到一份邮件，里面有您账号的密码"
+        android:text="输入绑定邮箱并提交后，您的邮箱将会收到一份邮件，里面有您账号的密码。若未绑定邮箱，请联系tyt_team_service@163.com"
         android:textColor="@color/font_darkblack"
         android:textSize="@dimen/text_size_12" />
 

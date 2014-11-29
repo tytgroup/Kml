@@ -72,7 +72,7 @@ public class RegisterFirstStepActivity extends Activity{
     	String password1=usrpsw.getText().toString();
     	String password2=usrpsw2.getText().toString();
     	String telRegex = "[1][358]\\d{9}";//"[1]"代表第1位为数字1，"[358]"代表第二位可以为3、5、8中的一个，"\\d{9}"代表后面是可以是0～9的数字，有9位。  
-        
+        String emailReg = "/^(\\w)+(\\.\\w+)*@(\\w)+((\\.\\w{2,3}){1,3})$/";
     	if("".equals(uno)){
     		Toast.makeText(RegisterFirstStepActivity.this, "请输入学号!", Toast.LENGTH_SHORT).show();
     		return false;
@@ -90,6 +90,12 @@ public class RegisterFirstStepActivity extends Activity{
     	}else if(!phone.matches(telRegex)){
     		Toast.makeText(RegisterFirstStepActivity.this, "请输入正确手机号!", Toast.LENGTH_SHORT).show();
     		return false;
+    	}else if(!"".equals(email)){
+    	if (!email.matches(emailReg)){
+    		Toast.makeText(RegisterFirstStepActivity.this, "请输入正确邮箱邮箱!", Toast.LENGTH_SHORT).show();
+    		return false;
+    	}
+    	
     	}
     	return true;
     }
