@@ -1,6 +1,7 @@
 package com.groupc.tyt.activity;
 
 import com.groupc.tyt.R;
+import com.groupc.tyt.common.UpdateAPK;
 import com.groupc.tyt.constant.ConstantDef;
 import com.groupc.tyt.constant.User;
 import com.groupc.tyt.fragment.FavorFragment;
@@ -56,6 +57,8 @@ public class MainActivity extends FragmentActivity {
 		initTab();
 		tabHost.setOnTabChangedListener(tabChangeListener);
 
+//		changeF();
+		new UpdateAPK().checkVersion(this);
 	}
 
 	public void findTabView() {
@@ -161,7 +164,7 @@ private void changeF(){
 		tabHost.setCurrentTab(ConstantDef.currenttab+1);
 		break;
 	}
-	getSupportFragmentManager().beginTransaction().replace(R.id.realtabcontent, currentFragment).commit();
+	getSupportFragmentManager().beginTransaction().replace(R.id.realtabcontent, currentFragment).commitAllowingStateLoss();
 }
 	protected void onResume() {
 		super.onResume();
